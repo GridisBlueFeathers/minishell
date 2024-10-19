@@ -1,2 +1,2 @@
 # Minishell
-![MinisHELL]("assets/minisHELL.png")
+![MinisHELL](assets/minisHELL.png)
