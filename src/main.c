@@ -6,11 +6,13 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:36:46 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/05 16:36:59 by svereten         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:25:20 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
+	if (argc > 1)
+		return (1);
 	return (0);
 }
