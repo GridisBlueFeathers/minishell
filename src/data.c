@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:55:08 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/19 17:08:43 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:32:22 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@ static t_data	*data_init(void)
 	ptr = (t_data *)ft_calloc(1, sizeof(t_data));
 	if (!ptr)
 		ft_panic(1, NULL);
-	ptr->nbr = 0;
-	ptr->env.first = 0;
+	ptr->env.first = NULL;
+	ptr->env.last = NULL;
+	ptr->path = NULL;
 	return (ptr);
 }
 
 static void	data_free(t_data *ptr)
 {
+	if (ptr->env.first)
+		free_env(ptr->env.first);
+	if (ptr->path)
+		ft_free(STR_ARR, &ptr->path);
 	free(ptr);
 }
 

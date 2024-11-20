@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 16:36:46 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/20 17:34:05 by jwolfram         ###   ########.fr       */
+/*   Created: 2024/11/20 16:50:10 by jwolfram          #+#    #+#             */
+/*   Updated: 2024/11/20 17:23:33 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+void	set_path(void)
 {
-	(void)argv;
-	if (argc > 1)
-		return (1);
-	env_init(env);
-	data(FREE);
-	ft_exit(0);
+	t_env_var	*node;	
+
+	node = data(GET)->env.first;
+	while (ft_strcmp(node->key, "PATH"))
+		node = node->next;
+	data(GET)->path = ft_split(node->value, ':');
+	if (!data(GET)->path)
+		ft_panic(1, NULL);
 }
