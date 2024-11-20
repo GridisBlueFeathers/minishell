@@ -6,13 +6,18 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:36:46 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/15 16:25:20 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:34:05 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
 int	main(int argc, char **argv, char **env)
 {
+	(void)argv;
 	if (argc > 1)
 		return (1);
-	return (0);
+	env_init(env);
+	data(FREE);
+	ft_exit(0);
 }

@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2024/11/15 16:27:09 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/11/20 17:03:56 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -33,6 +33,8 @@ OBJ_DIR = obj
 
 FILES = main \
 		data \
+		env \
+		path \
 		
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
@@ -48,6 +50,8 @@ OBJ_DIRS = ${sort ${dir ${OBJS}}}
 INCLUDE_FILES = ${wildcard include/*.h}
 
 CFLAGS := ${CFLAGS} -g
+
+DEV_FILES =	${wildcard src/dev*.c} 
 
 ###############################################################################
 #
@@ -86,7 +90,7 @@ re: fclean all
 ###############################################################################
 
 print:
-	echo ${INCLUDE_FILES}
+	echo ${INCLUDE_FILES} ${DEV_FILES}
 
 norm:
 	norminette ${SRCS} ${INCLUDE_FILES}
