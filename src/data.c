@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:55:08 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/21 17:35:47 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:39:52 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ static t_data	*data_init(void)
 	ptr = (t_data *)ft_calloc(1, sizeof(t_data));
 	if (!ptr)
 		ft_panic(1, NULL);
-	ptr->env.first = NULL;
-	ptr->env.last = NULL;
-	ptr->path = NULL;
 	return (ptr);
 }
 
