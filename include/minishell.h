@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/20 17:32:52 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:35:30 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -43,8 +43,7 @@ typedef struct s_data
 
 t_data	*data(t_option option);
 void	env_init(char **env);
-void	free_env(t_env_var *node);
-void	print_env(char **env);
-void	set_path(void);
+void	env_free(t_env_var *node);
+void	path_set(void);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:50:10 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/20 17:23:33 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:37:35 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_path(void)
+void	path_set(void)
 {
 	t_env_var	*node;	
 

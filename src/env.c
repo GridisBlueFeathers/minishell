@@ -6,13 +6,13 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/20 17:43:27 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:37:17 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_env(t_env_var	*node)
+void	env_free(t_env_var	*node)
 {
 	t_env_var	*tmp;
 
@@ -26,7 +26,7 @@ void	free_env(t_env_var	*node)
 	}
 }
 
-static t_env_var	*allocate_env(void)
+static t_env_var	*env_allocate(void)
 {
 	t_env_var	*node;
 
@@ -38,7 +38,7 @@ static t_env_var	*allocate_env(void)
 	return (node);
 }
 
-static void	set_env(char **env)
+static void	env_set(char **env)
 {
 	int			i;
 	int			len;
@@ -57,7 +57,7 @@ static void	set_env(char **env)
 			ft_panic(1, NULL);
 		if (!env[i + 1])
 			break ;
-		node = allocate_env();
+		node = env_allocate();
 		data(GET)->env.last->next = node;
 		node->prev = data(GET)->env.last;
 		data(GET)->env.last = node;
@@ -70,7 +70,7 @@ void	env_init(char **env)
 	t_env_var	*node;
 	int			fd;
 
-	node = allocate_env();
+	node = env_allocate();
 	data(GET)->env.first = node;
 	data(GET)->env.last = node;
 	if (!env[0])
@@ -86,7 +86,7 @@ void	env_init(char **env)
 	}
 	else
 	{
-		set_env(env);
-		set_path();
+		env_set(env);
+		path_set();
 	}
 }
