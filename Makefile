@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2024/11/20 17:03:56 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/11/26 18:17:53 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -22,7 +22,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 INCLUDE = -I./include -I./libft/include
 
-LDLIBS = -lft
+LDLIBS = -lft -lreadline
 LDFLAGS = -L./libft
 
 LIBFT = libft/libft.a
@@ -35,6 +35,7 @@ FILES = main \
 		data \
 		env \
 		path \
+		loop \
 		
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
