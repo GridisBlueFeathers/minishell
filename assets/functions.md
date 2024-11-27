@@ -9,7 +9,7 @@
 - [Execution Related](#execution-related)
 - [Fork Related](#fork-related)
 - [Stat Related](#stat-related)
-- [Other](#other-functions)
+- [Unused](#unused-functions)
 ## Print Related
 ### printf
 SYNOPSIS:
