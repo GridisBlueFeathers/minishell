@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2024/11/26 18:17:53 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/11/27 15:33:33 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -36,6 +36,8 @@ FILES = main \
 		env \
 		path \
 		loop \
+		signal \
+		utils/exit \
 		
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
@@ -89,6 +91,9 @@ re: fclean all
 # Dev targets
 # 
 ###############################################################################
+
+run: re
+	./minishell
 
 print:
 	echo ${INCLUDE_FILES} ${DEV_FILES}

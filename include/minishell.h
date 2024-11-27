@@ -6,16 +6,21 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/26 18:24:43 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:06:05 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/libft.h"
-# include "libft/ft_printf.h"
+# include "libft/stdio.h"
+# include "libft/stdlib.h"
+# include "libft/string.h"
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# define PREFIX_GOOD "\ueab2 minishell \uf061  "
+# define PREFIX_BAD "\uea76 minishell \uf061  "
 
 typedef enum e_option
 {
@@ -41,6 +46,7 @@ typedef struct s_data
 {
 	int		exit_code;
 	char	*rl_prompt;
+	char	*rl_prefix;
 	char	**path;
 	t_env	env;
 }	t_data;
@@ -50,5 +56,9 @@ void	loop(void);
 void	env_init(char **env);
 void	env_free(t_env_var *node);
 void	path_set(void);
+
+void	signal_int(int signal);
+
+void	minishell_exit(int status, char *msg);
 
 #endif
