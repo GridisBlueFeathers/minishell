@@ -2,11 +2,14 @@
 - [Print Related](#print-related)
 - [Memory Related](#memory-related)
 - [File Descriptor Related](#file-descriptor-related)
+- [Directory Related](#directory-related)
+- [Terminal Related](#terminal-related)
 - [Readline Related](#readline-related)
 - [Signal Related](#signal-related)
 - [Execution Related](#execution-related)
 - [Fork Related](#fork-related)
-- [Unused Functions](#unused)
+- [Stat Related](#stat-related)
+- [Other](#other-functions)
 ## Print Related
 ### printf
 SYNOPSIS:
@@ -203,6 +206,232 @@ RETURN VALUE:
 
     close() returns zero on success.  On error, -1 is returned, and errno is set appropriately.
 
+## Directory Related
+### getcwd
+SYNOPSIS:
+
+    #include <unistd.h>
+
+    char *getcwd(char *buf, size_t size);
+
+DESCRIPTION:
+
+    The getcwd() function copies an absolute pathname of the current working directory to the array pointed to
+    by buf, which is of length size.
+
+    If the length of the absolute pathname of the current working  directory, including the terminating null
+    byte, exceeds size bytes, NULL is returned, and errno is set to ERANGE; an application should check for this
+    error, and allocate a larger buffer if necessary.
+
+RETURN:
+
+    On success, this function returns a pointer to a string containing the pathname of the current working
+    directory. In the case of getcwd() this is the same value as buf.
+
+    On failure, these functions return NULL, and errno is set to indicate the error. The contents of the array
+    pointed to by buf are undefined on error.
+
+### chdir
+SYNOPSIS:
+
+    #include <unistd.h>
+
+    int chdir(const char *path);
+
+DESCRIPTION:
+
+    chdir() changes the current working directory of the calling process to the directory specified in path.
+
+RETURN:
+
+    On success, zero is returned.  On error, -1 is returned, and errno is set appropriately.
+
+### opendir
+SYNOPSIS:
+
+    #include <sys/types.h>
+    #include <dirent.h>
+
+    DIR *opendir(const char *name);
+
+DESCRIPTION:
+
+    The opendir() function opens a directory stream corresponding to the directory name, and returns a pointer
+    to the directory stream. The stream is positioned at the first entry in the directory.
+
+RETURN:
+
+    The opendir() function returns a pointer to the directory stream. On error, NULL is
+    returned, and errno is set appropriately.
+
+### readdir
+SYNOPSIS:
+
+    #include <dirent.h>
+
+    struct dirent *readdir(DIR *dirp);
+
+DESCRIPTION:
+
+    The readdir() function returns a pointer to a dirent structure representing the next directory entry in the
+    directory stream pointed to by dirp. It returns NULL on reaching the end of the directory stream or if an
+    error occurred.
+
+    The fields of the dirent structure are listed in the man readdir.
+
+RETURN:
+
+    On success, readdir() returns a pointer to a dirent structure. (This structure may be statically allocated;
+    do not attempt to free it.)
+
+    If the end of the directory stream is reached, NULL is returned and errno is not changed. If an error
+    occurs, NULL is returned and errno is set appropriately. To distinguish end of stream from an error, set
+    errno to zero before calling readdir() and then check the value of errno if NULL is returned.
+
+### closedir
+SYNOPSIS:
+
+    #include <sys/types.h>
+    #include <dirent.h>
+
+    int closedir(DIR *dirp);
+
+DESCRIPTION:
+
+    The closedir() function closes the directory stream associated with dirp. A successful call to closedir()
+    also closes the underlying file descriptor associated with dirp. The directory stream descriptor dirp is
+    not available after this call.
+
+RETURN:
+
+    The closedir() function returns 0 on success.  On error, -1 is returned, and errno is set appropriately.
+
+### unlink
+SYNOPSIS:
+
+    #include <unistd.h>
+
+    int unlink(const char *pathname);
+
+DESCRIPTION:
+
+    unlink() deletes a name from the filesystem. If that name was the last link to a file and no processes have
+    the file open, the file is deleted and the space it was using is made available for reuse.
+
+    If the name was the last link to a file but any processes still have the file open, the file will remain in
+    existence until the last file descriptor referring to it is closed.
+
+    If the name referred to a symbolic link, the link is removed.
+
+    If the name referred to a socket, FIFO, or device, the name for it is removed but processes which have the
+    object open may continue to use it.
+
+RETURN:
+
+    On success, zero is returned.  On error, -1 is returned, and errno is set appropriately.
+
+## Terminal Related
+### getenv
+SYNOPSIS:
+
+    #include <stdlib.h>
+
+    char *getenv(const char *name);
+
+DESCRIPTION:
+
+    The getenv() function searches the environment list to find the environment variable name, and returns a
+    pointer to the corresponding value string.
+
+RETURN:
+
+    The getenv() function returns a pointer to the value in the environment, or NULL if there is no match.
+
+### isatty
+SYNOPSIS:
+
+    #include <unistd.h>
+
+    int isatty(int fd);
+
+DESCRIPTION:
+
+    The isatty() function tests whether fd is an open file descriptor referring to a terminal.
+
+RETURN:
+
+    isatty() returns 1 if fd is an open file descriptor referring to a terminal; otherwise 0 is returned, and
+    errno is set to indicate the error.
+
+### ttyname
+SYNOPSIS:
+
+    #include <unistd.h>
+
+    char *ttyname(int fd);
+
+DESCRIPTION:
+
+    The function ttyname() returns a pointer to the null-terminated pathname of the terminal device that is open
+    on the file descriptor fd, or NULL on error (for example, if fd is not connected to a terminal). The return
+    value may point to static data, possibly overwritten by the next call. The function ttyname_r() stores this
+    pathname in the buffer buf of length buflen.
+
+RETURN:
+
+    The function ttyname() returns a pointer to a pathname on success. On error, NULL is returned, and errno is
+    set appropriately. The function ttyname_r() returns 0 on success, and an error number upon error.
+
+### ttyslot
+SYNOPSIS:
+
+    #include <unistd.h>
+
+    int ttyslot(void);
+
+DESCRIPTION:
+
+    The legacy function ttyslot() returns the index of the current user's entry in some file.
+
+    In detail, the function ttyslot() returns the index of the controlling terminal of the calling process
+    in  the file /etc/ttys, and that is (usually) the same as the index of the entry for the current user in 
+    the file /etc/utmp. BSD still has the /etc/ttys file, but System V-like systems do not, and hence cannot
+    refer to it.
+
+    Thus, on such systems the documentation says that ttyslot() returns the current user's index in the
+    user accounting data base.
+
+    For more information about this legacy function, check man ttyslot.
+
+RETURN:
+
+    If successful, this function returns the slot number. On error (e.g., if none of the file descriptors 0, 1
+    or 2 is associated with a terminal that occurs in this data base) it returns 0 on UNIX V6 and V7 and
+    BSD-like systems, but -1 on System V-like systems.
+
+### ioctl
+SYNOPSIS:
+
+    #include <sys/ioctl.h>
+
+    int ioctl(int fd, unsigned long request, ...);
+
+DESCRIPTION:
+
+    The ioctl() system call manipulates the underlying device parameters of special files. In particular, many
+    operating characteristics of character special files (e.g., terminals) may be controlled with ioctl()
+    requests. The argument fd must be an open file descriptor.
+
+    The second argument is a device-dependent request code. The third argument is an untyped pointer to memory.
+    It's traditionally char *argp (from the days before void * was valid C), and will be so named for this
+    discussion.
+
+RETURN:
+
+    Usually, on  success  zero is returned. A few ioctl() requests use the return value as an output parameter
+    and return a nonnegative value on success. On error, -1 is returned, and errno is set appropriately.
+
+
 ## Readline Related
 ### readline
 SYNOPSIS:
@@ -260,6 +489,22 @@ DESCRIPTION:
     usually used after outputting a line.
 
 RETURN VALUE:
+
+    No information available.
+
+### rl_redisplay
+SYNOPSIS:
+
+    #include <readline/readline.h>
+    #include <readline/history.h>
+
+    int rl_redisplay(void);
+
+DESCRIPTION:
+
+    The rl_redisplay() change what's displayed on the screen to reflect the current contents of rl_line_buffer.
+
+RETURN:
 
     No information available.
 
@@ -411,6 +656,27 @@ RETURN VALUE:
 
     On success, execve() does not return, on error -1 is returned, and errno is set appropriately.
 
+### perror
+SYNOPSIS:
+
+    #include <stdio.h>
+
+    void perror(const char *s);
+
+DESCRIPTION:
+
+    The perror() function produces a message on standard error describing the last error encountered during a
+    call to a system or library function.
+
+    First (if s is not NULL and *s is not a null byte ('\0')), the argument string s is printed, followed by a
+    colon and a blank. Then an error message corresponding to the current value of errno and a new-line.
+
+    To be of most use, the argument string should include the name of the function that incurred the error.
+
+RETURN:
+
+    The perror() function returns no value.
+
 ### exit
 SYNOPSIS:
 
@@ -549,102 +815,79 @@ RETURN VALUE:
     On success (at least one signal was sent), zero is returned.  On error, -1 is returned, and errno is set
     appropriately.
 
-## Other
-### getcwd
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### chdir
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
+## Stat Related
 ### stat 
 SYNOPSIS:
+
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <unistd.h>
+
+    int stat(const char *pathname, struct stat *statbuf);
+
 DESCRIPTION:
-RETURN:
-### lstat
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### fstat
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### unlink
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### opendir
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### readdir
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### closedir
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### perror
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### isatty
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### ttyname
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### ttyslot
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### ioctl
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### getenv
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### tcsetattr
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### tcgetattr
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### tgetent
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### tgetflag
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### tgetnum
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### tgetstr
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### tgoto
-SYNOPSIS:
-DESCRIPTION:
-RETURN:
-### tputs
-SYNOPSIS:
-DESCRIPTION:
+
+    This function returns  information about a file, in the buffer pointed to by statbuf. No permissions are
+    required on the file itself, but—in the case of stat()—execute (search) permission
+    is required on all of the directories in pathname that lead to the file.
+
+    stat() retrieves information about the file pointed to by pathname.
+
 RETURN:
 
-## Unused
+    On success, zero is returned.  On error, -1 is returned, and errno is set appropriately.
+
+### lstat
+
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <unistd.h>
+
+    int lstat(const char *pathname, struct stat *statbuf);
+
+DESCRIPTION:
+
+    This function returns  information about a file, in the buffer pointed to by statbuf. No permissions are
+    required on the file itself, but—in the case of lstat()—execute (search) permission
+    is required on all of the directories in pathname that lead to the file.
+
+    lstat() is identical to stat(), except that if pathname is a symbolic link, then it returns information
+    about the link itself, not the file that the link refers to.
+
+RETURN:
+
+    On success, zero is returned.  On error, -1 is returned, and errno is set appropriately.
+
+### fstat
+
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <unistd.h>
+
+    int fstat(int fd, struct stat *statbuf);
+
+DESCRIPTION:
+
+    This function returns  information about a file, in the buffer pointed to by statbuf. No permissions are
+    required on the file itself, but—in the case of fstat()—execute (search) permission
+    is required on all of the directories in pathname that lead to the file.
+
+    fstat() is identical to stat(), except that the file about which information is to be retrieved is specified
+    by the file descriptor fd.
+
+RETURN:
+
+    On success, zero is returned.  On error, -1 is returned, and errno is set appropriately.
+
+## Unused Functions
 - rl_replace_line
-- rl_redisplay
 - strerror
+- tcgetattr
+- tcsetattr
+- tgetent
+- tgetflag
+- tgetnum
+- tgetstr
+- tgoto
+- tputs
 - wait3 && wait4
