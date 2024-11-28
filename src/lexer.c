@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/28 15:47:15 by jwolfram         ###   ########.fr       */
+/*   Created: 2024/11/28 15:26:48 by jwolfram          #+#    #+#             */
+/*   Updated: 2024/11/28 15:45:58 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	loop(void)
+void	quote_check(void)
 {
-	while (1)
+	size_t	i;
+	size_t	s_quote;
+	size_t	d_quote;
+
+	i = 0;
+	s_quote = 0;
+	d_quote = 0;
+	while (data(GET)->rl_prompt[i])
 	{
-		if (data(GET)->exit_code)
-			data(GET)->rl_prompt = readline("\uea76 minishell \uf061  ");
-		else
-			data(GET)->rl_prompt = readline("\ueab2 minishell \uf061  ");
-		printf("%s\n", data(GET)->rl_prompt);
-		quote_check();
-		add_history(data(GET)->rl_prompt);
-		free(data(GET)->rl_prompt);
+		if (data(GET)->rl_prompt[i] == '"')
+			d_quote++;
+		else if (data(GET)->rl_prompt[i] == '\'' && d_quote % 2)	
+			s_quote++;
+		i++;
 	}
+	if (s_quote % 2 || d_quote % 2)
+		printf("Invalid quotation, this will exit the program\n");
+//		minishell_exit(1, "minishell: Invalid use of quotation marks");
 }
