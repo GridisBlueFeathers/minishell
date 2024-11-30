@@ -6,37 +6,38 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:26:48 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/30 13:11:18 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/30 13:24:44 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lexer_quote_check(void)
+static void	lexer_quote_check(void)
 {
 	size_t	i;
-	size_t	s_quote;
-	size_t	d_quote;
+	char	quote;
 
 	i = 0;
-	s_quote = 0;
-	d_quote = 0;
+	quote = 0;
 	while (data(GET)->rl_prompt[i])
 	{
-		if (!s_quote && !d_quote)
+		if (!quote)
 		{
-			if (data(GET)->rl_prompt[i] == '"')
-				d_quote = 1;
-			else if (data(GET)->rl_prompt[i] == '\'')	
-				s_quote = 1;
+			if (data(GET)->rl_prompt[i] == '"' || data(GET)->rl_prompt[i] == '\'')
+					quote = data(GET)->rl_prompt[i];
 		}
-		else if (s_quote && data(GET)->rl_prompt[i] == '\'')
-			s_quote = 0;
-		else if (d_quote && data(GET)->rl_prompt[i] == '"')
-			d_quote = 0;
+		else if (quote == '\'' && data(GET)->rl_prompt[i] == '\'')
+			quote = 0;
+		else if (quote == '"' && data(GET)->rl_prompt[i] == '"')
+			quote = 0;
 		i++;
 	}
-	if (s_quote || d_quote)
+	if (quote)
 		printf("Invalid quotation, this will exit the program\n");
 //		minishell_exit(1, "minishell: Invalid use of quotation marks");
+}
+
+void	lexer(void)
+{
+	lexer_quote_check();
 }
