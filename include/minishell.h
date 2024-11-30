@@ -16,6 +16,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+# define PREFIX_GOOD "\ueab2 minishell \uf061  "
+# define PREFIX_BAD "\uea76 minishell \uf061  "
+
 typedef enum e_option
 {
 	GET,
@@ -40,6 +43,7 @@ typedef struct s_data
 {
 	int		exit_code;
 	char	*rl_prompt;
+	char	*rl_prefix;
 	char	**path;
 	t_env	env;
 }	t_data;
@@ -49,6 +53,11 @@ void	loop(void);
 void	env_init(char **env);
 void	env_free(t_env_var *node);
 void	path_set(void);
+
+void	signal_init(void);
+void	signal_int(int signal);
+
+void	minishell_exit(int status, char *msg);
 
 int		lexer(void);
 

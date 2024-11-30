@@ -36,6 +36,8 @@ FILES = main \
 		env \
 		path \
 		loop \
+		signal \
+		utils/exit \
 		lexer \
 		
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
@@ -90,6 +92,9 @@ re: fclean all
 # Dev targets
 # 
 ###############################################################################
+
+run: re
+	./minishell
 
 print:
 	echo ${INCLUDE_FILES} ${DEV_FILES}

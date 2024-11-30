@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/21 17:37:17 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:25:13 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_env_var	*env_allocate(void)
 
 	node = (t_env_var *)ft_calloc(1, sizeof(t_env_var));
 	if (!node)
-		ft_panic(1, NULL);
+		minishell_exit(1, NULL);
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
@@ -51,10 +51,10 @@ static void	env_set(char **env)
 		len = ft_strchr(env[i], '=') - env[i];
 		node->key = ft_substr(env[i], 0, len);
 		if (!node->key)
-			ft_panic(1, NULL);
+			minishell_exit(1, NULL);
 		node->value = ft_substr(env[i], len + 1, ft_strlen(env[i]));
 		if (!node->value)
-			ft_panic(1, NULL);
+			minishell_exit(1, NULL);
 		if (!env[i + 1])
 			break ;
 		node = env_allocate();
@@ -78,11 +78,11 @@ void	env_init(char **env)
 		fd = -1;
 		node->key = ft_strdup("USER");
 		if (!node->key)
-			ft_panic(1, NULL);
+			minishell_exit(1, NULL);
 		/* if needed add function that finds username */
 		node->value = ft_strdup("Han is cool and always gay");
 		if (!node->value)
-			ft_panic(1, NULL);
+			minishell_exit(1, NULL);
 	}
 	else
 	{

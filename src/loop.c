@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/30 14:43:04 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:36:09 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ static void	prompt_exec(void)
 
 void	loop(void)
 {
+	signal_init();
 	while (1)
 	{
 		if (data(GET)->exit_code)
-			data(GET)->rl_prompt = readline("\uea76 minishell \uf061  ");
+			data(GET)->rl_prompt = readline(PREFIX_BAD);
 		else
-			data(GET)->rl_prompt = readline("\ueab2 minishell \uf061  ");
+			data(GET)->rl_prompt = readline(PREFIX_GOOD);
+		if (!data(GET)->rl_prompt)
+			minishell_exit(0, NULL);
 		prompt_exec();
 		free(data(GET)->rl_prompt);
 	}
