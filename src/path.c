@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:50:10 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/21 17:37:35 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:25:30 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	path_set(void)
 		node = node->next;
 	data(GET)->path = ft_split(node->value, ':');
 	if (!data(GET)->path)
-		ft_panic(1, NULL);
+		minishell_exit(1, NULL);
 }
