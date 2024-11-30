@@ -6,21 +6,29 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:25:48 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/27 18:33:58 by svereten         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:33:28 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/stdio.h"
 #include "minishell.h"
-#include <readline/readline.h>
+#include <sys/ioctl.h>
 
 void	signal_int(int signal)
 {
 	(void)signal;
 	data(GET)->exit_code = 130;
-	rl_replace_line("", 0);
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	printf("Kill all children instead of this please\n");
+	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	rl_on_new_line();
-	rl_redisplay();
+	rl_replace_line("", 0);
 	return ;
+}
+
+void	signal_init(void)
+{
+	struct sigaction	action;
+
+	action.sa_handler = signal_int;
+	sigemptyset(&action.sa_mask);
+	action.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &action, NULL);
+	signal(SIGQUIT, SIG_IGN);
 }

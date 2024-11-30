@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/27 17:06:05 by svereten         ###   ########.fr       */
+/*   Updated: 2024/11/30 14:24:58 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -57,6 +57,7 @@ void	env_init(char **env);
 void	env_free(t_env_var *node);
 void	path_set(void);
 
+void	signal_init(void);
 void	signal_int(int signal);
 
 void	minishell_exit(int status, char *msg);
