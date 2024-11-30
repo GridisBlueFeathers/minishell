@@ -12,6 +12,17 @@
 
 #include "minishell.h"
 
+static void	prompt_exec(void)
+{
+	if (data(GET)->rl_prompt[0] == '\n')
+		return ;
+	add_history(data(GET)->rl_prompt);
+	if (!lexer())
+		return ;
+	printf("%s\n", data(GET)->rl_prompt);
+	data(GET)->exit_code = 0;
+}
+
 void	loop(void)
 {
 	signal_init();
@@ -23,7 +34,7 @@ void	loop(void)
 			data(GET)->rl_prompt = readline(PREFIX_GOOD);
 		if (!data(GET)->rl_prompt)
 			minishell_exit(0, NULL);
-		add_history(data(GET)->rl_prompt);
+		prompt_exec();
 		free(data(GET)->rl_prompt);
 	}
 }
