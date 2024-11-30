@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/28 15:48:05 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/30 13:05:55 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -49,6 +49,7 @@ void	loop(void);
 void	env_init(char **env);
 void	env_free(t_env_var *node);
 void	path_set(void);
-void	quote_check(void);
+
+void	lexer_quote_check(void);
 
 #endif

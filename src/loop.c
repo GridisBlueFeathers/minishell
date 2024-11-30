@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/28 15:47:15 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/30 13:04:54 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	loop(void)
 		else
 			data(GET)->rl_prompt = readline("\ueab2 minishell \uf061  ");
 		printf("%s\n", data(GET)->rl_prompt);
-		quote_check();
+		lexer_quote_check();
 		add_history(data(GET)->rl_prompt);
 		free(data(GET)->rl_prompt);
 	}
