@@ -6,13 +6,14 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/30 17:59:30 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:05:04 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include "token.h"
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -46,11 +47,12 @@ typedef struct s_env
 
 typedef struct s_data
 {
-	int		exit_code;
-	char	*rl_prompt;
-	char	*rl_prefix;
-	char	**path;
-	t_env	env;
+	int			exit_code;
+	char		*rl_prompt;
+	char		*rl_prefix;
+	char		**path;
+	t_prompt	**prompt;
+	t_env		env;
 }	t_data;
 
 t_data	*data(t_option option);
@@ -61,12 +63,13 @@ void	env_free(t_env_var *node);
 void	path_set(void);
 
 int		isredir(char c);
+size_t	wordlen(char *str);
+
+int		lexer(void);
 
 void	signal_init(void);
 void	signal_int(int signal);
 
 void	minishell_exit(int status, char *msg);
-
-int		lexer(void);
 
 #endif
