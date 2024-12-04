@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/02 19:05:04 by jwolfram         ###   ########.fr       */
+/*   Created: 2024/12/04 18:29:02 by svereten          #+#    #+#             */
+/*   Updated: 2024/12/04 18:53:39 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -17,6 +17,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "command.h"
 
 # define PREFIX_GOOD "\ueab2 minishell \uf061  "
 # define PREFIX_BAD "\uea76 minishell \uf061  "
@@ -49,9 +50,10 @@ typedef struct s_data
 {
 	int			exit_code;
 	char		*rl_prompt;
-	char		*rl_prefix;
 	char		**path;
 	t_prompt	**prompt;
+	int			cmd_amount;
+	t_cmd		**commands;
 	t_env		env;
 }	t_data;
 
