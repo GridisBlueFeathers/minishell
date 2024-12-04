@@ -6,11 +6,13 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:01:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/02 19:05:02 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:49:15 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef TOKEN_H
 # define TOKEN_H
+
+# include "minishell.h"
 
 typedef enum e_tok_type
 {
@@ -18,8 +20,7 @@ typedef enum e_tok_type
 	APPEND,
 	HEREDOC,
 	INPUT,
-	OUTPUT,
-	PIPE
+	OUTPUT
 }	t_tok_type;
 
 typedef struct s_token
@@ -32,6 +33,7 @@ typedef struct s_token
 typedef struct s_prompt
 {
 	char	*name;
+	size_t	idx;
 	t_token	*first;
 	t_token	*last;
 }	t_prompt;

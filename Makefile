@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2024/11/30 17:25:34 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/12/04 15:47:02 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -38,8 +38,12 @@ FILES = main \
 		loop \
 		signal \
 		lexer \
+		token \
 		utils/exit \
 		utils/isredir \
+		utils/wordlen \
+		dev 
+		# -> dev file, delete later #
 		
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}

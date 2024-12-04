@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   wordlen.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 16:36:46 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/04 15:47:28 by jwolfram         ###   ########.fr       */
+/*   Created: 2024/12/02 16:58:12 by jwolfram          #+#    #+#             */
+/*   Updated: 2024/12/02 19:00:47 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+size_t	wordlen(char *str)
 {
-	(void)argv;
-	if (argc > 1)
-		return (1);
-	env_init(env);
-	env_print();
-	loop();
-	data(FREE);
-	ft_exit(0);
+	size_t	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (!ft_isspace(str[i]))
+		i++;
+	return (i);
 }

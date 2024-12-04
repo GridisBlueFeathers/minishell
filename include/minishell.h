@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 18:29:02 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/04 18:53:39 by jwolfram         ###   ########.fr       */
+/*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
+/*   Updated: 2024/12/04 18:54:33 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -56,6 +56,14 @@ typedef struct s_data
 	t_cmd		**commands;
 	t_env		env;
 }	t_data;
+
+/* dev functions */
+/* ------------- */
+
+void	env_print(void);
+void	tokenizer_print();
+
+/* ------------- */
 
 t_data	*data(t_option option);
 void	loop(void);
