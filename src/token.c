@@ -6,13 +6,13 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:34:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/04 18:48:07 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:57:06 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_token	*token_allocate(void)
+static t_token	*token_allocate(t_prompt *prompt)
 {
 	t_token	*node;
 
@@ -22,56 +22,98 @@ static t_token	*token_allocate(void)
 	node->tok_str = NULL;
 	node->tok_type = 0;
 	node->next = NULL;
+	if (!data(GET)->prompt[prompt->idx]->last)
+	{
+		data(GET)->prompt[prompt->idx]->first = node;
+		data(GET)->prompt[prompt->idx]->last = node;
+	}
+	else
+{
+		data(GET)->prompt[prompt->idx]->last->next = node;
+		data(GET)->prompt[prompt->idx]->last = node;
+	}
 	return (node);
 }
 
-static void	token_set_var(char *token, t_tok_type type)
+static size_t	token_redir_set(t_token *token)
 {
-	if (type = APPEND)
+	if (token->tok_type == APPEND)
 	{
-
+		token->tok_str = ft_strdup(">>");
+		if (!token->tok_str)
+			minishell_exit(1, NULL);
 	}
+	if (token->tok_type == HEREDOC)
+	{
+		token->tok_str = ft_strdup("<<");
+		if (!token->tok_str)
+			minishell_exit(1, NULL);
+	}
+	if (token->tok_type ==OUTPUT)
+	{
+		token->tok_str = ft_strdup(">");
+		if (!token->tok_str)
+			minishell_exit(1, NULL);
+	}
+	if (token->tok_type == INPUT)
+	{
+		token->tok_str = ft_strdup("<");
+		if (!token->tok_str)
+			minishell_exit(1, NULL);
+	}
+	return (ft_strlen(token->tok_str) - 1);
 }
 
-static void	token_set(char *prompt)
+static size_t	token_str_set(char *prompt, t_token *token)
+{
+	if (token->tok_type == WORD)
+	{
+		token->tok_str = ft_substr(prompt, 0, wordlen(prompt));
+		if (!token->tok_str)
+			minishell_exit(1, NULL);
+		return (wordlen(prompt) - 1);
+	}
+	return (token_redir_set(token));
+}
+
+static t_tok_type	token_type_set(char *prompt)
 {
 	if (!prompt)
-		return ;
+		return (EOP);
 	if (isredir(prompt[0]) && prompt[1] && isredir(prompt[1]))
 	{
 		if (prompt[1] == '>')
-			token_set_var(prompt, APPEND);
+			return (APPEND);
 		else if (prompt[1] == '<')
-			token_set_var(prompt, HEREDOC);
+				return (HEREDOC);
 	}
 	else if (isredir(prompt[0]) && prompt[1] && !isredir(prompt[1]))
 	{
 		if (prompt[0] == '>')
-			token_set_var(prompt, OUTPUT);
+			return (OUTPUT);
 		else
-			token_set_var(prompt, INPUT);
+			return (INPUT);
 	}
-	else if (!isredir(prompt[0]))
-		token_set_var(prompt, WORD);
+	return (WORD);
 }
 
-static void	token_init(char *prompt)
+static void	token_init(t_prompt *prompt)
 {
 	int		i;
 	t_token	*token;
 
 	i = 0;
-	token = token_allocate();
-	data(GET)->prompt[i]->first = token;
-	data(GET)->prompt[i]->last = token;
-	while ()
+	while (prompt->name[i])
 	{
-		token_set(prompt + i);
-		if (!prompt[i + 1])
-			break ;
-		token = token_allocate();
-		data(GET)->prompt[i]->last->next = token;
-		data(GET)->prompt[i]->last = token;
+		if (isspace(prompt->name[i]))
+		{
+			i++;
+			continue ;
+		}
+		token = token_allocate(prompt);
+		token->tok_type = token_type_set(prompt->name + i);
+		i += token_str_set(prompt->name + i, token);
+		i++;
 	}
 }
 
@@ -108,7 +150,8 @@ void	parser_init(void)
 	prompt_init();
 	while (data(GET)->prompt[i])
 	{
-		token_init(data(GET)->prompt[i]->name);
+		data(GET)->prompt[i]->idx = i;
+		token_init(data(GET)->prompt[i]);
 		i++;
 	}
 

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:36:46 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/04 15:47:28 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:39:34 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(int argc, char **argv, char **env)
 	if (argc > 1)
 		return (1);
 	env_init(env);
-	env_print();
 	loop();
 	data(FREE);
 	ft_exit(0);

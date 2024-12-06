@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:01:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/04 18:49:15 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:24:26 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef TOKEN_H
@@ -16,6 +16,7 @@
 
 typedef enum e_tok_type
 {
+	EOP,
 	WORD,
 	APPEND,
 	HEREDOC,
@@ -38,6 +39,6 @@ typedef struct s_prompt
 	t_token	*last;
 }	t_prompt;
 
-void	prompt_init(void);
+void	parser_init(void);
 
 #endif

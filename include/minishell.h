@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/04 18:54:33 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:40:38 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -60,8 +60,9 @@ typedef struct s_data
 /* dev functions */
 /* ------------- */
 
+void	debug_print(void);
 void	env_print(void);
-void	tokenizer_print();
+void	tokenizer_print(void);
 
 /* ------------- */
 

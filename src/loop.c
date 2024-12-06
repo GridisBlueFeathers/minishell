@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/04 16:15:20 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:24:06 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	prompt_exec(void)
 	if (!lexer())
 		return ;
 	printf("%s\n", data(GET)->rl_prompt);
-	token_init();
+	parser_init();
 	debug_print();
 	data(GET)->exit_code = 0;
 }
