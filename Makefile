@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2024/12/04 15:47:02 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/12/13 16:18:49 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -38,10 +38,11 @@ FILES = main \
 		loop \
 		signal \
 		lexer \
-		token \
+		parser \
 		utils/exit \
 		utils/isredir \
 		utils/wordlen \
+		utils/minishell_split \
 		dev 
 		# -> dev file, delete later #
 		

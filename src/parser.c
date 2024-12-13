@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:34:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/06 17:57:06 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:02:19 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/stdio.h"
 #include "minishell.h"
 
 static t_token	*token_allocate(t_prompt *prompt)
@@ -123,7 +124,9 @@ void	prompt_init(void)
 	int		len;
 	int		i;
 
-	prompt = ft_split(data(GET)->rl_prompt, '|');
+	prompt = minishell_split(data(GET)->rl_prompt);
+	ft_putstrarr_fd(prompt, STDOUT_FILENO);
+	ft_putchar_fd('\n', STDOUT_FILENO);
 	if (!prompt)
 		minishell_exit(1, NULL);
 	i = 0;
