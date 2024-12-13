@@ -6,12 +6,13 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/04 17:44:25 by svereten         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:18:55 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
 # define COMMAND_H
 
+#include <sys/types.h>
 typedef enum e_redir_type
 {
 	INPUT,
@@ -48,9 +49,29 @@ typedef struct s_cmd
 	char			*name;
 	/* array of command arguments */
 	char			**argv;
+	/* for check if last command */
+	int				index;
+	pid_t			pid;
+	/* to prevent execution of everything but heredocs */
+	int				redir_valid;
 	t_redir			*redir_head;
 	t_redir			*redir_tail;
-	struct s_cmd	*next;
 }	t_cmd;
+
+typedef enum e_pipe
+{
+	RD,
+	WR
+}	t_pipe;
+
+void	executor(void);
+
+/**
+ * DEV function - delete on production
+ *
+ * mocks `cat Makefile` command
+ */
+void	dev_mock_cat_make(void);
+void	dev_mock_echo_hi(void);
 
 #endif

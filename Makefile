@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2024/11/30 17:25:34 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/12/13 15:16:43 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -38,6 +38,7 @@ FILES = main \
 		loop \
 		signal \
 		lexer \
+		executor/executor \
 		utils/exit \
 		utils/isredir \
 		
@@ -52,11 +53,15 @@ OBJ_DIRS = ${sort ${dir ${OBJS}}}
 # 
 ###############################################################################
 
+
 INCLUDE_FILES = ${wildcard include/*.h}
 
 CFLAGS := ${CFLAGS} -g
 
-DEV_FILES =	${wildcard src/dev*.c} 
+DEV_FILES = dev \
+			executor/dev \
+
+OBJS := ${OBJS} ${DEV_FILES:%=${OBJ_DIR}/%.o}
 
 ###############################################################################
 #

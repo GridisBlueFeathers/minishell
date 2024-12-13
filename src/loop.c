@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/30 16:36:09 by svereten         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:19:19 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 static void	prompt_exec(void)
 {
-	if (data(GET)->rl_prompt[0] == '\n')
+	if (!data(GET)->rl_prompt[0])
 		return ;
 	add_history(data(GET)->rl_prompt);
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat Makefile"))
+		dev_mock_cat_make();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "echo hi"))
+		dev_mock_echo_hi();	
+	printf("Prompt: %s\n", data(GET)->rl_prompt);
 	if (!lexer())
 		return ;
-	printf("%s\n", data(GET)->rl_prompt);
+	executor();
 	data(GET)->exit_code = 0;
 }
 
