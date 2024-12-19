@@ -6,123 +6,96 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 13:36:16 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/13 17:38:09 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:17:10 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	ms_toggle_quotes(char *quote, char *str, int i)
+static int	ms_valid_pipe(char *str, size_t loc)
 {
-	if (*quote && str[i] == '\\' && str[i + 1] && str[i + 1] == *quote)
-		return (1);
-	if (!*quote && (str[i] == '\'' || str[i] == '"'))
-	{
-		*quote = str[i];
-		return (1);
-	}
-	else if (*quote && *quote == str[i])
-	{
-		*quote = 0;
-		return (1);
-	}
-	return (0);
-}
-
-static int	ms_strwcount(char *str)
-{
-	char	quote;
 	size_t	i;
-	size_t	words_num;
-
-	i = 0;
-	words_num = 1;
-	quote = 0;
-	while (str[i])
-	{
-		if (ms_toggle_quotes(&quote, str, i))
-		{
-			i++;
-			if (quote && str[i] == quote && str[i - 1] == '\\')
-				i++;
-			continue ;
-		}
-		if (!quote && str[i] == '|')
-			words_num++;
-		i++;
-	}
-	return (words_num);
-}
-
-static int	ms_append_to_res(char **res, char *str)
-{
-	int		j;
-	int		i;
 	char	quote;
 
 	i = 0;
 	quote = 0;
-	while (str[i])
+	while (str[i] && i < loc)
 	{
-		if (ms_toggle_quotes(&quote, str, i))
+		if (str[i] == '\\' && str[i + 1] && isquote(str[i + 1]))
 		{
-			i++;
-			if (quote && str[i] == quote && str[i - 1] == '\\')
-				i++;
+			i += 2;
 			continue ;
 		}
-		if (!quote && str[i] == '|')
-			break ;
+		if (!quote && isquote(str[i]))
+			quote = str[i];
+		else if (quote && str[i] == quote)
+			quote = 0;
 		i++;
 	}
-	j = 0;
-	while (res[j])
-		j++;
-	res[j] = ft_substr(str, 0, i);
-	if (!res[j])
+	if (quote)
 		return (0);
 	return (1);
 }
 
-static int	ms_iterate_split(char *str, char **res)
+static size_t	ms_wordcount(char *str)
 {
-	int		i;
-	int		check;
-	char	quote;
+	size_t	i;
+	size_t	words;
 
 	i = 0;
-	check = 1;
-	quote = 0;
+	if (!str)
+		return (0);
+	words = 1;
 	while (str[i])
 	{
-		if (!i)
-			check = ms_append_to_res(res, str + i);
-		else if (!quote && str[i] == '|')
-			check = ms_append_to_res(res, str + (i + 1));
-		if (!check)
-		{
-			ft_free(STR_ARR, &res);
-			return (0);
-		}
-		if (ms_toggle_quotes(&quote, str, i))
-			i++;
+		if (str[i] == '|' && ms_valid_pipe(str, i))
+			words++;
 		i++;
 	}
-	return (1);
+	return (words);
+}
+
+static char 	*ms_set_res(char *str, size_t last_loc, size_t loc)
+{
+	char	*res;
+	
+	if (!last_loc && !str[loc + 1])
+		res = ft_substr(str, last_loc, loc + 1);
+	else if (!last_loc)
+		res = ft_substr(str, last_loc, loc);
+	else if (!str[loc + 1])
+		res = ft_substr(str, last_loc + 1, loc + 1);
+	else
+		res = ft_substr(str, last_loc + 1, ft_strlen(str) - loc);
+	if (!res)
+		minishell_exit(1, NULL);
+	return (res);	
 }
 
 char	**minishell_split(char *str)
 {
 	char	**res;
-	int		words_num;
+	size_t	i;
+	size_t	y;
+	size_t	last_loc;
 
-	if (!str)
-		return (0);
-	words_num = ms_strwcount(str);
-	res = (char **)ft_calloc(words_num + 1, sizeof(char *));
+	i = ms_wordcount(str);
+	printf("we have %zu words\n", i);
+	res = (char **)ft_calloc(i + 1, sizeof(char *));
 	if (!res)
-		return (0);
-	if (!ms_iterate_split(str, res))
-		return (0);
+		minishell_exit(1, NULL);
+	i = 0;
+	y = 0;
+	last_loc = 0;
+	while (str[i])
+	{
+		if ((str[i] == '|' && ms_valid_pipe(str, i)) || !str[i + 1])
+		{
+			printf("%zu\n", i);
+			res[y] = ms_set_res(str, last_loc, i);
+			last_loc = i;
+			y++;
+		}
+		i++;
+	}
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:26:48 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/13 16:43:42 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:35:10 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ static int	lexer_quote_check(void)
 	while (data(GET)->rl_prompt[i])
 	{
 		if (data(GET)->rl_prompt[i] == '\\' && data(GET)->rl_prompt[i + 1]
-			&& (data(GET)->rl_prompt[i + 1] == '"'
-			|| data(GET)->rl_prompt[i + 1] == '\''))
+			&& isquote(data(GET)->rl_prompt[i + 1]))
 			i += 2;
 		if (!quote)
 		{
-			if (data(GET)->rl_prompt[i] == '"'
-				|| data(GET)->rl_prompt[i] == '\'')
+			if (isquote(data(GET)->rl_prompt[i]))
 				quote = data(GET)->rl_prompt[i];
 		}
 		else if ((quote == '\'' && data(GET)->rl_prompt[i] == '\'')

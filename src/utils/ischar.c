@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:23:16 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/30 17:24:50 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:31:13 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 int	isredir(char c)
 {
 	if (c == '<' || c == '>')
+		return (1);
+	return (0);
+}
+
+int	isquote(char c)
+{
+	if (c == '\'' || c == '"')
 		return (1);
 	return (0);
 }

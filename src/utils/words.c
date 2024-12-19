@@ -1,16 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wordlen.c                                          :+:      :+:    :+:   */
+/*   words.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:58:12 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/13 17:00:43 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:36:12 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+size_t	wordcount(char *str)
+{
+	size_t	i;
+	size_t	words;
+
+	if (!str)
+		return (0);
+	i = 0;
+	words = 0;
+	while(str[i])
+	{
+		if (!isspace(str[i]))
+		{
+			i += wordlen(str + i);
+			words++;
+		}
+		i++;
+	}
+	return (words);
+}
 
 size_t	wordlen(char *str)
 {
@@ -23,7 +44,7 @@ size_t	wordlen(char *str)
 		return (0);
 	while (str[i] && !isredir(str[i]))
 	{
-		if (!quote && (str[i] == '\'' || str[i] == '"'))
+		if (!quote && isquote(str[i]))
 			quote = str[i];
 		else if (quote && str[i] == quote)
 			quote = 0;
