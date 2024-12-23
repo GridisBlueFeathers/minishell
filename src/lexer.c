@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:26:48 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/19 13:35:10 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:55:57 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static int	lexer_pipe_check(void)
 	i = 0;
 	if (!ft_strchr(data(GET)->rl_prompt, '|'))
 		return (1);
-	if (data(GET)->rl_prompt[i] == '|')
-		return (0);
 	while (ft_isspace(data(GET)->rl_prompt[i]))
 		i++;
 	if (data(GET)->rl_prompt[i] == '|')
@@ -59,7 +57,7 @@ static int	lexer_pipe_check(void)
 			i++;
 			while (ft_isspace(data(GET)->rl_prompt[i]))
 				i++;
-			if (!data(GET)->rl_prompt[i])
+			if (!data(GET)->rl_prompt[i] || data(GET)->rl_prompt[i] == '|')
 				return (0);
 		}
 		i++;
