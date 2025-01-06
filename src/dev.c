@@ -44,6 +44,6 @@ void	tokenizer_print()
 
 void	debug_print(void)	
 {
-	//env_print();
-	tokenizer_print();
+	env_print();
+	//tokenizer_print();
 }
