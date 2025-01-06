@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:26:48 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/30 17:59:55 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:47:36 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ static int	lexer_quote_check(void)
 	quote = 0;
 	while (data(GET)->rl_prompt[i])
 	{
+		if (data(GET)->rl_prompt[i] == '\\' && data(GET)->rl_prompt[i + 1]
+			&& isquote(data(GET)->rl_prompt[i + 1]))
+			i += 2;
 		if (!quote)
 		{
-			if (data(GET)->rl_prompt[i] == '"'
-				|| data(GET)->rl_prompt[i] == '\'')
+			if (isquote(data(GET)->rl_prompt[i]))
 				quote = data(GET)->rl_prompt[i];
 		}
 		else if ((quote == '\'' && data(GET)->rl_prompt[i] == '\'')
@@ -44,8 +46,6 @@ static int	lexer_pipe_check(void)
 	i = 0;
 	if (!ft_strchr(data(GET)->rl_prompt, '|'))
 		return (1);
-	if (data(GET)->rl_prompt[i] == '|')
-		return (0);
 	while (ft_isspace(data(GET)->rl_prompt[i]))
 		i++;
 	if (data(GET)->rl_prompt[i] == '|')
@@ -57,7 +57,7 @@ static int	lexer_pipe_check(void)
 			i++;
 			while (ft_isspace(data(GET)->rl_prompt[i]))
 				i++;
-			if (!data(GET)->rl_prompt[i])
+			if (!data(GET)->rl_prompt[i] || data(GET)->rl_prompt[i] == '|')
 				return (0);
 		}
 		i++;
@@ -94,7 +94,8 @@ static int	lexer_redir_check(void)
 		return (1);
 	while (data(GET)->rl_prompt[i])
 	{
-		if (isredir(data(GET)->rl_prompt[i]))
+		if (isredir(data(GET)->rl_prompt[i])
+			&& valid_operator(data(GET)->rl_prompt, i))
 		{
 			if (!lexer_double_redir_check(data(GET)->rl_prompt + i))
 				return (0);

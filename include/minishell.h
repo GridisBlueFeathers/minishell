@@ -5,14 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 18:29:02 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/04 18:29:07 by svereten         ###   ########.fr       */
+/*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
+/*   Updated: 2025/01/06 12:08:57 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include "token.h"
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -47,13 +48,23 @@ typedef struct s_env
 
 typedef struct s_data
 {
-	int		exit_code;
-	char	*rl_prompt;
-	char	**path;
-	int		cmd_amount;
-	t_cmd	**commands;
-	t_env	env;
+	int			exit_code;
+	char		*rl_prompt;
+	char		**path;
+	t_prompt	**prompt;
+	int			cmd_amount;
+	t_cmd		**commands;
+	t_env		env;
 }	t_data;
+
+/* dev functions */
+/* ------------- */
+
+void	debug_print(void);
+void	env_print(void);
+void	tokenizer_print(void);
+
+/* ------------- */
 
 t_data	*data(t_option option);
 void	loop(void);
@@ -63,12 +74,16 @@ void	env_free(t_env_var *node);
 void	path_set(void);
 
 int		isredir(char c);
+int		isquote(char c);
+size_t	wordlen(char *str);
+int		valid_operator(char *str, size_t loc);
+char	**minishell_split(char *str);
+
+int		lexer(void);
 
 void	signal_init(void);
 void	signal_int(int signal);
 
 void	minishell_exit(int status, char *msg);
-
-int		lexer(void);
 
 #endif
