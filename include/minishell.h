@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:29:02 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/04 18:29:07 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:58:36 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -47,6 +47,8 @@ typedef struct s_env
 
 typedef struct s_data
 {
+	int		stdin_copy;
+	int		stdout_copy;
 	int		exit_code;
 	char	*rl_prompt;
 	char	**path;
@@ -63,6 +65,10 @@ void	env_free(t_env_var *node);
 void	path_set(void);
 
 int		isredir(char c);
+void	redirect(int old_fd, int new_fd);
+void	stdfd_copy(void);
+void	stdfd_reset(void);
+void	stdfd_close(void);
 
 void	signal_init(void);
 void	signal_int(int signal);

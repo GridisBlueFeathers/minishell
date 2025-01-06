@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2024/12/13 15:16:43 by svereten         ###   ########.fr        #
+#    Updated: 2025/01/06 14:30:15 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -41,6 +41,8 @@ FILES = main \
 		executor/executor \
 		utils/exit \
 		utils/isredir \
+		utils/redirect \
+		utils/stdfd \
 		
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
@@ -100,7 +102,8 @@ re: fclean all
 ###############################################################################
 
 run: re
-	./minishell
+	@clear
+	@./minishell
 
 print:
 	echo ${INCLUDE_FILES} ${DEV_FILES}

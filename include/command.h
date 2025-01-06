@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/13 16:18:55 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:03:36 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
@@ -73,5 +73,8 @@ void	executor(void);
  */
 void	dev_mock_cat_make(void);
 void	dev_mock_echo_hi(void);
+void	dev_mock_cat_dev2(void);
+void	dev_mock_cat_pipe_grep(void);
+void	dev_mock_cat_pipe_grep_pipe_wc(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/13 16:19:19 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:06:49 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ static void	prompt_exec(void)
 		dev_mock_cat_make();	
 	if (!ft_strcmp(data(GET)->rl_prompt, "echo hi"))
 		dev_mock_echo_hi();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat dev/2 | grep hey | wc -l"))
+		dev_mock_cat_pipe_grep_pipe_wc();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat dev/2 | grep hey"))
+		dev_mock_cat_pipe_grep();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat dev/2"))
+		dev_mock_cat_dev2();	
 	printf("Prompt: %s\n", data(GET)->rl_prompt);
 	if (!lexer())
 		return ;
