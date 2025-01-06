@@ -6,16 +6,43 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/06 11:57:03 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:57:47 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	env_update(void)
+{
+	char		*cur;
+	t_env_var	*env;
+
+	env = data(GET)->env.first;
+	while (env)
+	{
+		cur = getenv(env->key);
+		if (ft_strcmp(env->value, cur))
+		{
+			// debug print, remove later
+			printf("Env diff at %s: %s\nNow: %s\n", env->key, env->value, cur);
+			ft_free(STR, &env->value);
+			if (cur)
+			{
+				env->value = ft_strdup(cur);
+				if (!env->value)
+					minishell_exit(1, NULL);
+			}
+		}
+		ft_free(STR, &cur);
+		env = env->next;
+	}
+}
+
 static void	prompt_exec(void)
 {
 	if (data(GET)->rl_prompt[0] == '\n')
 		return ;
+	env_update();
 	add_history(data(GET)->rl_prompt);
 	if (!lexer())
 		return ;
