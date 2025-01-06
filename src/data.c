@@ -6,11 +6,10 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:55:08 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/11/21 17:39:52 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:12:49 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "minishell.h"
 
 static t_data	*data_init(void)
@@ -19,7 +18,7 @@ static t_data	*data_init(void)
 
 	ptr = (t_data *)ft_calloc(1, sizeof(t_data));
 	if (!ptr)
-		ft_panic(1, NULL);
+		minishell_exit(1, NULL);
 	return (ptr);
 }
 
@@ -29,7 +28,8 @@ static void	data_free(t_data *ptr)
 		env_free(ptr->env.first);
 	if (ptr->path)
 		ft_free(STR_ARR, &ptr->path);
-	free(ptr);
+	printf("Kill all children instead of this please\n");
+	ft_free(STRUCT, &ptr);
 }
 
 t_data	*data(t_option option)

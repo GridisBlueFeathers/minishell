@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   isredir.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 16:36:46 by svereten          #+#    #+#             */
-/*   Updated: 2024/11/27 15:15:20 by svereten         ###   ########.fr       */
+/*   Created: 2024/11/30 17:23:16 by jwolfram          #+#    #+#             */
+/*   Updated: 2024/11/30 17:24:50 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int	isredir(char c)
 {
-	(void)argv;
-	if (argc > 1)
+	if (c == '<' || c == '>')
 		return (1);
-	env_init(env);
-	loop();
-	data(FREE);
-	ft_exit(0);
+	return (0);
 }
