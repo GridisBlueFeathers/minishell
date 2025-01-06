@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/06 12:58:42 by jwolfram         ###   ########.fr        #
+#    Updated: 2025/01/06 18:12:46 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -38,8 +38,9 @@ FILES = main \
 		loop \
 		signal \
 		lexer \
-		parser \
-		token \
+		parser/prompt \
+		parser/token \
+		parser/special_input \
 		utils/exit \
 		utils/ischar \
 		utils/words \

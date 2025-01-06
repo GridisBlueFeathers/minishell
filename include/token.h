@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:01:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/06 12:58:12 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:13:18 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef TOKEN_H
@@ -41,6 +41,7 @@ typedef struct s_prompt
 
 void	parser_init(void);
 void	token_init(t_prompt *prompt);
+void	special_input_replace(size_t i);
 size_t	wordcount(char *str);
 
 #endif
