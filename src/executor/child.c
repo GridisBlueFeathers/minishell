@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:25:48 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/06 17:44:21 by svereten         ###   ########.fr       */
+/*   Created: 2025/01/06 16:05:03 by svereten          #+#    #+#             */
+/*   Updated: 2025/01/06 16:05:25 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
-#include <sys/ioctl.h>
 
-void	signal_int(int signal)
+static int	child_apply_redirs(t_cmd *cmd)
 {
-	(void)signal;
-	data(GET)->exit_code = 130;
-	data(GET)->mode = IN_PROMPT;
-	ioctl(STDIN_FILENO, TIOCSTI, "\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	return ;
+	(void)cmd;
+	return (1);
 }
 
-void	signal_init(void)
+void	child_execute(t_cmd *cmd, int pipe_fd[2])
 {
-	struct sigaction	action;
-
-	action.sa_handler = signal_int;
-	sigemptyset(&action.sa_mask);
-	action.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &action, NULL);
-	signal(SIGQUIT, SIG_IGN);
+	if (cmd->index + 1 != data(GET)->cmd_amount)
+	{
+		ft_close(pipe_fd[RD]);
+		redirect(pipe_fd[WR], STDOUT_FILENO);
+	}
+	else
+		redirect(data(GET)->stdout_copy, STDOUT_FILENO);
+	if (!child_apply_redirs(cmd))
+		minishell_exit(1, NULL);
+	if (execve(cmd->bin, cmd->argv, NULL))
+		minishell_exit(0, NULL);
 }

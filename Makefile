@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/06 14:30:15 by svereten         ###   ########.fr        #
+#    Updated: 2025/01/06 16:42:33 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -39,10 +39,14 @@ FILES = main \
 		signal \
 		lexer \
 		executor/executor \
+		executor/commands \
+		executor/cmd \
+		executor/child \
 		utils/exit \
 		utils/isredir \
 		utils/redirect \
 		utils/stdfd \
+		utils/pipe_close \
 		
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}

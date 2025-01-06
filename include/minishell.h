@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:29:02 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/06 14:58:36 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:43:13 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -31,6 +31,12 @@ typedef enum e_option
 	FREE
 }	t_option;
 
+typedef	enum e_mode
+{
+	IN_PROMPT,
+	IN_HEREDOC,
+}	t_mode;
+
 typedef struct s_env_var
 {
 	char				*key;
@@ -47,14 +53,15 @@ typedef struct s_env
 
 typedef struct s_data
 {
+	t_env	env;
+	t_cmd	**commands;
+	char	**path;
+	char	*rl_prompt;
 	int		stdin_copy;
 	int		stdout_copy;
 	int		exit_code;
-	char	*rl_prompt;
-	char	**path;
 	int		cmd_amount;
-	t_cmd	**commands;
-	t_env	env;
+	t_mode	mode;
 }	t_data;
 
 t_data	*data(t_option option);
@@ -66,6 +73,7 @@ void	path_set(void);
 
 int		isredir(char c);
 void	redirect(int old_fd, int new_fd);
+void	pipe_close(int	pipe_fd[2]);
 void	stdfd_copy(void);
 void	stdfd_reset(void);
 void	stdfd_close(void);

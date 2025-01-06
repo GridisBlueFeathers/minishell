@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/06 15:03:36 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:51:47 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
@@ -66,6 +66,13 @@ typedef enum e_pipe
 
 void	executor(void);
 
+void	commands_reset(void);
+
+int		cmd_execute(t_cmd *cmd);
+int		cmd_heredoc_run(t_cmd *cmd);
+
+void	child_execute(t_cmd *cmd, int pipe_fd[2]);
+
 /**
  * DEV function - delete on production
  *
@@ -76,5 +83,6 @@ void	dev_mock_echo_hi(void);
 void	dev_mock_cat_dev2(void);
 void	dev_mock_cat_pipe_grep(void);
 void	dev_mock_cat_pipe_grep_pipe_wc(void);
+void	dev_mock_cat_heredoc(void);
 
 #endif
