@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/19 13:32:49 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:08:57 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -76,6 +76,7 @@ void	path_set(void);
 int		isredir(char c);
 int		isquote(char c);
 size_t	wordlen(char *str);
+int		valid_operator(char *str, size_t loc);
 char	**minishell_split(char *str);
 
 int		lexer(void);

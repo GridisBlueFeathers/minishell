@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2024/12/19 13:32:31 by jwolfram         ###   ########.fr        #
+#    Updated: 2025/01/06 12:58:42 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -39,9 +39,11 @@ FILES = main \
 		signal \
 		lexer \
 		parser \
+		token \
 		utils/exit \
 		utils/ischar \
 		utils/words \
+		utils/valid_operator \
 		utils/minishell_split \
 		dev 
 		# -> dev file, delete later #

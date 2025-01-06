@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:26:48 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/12/23 16:55:57 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:47:36 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ static int	lexer_redir_check(void)
 		return (1);
 	while (data(GET)->rl_prompt[i])
 	{
-		if (isredir(data(GET)->rl_prompt[i]))
+		if (isredir(data(GET)->rl_prompt[i])
+			&& valid_operator(data(GET)->rl_prompt, i))
 		{
 			if (!lexer_double_redir_check(data(GET)->rl_prompt + i))
 				return (0);
