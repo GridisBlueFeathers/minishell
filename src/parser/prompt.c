@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:34:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/06 18:15:03 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:28:31 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	parser_init(void)
 	prompt_init();
 	while (data(GET)->prompt[i])
 	{
+		printf("hello world\n");
 		data(GET)->prompt[i]->idx = i;
 		token_init(data(GET)->prompt[i]);
 		special_input_replace(i);
