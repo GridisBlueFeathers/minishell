@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/06 14:57:47 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:18:22 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	env_update(void)
 					minishell_exit(1, NULL);
 			}
 		}
-		ft_free(STR, &cur);
 		env = env->next;
 	}
 }
