@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/06 12:58:42 by jwolfram         ###   ########.fr        #
+#    Updated: 2025/01/10 16:19:30 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -33,18 +33,23 @@ OBJ_DIR = obj
 
 FILES = main \
 		data \
-		env \
+		env_init \
+		env_update \
 		path \
 		loop \
 		signal \
 		lexer \
-		parser \
-		token \
-		utils/exit \
-		utils/ischar \
+		parser/parser \
+		parser/prompt \
+		parser/token \
+		parser/expander \
 		utils/words \
+		utils/ischar \
+		utils/substrrplc \
+		utils/ft_getenv \
 		utils/valid_operator \
 		utils/minishell_split \
+		utils/exit \
 		dev 
 		# -> dev file, delete later #
 		
@@ -52,6 +57,12 @@ SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
 
 OBJ_DIRS = ${sort ${dir ${OBJS}}}
+
+DEFAULT = \033[0m
+
+BLUE = \033[1;34m
+
+GREEN = \033[1;32m
 
 ###############################################################################
 #
@@ -74,24 +85,30 @@ DEV_FILES =	${wildcard src/dev*.c}
 all: ${NAME}
 
 ${NAME}: ${OBJS} | ${LIBFT}
-	${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o $@ ${LDLIBS} ${LDFLAGS}
+	@${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o $@ ${LDLIBS} ${LDFLAGS}
+	@echo "${GREEN}--------------------------${DEFAULT}"
+	@echo "${GREEN}   COMPILATION COMPLETE   ${DEFAULT}"
+	@echo "${GREEN}--------------------------${DEFAULT}"
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c | ${OBJ_DIRS}
-	${CC} ${CFLAGS} ${INCLUDE} -c $< -o $@
+	@${CC} ${CFLAGS} ${INCLUDE} -c $< -o $@
 
 ${LIBFT}:
-	${MAKE} -C ${LIBFT_DIR} GNL_SIZE="-D BUFFER_SIZE=42"
+	@${MAKE} -C ${LIBFT_DIR} GNL_SIZE="-D BUFFER_SIZE=42"
 
 ${OBJ_DIRS}:
-	mkdir -p $@
+	@mkdir -p $@
 
 clean:
-	rm -rf ${OBJ_DIR}
-	${MAKE} clean -C ${LIBFT_DIR}
+	@rm -rf ${OBJ_DIR}
+	@${MAKE} clean -C ${LIBFT_DIR}
+	@echo "${BLUE}--------------------------${DEFAULT}"
+	@echo "${BLUE}     CLEANUP COMPLETE     ${DEFAULT}"
+	@echo "${BLUE}--------------------------${DEFAULT}"
 
 fclean: clean
-	rm -rf ${NAME}
-	${MAKE} fclean -C ${LIBFT_DIR}
+	@rm -rf ${NAME}
+	@${MAKE} fclean -C ${LIBFT_DIR}
 
 re: fclean all
 

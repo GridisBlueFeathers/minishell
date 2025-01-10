@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:34:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/06 12:57:10 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/10 13:36:48 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	prompt_init(void)
 
 	ms_data = data(GET);
 	prompt = minishell_split(ms_data->rl_prompt);
-	ft_putstrarr_fd(prompt, STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	if (!prompt)
 		minishell_exit(1, NULL);
@@ -38,20 +37,6 @@ void	prompt_init(void)
 			minishell_exit(1, NULL);
 		ms_data->prompt[i]->name = prompt[i];
 		ms_data->prompt[i]->idx = i;
-		i++;
-	}
-}
-
-void	parser_init(void)
-{
-	size_t		i;
-
-	i = 0;
-	prompt_init();
-	while (data(GET)->prompt[i])
-	{
-		data(GET)->prompt[i]->idx = i;
-		token_init(data(GET)->prompt[i]);
 		i++;
 	}
 }

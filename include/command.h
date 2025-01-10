@@ -6,13 +6,13 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/06 16:01:44 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/10 12:03:51 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
 # define COMMAND_H
 
-# include "token.h"
+# include "parser.h"
 
 typedef struct s_redir
 {
