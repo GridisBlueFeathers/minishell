@@ -6,14 +6,14 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/06 12:08:57 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/10 12:02:15 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "libft/libft.h"
-# include "token.h"
+# include "parser.h"
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -72,10 +72,12 @@ void	loop(void);
 void	env_init(char **env);
 void	env_free(t_env_var *node);
 void	path_set(void);
+void	env_update(void);
 
 int		isredir(char c);
 int		isquote(char c);
 size_t	wordlen(char *str);
+char	*ft_getenv(char *key);
 int		valid_operator(char *str, size_t loc);
 char	**minishell_split(char *str);
 
