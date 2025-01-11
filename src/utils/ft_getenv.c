@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:01:29 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/10 16:04:47 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/11 12:34:23 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_getenv(char *key)
 	var = data(GET)->env.first;
 	while (var)
 	{
-		if (!ft_strcmp(key, var->key))
+		if (!ft_strncmp(key, var->key, ft_strlen(key)))
 			return (var->value);
 		var = var->next;
 	}

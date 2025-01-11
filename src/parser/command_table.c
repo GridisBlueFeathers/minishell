@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 11:51:25 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/10 17:14:54 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/01/10 17:08:12 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parser_init(void)
+void	command_table_init(t_token *token)
 {
-	size_t		i;
-
-	i = 0;
-	prompt_init();
-	while (data(GET)->prompt[i])
+	int	first_word;
+ 
+	first_word = 0;
+	while (token)
 	{
-		data(GET)->prompt[i]->idx = i;
-		token_init(data(GET)->prompt[i]);
-		expander_init(data(GET)->prompt[i]->first);
-	//	command_table_init(data(GET)->prompt[i]);
-		i++;
+		if (token->tok_type == WORD && !first_word)
 	}
 }

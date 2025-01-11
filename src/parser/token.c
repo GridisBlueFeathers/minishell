@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:55:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/06 12:57:54 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/10 17:22:11 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,11 @@ static t_tok_type	token_type_set(char *prompt, size_t loc)
 void	token_init(t_prompt *prompt)
 {
 	int		i;
+	size_t	j;
 	t_token	*token;
 
 	i = 0;
+	j = 0;
 	while (prompt->name[i])
 	{
 		if (isspace(prompt->name[i]))
@@ -115,6 +117,9 @@ void	token_init(t_prompt *prompt)
 		token = token_allocate(prompt);
 		token->tok_type = token_type_set(prompt->name, i);
 		i += token_str_set(prompt->name + i, token);
+		printf("what is this then %s\n", token->tok_str);
+		token->idx = j;
 		i++;
+		j++;
 	}
 }
