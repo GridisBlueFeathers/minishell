@@ -6,23 +6,17 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2024/12/04 17:44:25 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/10 12:03:51 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
 # define COMMAND_H
 
-typedef enum e_redir_type
-{
-	INPUT,
-	OUTPUT,
-	APPEND,
-	HEREDOC
-}	t_redir_type;
+# include "parser.h"
 
 typedef struct s_redir
 {
-	t_redir_type	type;
+	t_tok_type	type;
 	/* name of the redirect file, if type is HEREDOC - name of tmp file */
 	char			*file_name;
 	int				fd;
