@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 13:36:16 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/11 13:00:38 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/11 14:46:41 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static size_t	ms_wordcount(char *str)
 	words = 1;
 	while (str[i])
 	{
-		if (str[i] == '|' && valid_operator(str, i))
+		if (str[i] == '|' && valid_operator(str, i, 0))
 			words++;
 		i++;
 	}
@@ -63,7 +63,7 @@ char	**minishell_split(char *str)
 	last_loc = 0;
 	while (str[i])
 	{
-		if ((str[i] == '|' && valid_operator(str, i)) || !str[i + 1])
+		if ((str[i] == '|' && valid_operator(str, i, 0)) || !str[i + 1])
 		{
 			res[y] = ms_set_res(str, last_loc, i);
 			last_loc = i;

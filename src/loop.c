@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/11 12:29:30 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:06:01 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	prompt_exec(void)
 {
 	if (data(GET)->rl_prompt[0] == '\n')
 		return ;
-	//env_update();
 	add_history(data(GET)->rl_prompt);
 	if (!lexer())
 		return ;
