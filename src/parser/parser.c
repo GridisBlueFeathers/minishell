@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 16:36:46 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/13 15:40:58 by svereten         ###   ########.fr       */
+/*   Created: 2025/01/10 11:51:25 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/01/10 13:32:15 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+void	parser_init(void)
 {
-	(void)argv;
-	if (argc > 1)
-		return (1);
-	env_init(env);
-	stdfd_copy();
-	loop();
-	data(FREE);
-	ft_exit(0);
+	size_t		i;
+
+	i = 0;
+	prompt_init();
+	while (data(GET)->prompt[i])
+	{
+		data(GET)->prompt[i]->idx = i;
+		token_init(data(GET)->prompt[i]);
+		expander_init(data(GET)->prompt[i]->first);
+		i++;
+	}
 }

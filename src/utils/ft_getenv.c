@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 16:36:46 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/13 15:40:58 by svereten         ###   ########.fr       */
+/*   Created: 2025/01/10 12:01:29 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/01/10 16:04:47 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+char	*ft_getenv(char *key)
 {
-	(void)argv;
-	if (argc > 1)
-		return (1);
-	env_init(env);
-	stdfd_copy();
-	loop();
-	data(FREE);
-	ft_exit(0);
+	t_env_var	*var;
+
+	var = data(GET)->env.first;
+	while (var)
+	{
+		if (!ft_strcmp(key, var->key))
+			return (var->value);
+		var = var->next;
+	}
+	return (NULL);
 }
