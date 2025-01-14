@@ -102,11 +102,9 @@ static t_tok_type	token_type_set(char *prompt, size_t loc)
 void	token_init(t_prompt *prompt)
 {
 	int		i;
-	size_t	j;
 	t_token	*token;
 
 	i = 0;
-	j = 0;
 	while (prompt->name[i])
 	{
 		if (isspace(prompt->name[i]))
@@ -117,8 +115,6 @@ void	token_init(t_prompt *prompt)
 		token = token_allocate(prompt);
 		token->tok_type = token_type_set(prompt->name, i);
 		i += token_str_set(prompt->name + i, token);
-		token->idx = j;
 		i++;
-		j++;
 	}
 }

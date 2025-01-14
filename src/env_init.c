@@ -70,6 +70,7 @@ static void	env_set(char **env)
 	}
 }
 
+
 static void	no_env_set()
 {
 	t_env_var *node;

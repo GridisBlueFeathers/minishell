@@ -46,6 +46,7 @@ void	prompt_init(void);
 void	token_init(t_prompt *prompt);
 void	expander_init(t_token *token);
 void	quotes_rm_init(t_token *token);
+
 size_t	wordcount(char *str);
 char	*substrrplc(char *main_str, char *old_str, char *new_str);
 

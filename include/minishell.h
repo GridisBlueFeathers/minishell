@@ -79,6 +79,7 @@ int		isquote(char c);
 size_t	wordlen(char *str);
 char	*ft_getenv(char *key);
 int		valid_operator(char *str, size_t loc, char type);
+
 char	**minishell_split(char *str);
 
 int		lexer(void);

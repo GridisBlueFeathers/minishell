@@ -58,7 +58,6 @@ static char	*exp_old_str_init(char *str)
 	{
 		if (str[i] == '$' && str[i + 1] && valid_operator(str, i, '\''))
 		{
-			printf("wtf %s\n", str + i);
 			if (str[i + 1] == '?')
 				res = ft_strdup("$?");
 			else if (ft_isalpha(str[i + 1]) || str[i + 1] == '_')

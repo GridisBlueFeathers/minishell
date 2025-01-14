@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/11 15:14:06 by jwolfram         ###   ########.fr        #
+#    Updated: 2025/01/11 16:58:50 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -26,6 +26,7 @@ LDLIBS = -lft -lreadline
 LDFLAGS = -L./libft
 
 LIBFT = libft/libft.a
+LIBFT_DEFINES = GNL_SIZE="-D BUFFER_SIZE=42" PANIC_MSG=minishell DEBUG=1
 
 LIBFT_DIR = libft
 SRC_DIR = src
@@ -95,7 +96,7 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c | ${OBJ_DIRS}
 	@${CC} ${CFLAGS} ${INCLUDE} -c $< -o $@
 
 ${LIBFT}:
-	@${MAKE} -C ${LIBFT_DIR} GNL_SIZE="-D BUFFER_SIZE=42"
+	@${MAKE} -C ${LIBFT_DIR} ${LIBFT_DEFINES}
 
 ${OBJ_DIRS}:
 	@mkdir -p $@
