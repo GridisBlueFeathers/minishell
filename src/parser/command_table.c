@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 12:01:29 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/11 12:34:23 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/01/10 17:08:12 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_getenv(char *key)
+void	command_table_init(t_token *token)
 {
-	t_env_var	*var;
-
-	var = data(GET)->env.first;
-	while (var)
+	int	first_word;
+ 
+	first_word = 0;
+	while (token)
 	{
-		if (!ft_strncmp(key, var->key, ft_strlen(key)))
-			return (var->value);
-		var = var->next;
+		if (token->tok_type == WORD && !first_word)
 	}
-	return (NULL);
 }
