@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/07 16:18:08 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:11:54 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,17 @@ static t_env_var	*env_allocate(void)
 	node = (t_env_var *)ft_calloc(1, sizeof(t_env_var));
 	if (!node)
 		minishell_exit(1, NULL);
-	node->next = NULL;
-	node->prev = NULL;
+	if (!data(GET)->env.first)
+	{
+		data(GET)->env.first = node;
+		data(GET)->env.last = node;
+	}
+	else
+	{
+		data(GET)->env.last->next = node;
+		node->prev = data(GET)->env.last;
+		data(GET)->env.last = node;
+	}
 	return (node);
 }
 
@@ -45,9 +54,9 @@ static void	env_set(char **env)
 	t_env_var	*node;
 
 	i = 0;
-	node = data(GET)->env.first;
 	while (env[i])
 	{
+		node = env_allocate();
 		len = ft_strchr(env[i], '=') - env[i];
 		node->key = ft_substr(env[i], 0, len);
 		if (!node->key)
@@ -57,33 +66,34 @@ static void	env_set(char **env)
 			minishell_exit(1, NULL);
 		if (!env[i + 1])
 			break ;
-		node = env_allocate();
-		data(GET)->env.last->next = node;
-		node->prev = data(GET)->env.last;
-		data(GET)->env.last = node;
 		i++;
 	}
 }
 
-void	env_init(char **env)
+static void	no_env_set()
 {
-	t_env_var	*node;
-	int			fd;
+	t_env_var *node;
 
 	node = env_allocate();
-	data(GET)->env.first = node;
-	data(GET)->env.last = node;
+	node->key = ft_strdup("PWD");
+	if (!node->key)
+		minishell_exit(1, NULL);
+	node->value = getcwd(NULL, 0);
+	if (!node->value)
+		minishell_exit(1, NULL);
+	node = env_allocate();
+	node->key = ft_strdup("SHLVL");
+	if (!node->key)
+		minishell_exit(1, NULL);
+	node->value = ft_strdup("1");
+	if (!node->value)
+		minishell_exit(1, NULL);
+}
+
+void	env_init(char **env)
+{
 	if (!env[0])
-	{
-		fd = -1;
-		node->key = ft_strdup("USER");
-		if (!node->key)
-			minishell_exit(1, NULL);
-		/* if needed add function that finds username */
-		node->value = ft_strdup("Han is cool and always gay");
-		if (!node->value)
-			minishell_exit(1, NULL);
-	}
+		no_env_set();
 	else
 	{
 		env_set(env);
