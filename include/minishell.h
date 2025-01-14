@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/14 16:53:30 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:06:27 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -31,7 +31,7 @@ typedef enum e_option
 	FREE
 }	t_option;
 
-typedef	enum e_mode
+typedef enum e_mode
 {
 	IN_PROMPT,
 	IN_HEREDOC,
@@ -84,7 +84,7 @@ void	env_update(void);
 
 int		isredir(char c);
 void	redirect(int old_fd, int new_fd);
-void	pipe_close(int	pipe_fd[2]);
+void	pipe_close(int pipe_fd[2]);
 void	stdfd_copy(void);
 void	stdfd_reset(void);
 void	stdfd_close(void);

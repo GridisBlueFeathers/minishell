@@ -116,3 +116,19 @@ void	dev_mock_cat_pipe_grep_pipe_wc(void)
 	data(GET)->commands[2]->index = 2;
 	data(GET)->commands[2]->redir_valid = 1;
 }
+
+void	dev_shim_prompt()
+{
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat Makefile"))
+		dev_mock_cat_make();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat << hey"))
+		dev_mock_cat_heredoc();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "echo hi"))
+		dev_mock_echo_hi();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat dev/2 | grep hey | wc -l"))
+		dev_mock_cat_pipe_grep_pipe_wc();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat dev/2 | grep hey"))
+		dev_mock_cat_pipe_grep();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat dev/2"))
+		dev_mock_cat_dev2();	
+}

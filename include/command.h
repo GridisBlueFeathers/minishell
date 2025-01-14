@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/13 15:38:42 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:11:01 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
@@ -60,9 +60,12 @@ typedef enum e_pipe
 void	executor(void);
 
 void	commands_reset(void);
+int		commands_heredocs_run(void);
 
 int		cmd_execute(t_cmd *cmd);
 int		cmd_heredoc_run(t_cmd *cmd);
+
+void	heredoc_handle(t_redir *redir);
 
 void	child_execute(t_cmd *cmd, int pipe_fd[2]);
 
@@ -71,6 +74,7 @@ void	child_execute(t_cmd *cmd, int pipe_fd[2]);
  *
  * mocks `cat Makefile` command
  */
+void	dev_shim_prompt();
 void	dev_mock_cat_make(void);
 void	dev_mock_echo_hi(void);
 void	dev_mock_cat_dev2(void);

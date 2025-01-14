@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:45:30 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/06 18:12:59 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:08:47 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -44,4 +44,21 @@ void	commands_reset(void)
 	}
 	ft_free(STRUCT, &data(GET)->commands);
 	data(GET)->cmd_amount = 0;
+}
+
+int	commands_heredocs_run(void)
+{
+	int	i;
+
+	i = 0;
+	while (data(GET)->commands[i])
+	{
+		if (!cmd_heredoc_run(data(GET)->commands[i]))
+		{
+			commands_reset();
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
