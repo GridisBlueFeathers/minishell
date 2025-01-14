@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:55:15 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/14 17:04:05 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:20:30 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -27,11 +27,11 @@ static char	*heredoc_get_name(void)
 		return (ft_close(urandom_fd), NULL);
 	ft_strlcpy(res, "/tmp/", 22);
 	i = 0;
+	c = 0;
 	while (i < 16)
 	{
 		if (read(urandom_fd, &c, 1) < 0)
 			return (ft_close(urandom_fd), NULL);
-		c = c % 256;
 		if (!isalpha(c % 256))
 			continue ;
 		res[i + 5] = (unsigned char)c % 256;
@@ -61,6 +61,7 @@ void	heredoc_handle(t_redir *redir)
 		write(redir->fd, heredoc_line, ft_strlen(heredoc_line));
 		ft_free(STR, &heredoc_line);
 	}
+	ft_free(STR, &heredoc_line);
 	ft_close(redir->fd);
 	return ;
 }
