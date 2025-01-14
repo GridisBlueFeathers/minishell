@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/11 15:00:37 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:23:22 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static char	*exp_old_str_init(char *str)
 			else if (ft_isalpha(str[i + 1]) || str[i + 1] == '_')
 				res = exp_find_str(str + i);
 			break ;
-			// case for $(VAR)???
 		}
 		i++;
 	}

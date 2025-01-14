@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/11 16:58:50 by svereten         ###   ########.fr        #
+#    Updated: 2025/01/14 13:38:49 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -45,6 +45,7 @@ FILES = main \
 		parser/token \
 		parser/expander \
 		parser/quotes_rm \
+		parser/command_table \
 		utils/words \
 		utils/ischar \
 		utils/substrrplc \

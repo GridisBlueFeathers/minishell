@@ -34,6 +34,8 @@ void	tokenizer_print()
 				printf("Token Type: OUTPUT\n");
 			else if (token->tok_type == INPUT)
 				printf("Token Type: INPUT\n");
+			else if (token->tok_type == CMD)
+				printf("Token Type: CMD\n");
 			else
 				printf("Token Type: WORD\n");
 			printf("Token String: %s\n\n", token->tok_str);
@@ -45,7 +47,7 @@ void	tokenizer_print()
 
 void	debug_print(void)	
 {
-	printf("debug\n");
+	printf("--------------------------\ndebug\n--------------------------\n");
 	//env_print();
 	tokenizer_print();
 }
