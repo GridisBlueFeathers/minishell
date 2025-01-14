@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 18:29:02 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/13 15:40:09 by svereten         ###   ########.fr       */
+/*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
+/*   Updated: 2025/01/14 16:53:30 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -91,7 +91,8 @@ void	stdfd_close(void);
 int		isquote(char c);
 size_t	wordlen(char *str);
 char	*ft_getenv(char *key);
-int		valid_operator(char *str, size_t loc);
+int		valid_operator(char *str, size_t loc, char type);
+
 char	**minishell_split(char *str);
 
 int		lexer(void);

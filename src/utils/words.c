@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:58:12 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/06 12:50:20 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/11 14:49:44 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ size_t	wordlen(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (isredir(str[i]) && valid_operator(str, i))
+		if (isredir(str[i]) && valid_operator(str, i, 0))
 			break ;
 		if (!quote && isquote(str[i]))
 			quote = str[i];

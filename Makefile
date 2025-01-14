@@ -52,6 +52,7 @@ FILES = main \
 		parser/prompt \
 		parser/token \
 		parser/expander \
+		parser/quotes_rm \
 		utils/words \
 		utils/ischar \
 		utils/substrrplc \
@@ -105,8 +106,7 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c | ${OBJ_DIRS}
 	@${CC} ${CFLAGS} ${INCLUDE} -c $< -o $@
 
 ${LIBFT}:
-	${MAKE} -C ${LIBFT_DIR} ${LIBFT_DEFINES}
-
+	@${MAKE} -C ${LIBFT_DIR} ${LIBFT_DEFINES}
 
 ${OBJ_DIRS}:
 	@mkdir -p $@

@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:55:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/06 12:57:54 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:01:18 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static t_tok_type	token_type_set(char *prompt, size_t loc)
 	if (!prompt)
 		return (EOP);
 	if (isredir(prompt[loc]) && prompt[loc + 1] && isredir(prompt[loc + 1])
-		&& valid_operator(prompt, loc))
+		&& valid_operator(prompt, loc, 0))
 	{
 		if (prompt[loc + 1] == '>')
 			return (APPEND);
@@ -89,7 +89,7 @@ static t_tok_type	token_type_set(char *prompt, size_t loc)
 			return (HEREDOC);
 	}
 	else if (isredir(prompt[loc]) && prompt[loc + 1]
-		&& !isredir(prompt[loc + 1]) && valid_operator(prompt, loc))
+		&& !isredir(prompt[loc + 1]) && valid_operator(prompt, loc, 0))
 	{
 		if (prompt[loc] == '>')
 			return (OUTPUT);

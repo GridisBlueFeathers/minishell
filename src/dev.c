@@ -25,6 +25,7 @@ void	tokenizer_print()
 		printf("Prompt %d: %s\n", i, data(GET)->prompt[i]->name);
 		while (token)
 		{
+			printf("Token Index: %zu\n", token->idx);
 			if (token->tok_type == APPEND)
 				printf("Token Type: APPEND\n");
 			else if (token->tok_type == HEREDOC)

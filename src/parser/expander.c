@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/10 16:07:12 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:00:37 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*exp_old_str_init(char *str)
 	res = NULL;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1])
+		if (str[i] == '$' && str[i + 1] && valid_operator(str, i, '\''))
 		{
 			if (str[i + 1] == '?')
 				res = ft_strdup("$?");
@@ -79,13 +79,10 @@ void	expander_init(t_token *token)
 	{
 		while (token->tok_type == WORD && ft_strchr(token->tok_str, '$'))
 		{
-			printf("main: %s\n", token->tok_str);
 			old_str = exp_old_str_init(token->tok_str);
 			if (!old_str)
 				break ;
 			new_str = exp_new_str_init(old_str);
-			printf("old str: %s\n", old_str);
-			printf("new str: %s\n", new_str);
 			token->tok_str = substrrplc(token->tok_str, old_str, new_str);
 		}
 		token = token->next;
