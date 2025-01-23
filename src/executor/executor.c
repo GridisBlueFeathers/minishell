@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 17:48:21 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:02:46 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -51,7 +51,6 @@ void	executor_execute_pipeline(void)
 		minishell_exit(1, NULL);
 	if (WIFEXITED(s))
 		data(GET)->exit_code = WEXITSTATUS(s);
-	commands_reset();
 	stdfd_restore();
 }
 
@@ -61,6 +60,7 @@ void	executor_execute(void)
 		executor_execute_single();
 	else
 		executor_execute_pipeline();
+	commands_reset();
 }
 
 void	executor(void)
