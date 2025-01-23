@@ -6,26 +6,41 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/14 17:11:18 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:48:21 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "command.h"
 #include "minishell.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/wait.h>
 
-void	executor(void)
+void	executor_execute_single(void)
+{
+	int	s;
+
+	dprintf(STDERR_FILENO, "Executing single command\n");
+	if (!data(GET)->commands[0]->type)
+	{
+		if (!cmd_execute_single_bin(data(GET)->commands[0]))
+		{
+			data(GET)->exit_code = 1;
+			return ;
+		}
+		if (waitpid(data(GET)->commands[0]->pid, &s, 0) < 0)
+			minishell_exit(1, NULL);
+		if (WIFEXITED(s))
+			data(GET)->exit_code = WEXITSTATUS(s);
+	}
+}
+
+void	executor_execute_pipeline(void)
 {
 	int	i;
 	int	s;
 
-	dev_shim_prompt();
-	dprintf(STDERR_FILENO, "Executor\n");
-	dprintf(STDERR_FILENO, "Amount of commands: %d\n", data(GET)->cmd_amount);
-	data(GET)->mode = IN_HEREDOC;
-	if (!commands_heredocs_run())
-		return ;
 	i = 0;
+	stdfd_copy();
 	while (i < data(GET)->cmd_amount)
 	{
 		if (!cmd_execute(data(GET)->commands[i]))
@@ -37,5 +52,25 @@ void	executor(void)
 	if (WIFEXITED(s))
 		data(GET)->exit_code = WEXITSTATUS(s);
 	commands_reset();
-	stdfd_reset();
+	stdfd_restore();
+}
+
+void	executor_execute(void)
+{
+	if (data(GET)->cmd_amount == 1)
+		executor_execute_single();
+	else
+		executor_execute_pipeline();
+}
+
+void	executor(void)
+{
+
+	dev_shim_prompt();
+	dprintf(STDERR_FILENO, "Executor\n");
+	dprintf(STDERR_FILENO, "Amount of commands: %d\n", data(GET)->cmd_amount);
+	data(GET)->mode = IN_HEREDOC;
+	if (!commands_heredocs_run())
+		return ;
+	executor_execute();
 }

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/14 17:11:01 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:35:12 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
@@ -63,11 +63,13 @@ void	commands_reset(void);
 int		commands_heredocs_run(void);
 
 int		cmd_execute(t_cmd *cmd);
+int		cmd_execute_single_bin(t_cmd *cmd);
 int		cmd_heredoc_run(t_cmd *cmd);
 
 void	heredoc_handle(t_redir *redir);
 
 void	child_execute(t_cmd *cmd, int pipe_fd[2]);
+void	child_execute_single(t_cmd *cmd);
 
 /**
  * DEV function - delete on production

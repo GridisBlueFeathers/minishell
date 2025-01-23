@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/14 17:06:27 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:06:43 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -83,10 +83,13 @@ void	path_set(void);
 void	env_update(void);
 
 int		isredir(char c);
-void	redirect(int old_fd, int new_fd);
+/**
+ * Old fd MUST be passed by reference
+*/
+void	redirect(int *old_fd, int new_fd);
 void	pipe_close(int pipe_fd[2]);
 void	stdfd_copy(void);
-void	stdfd_reset(void);
+void	stdfd_restore(void);
 void	stdfd_close(void);
 int		isquote(char c);
 size_t	wordlen(char *str);

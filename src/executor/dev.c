@@ -117,6 +117,38 @@ void	dev_mock_cat_pipe_grep_pipe_wc(void)
 	data(GET)->commands[2]->redir_valid = 1;
 }
 
+static void	dev_mock_cat_dev_input(void)
+{
+	data(GET)->cmd_amount = 1;
+	data(GET)->commands = (t_cmd **)ft_calloc(2, sizeof(t_cmd *));
+	data(GET)->commands[0] = ft_calloc(1, sizeof(t_cmd));
+	data(GET)->commands[0]->bin = ft_strdup("/usr/bin/cat");
+	data(GET)->commands[0]->name = ft_strdup("cat");
+	char	*argv_0[] = {"cat", NULL};
+	data(GET)->commands[0]->argv = ft_strarrdup(argv_0);
+	data(GET)->commands[0]->type = BIN;
+	data(GET)->commands[0]->index = 0;
+	data(GET)->commands[0]->redir_valid = 1;
+	data(GET)->commands[0]->redir_head = ft_calloc(1, sizeof(t_redir));
+	data(GET)->commands[0]->redir_tail = data(GET)->commands[0]->redir_head;
+	data(GET)->commands[0]->redir_head->file_name = ft_strdup("dev/input");
+	data(GET)->commands[0]->redir_head->type = INPUT;
+}
+
+static void	dev_mock_cat(void)
+{
+	data(GET)->cmd_amount = 1;
+	data(GET)->commands = (t_cmd **)ft_calloc(2, sizeof(t_cmd *));
+	data(GET)->commands[0] = ft_calloc(1, sizeof(t_cmd));
+	data(GET)->commands[0]->bin = ft_strdup("/usr/bin/cat");
+	data(GET)->commands[0]->name = ft_strdup("cat");
+	char	*argv_0[] = {"cat", NULL};
+	data(GET)->commands[0]->argv = ft_strarrdup(argv_0);
+	data(GET)->commands[0]->type = BIN;
+	data(GET)->commands[0]->index = 0;
+	data(GET)->commands[0]->redir_valid = 1;
+}
+
 void	dev_shim_prompt()
 {
 	if (!ft_strcmp(data(GET)->rl_prompt, "cat Makefile"))
@@ -131,4 +163,8 @@ void	dev_shim_prompt()
 		dev_mock_cat_pipe_grep();	
 	if (!ft_strcmp(data(GET)->rl_prompt, "cat dev/2"))
 		dev_mock_cat_dev2();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat < dev/input"))
+		dev_mock_cat_dev_input();	
+	if (!ft_strcmp(data(GET)->rl_prompt, "cat"))
+		dev_mock_cat();
 }

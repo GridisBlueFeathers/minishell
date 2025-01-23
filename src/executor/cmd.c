@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/14 17:17:44 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:58:24 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -31,6 +31,19 @@ int	cmd_heredoc_run(t_cmd *cmd)
 	return (data(GET)->mode);
 }
 
+int	cmd_execute_single_bin(t_cmd *cmd)
+{
+	dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->index);
+	if (!cmd->redir_valid)
+		return (0);
+	cmd->pid = fork();
+	if (cmd->pid < 0)
+		minishell_exit(1, NULL);
+	if (cmd->pid == 0)
+		child_execute_single(cmd);
+	return (1);
+}
+
 int	cmd_execute(t_cmd *cmd)
 {
 	int		pipe_fd[2];
@@ -52,7 +65,7 @@ int	cmd_execute(t_cmd *cmd)
 	if (cmd->index + 1 != data(GET)->cmd_amount)
 	{
 		ft_close(pipe_fd[WR]);
-		redirect(pipe_fd[RD], STDIN_FILENO);
+		redirect(&pipe_fd[RD], STDIN_FILENO);
 	}
 	return (1);
 }
