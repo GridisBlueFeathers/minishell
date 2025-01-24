@@ -30,6 +30,8 @@ void	tokenizer_print()
 				printf("Token Type: APPEND\n");
 			else if (token->tok_type == HEREDOC)
 				printf("Token Type: HEREDOC\n");
+			else if (token->tok_type == HRDC_EXPND)
+				printf("Token Type: HEREDOC EXPAND\n");
 			else if (token->tok_type == OUTPUT)
 				printf("Token Type: OUTPUT\n");
 			else if (token->tok_type == INPUT)
@@ -49,13 +51,14 @@ void	redir_print(t_redir *redir)
 {
 	while (redir)
 	{
-		printf("---> Redir for the Command\n");
+		printf("\nRedir for the Command\n");
 		if (redir->type == APPEND)
 			printf("Redir Type: APPEND\n");
-		else if (redir->type == HEREDOC)
+		else if (redir->type == HEREDOC || redir->type == HRDC_EXPND)
 		{
 			printf("Redir Type: HEREDOC\n");
 			printf("Heredoc Delimiter: %s\n", redir->heredoc_delim);
+			printf("Heredoc Expander: %d\n", redir->heredoc_expand);
 			if (redir->heredoc_expand)
 				printf("Heredoc needs to expand\n");
 			else

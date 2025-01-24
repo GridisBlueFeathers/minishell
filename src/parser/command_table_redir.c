@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:22:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 14:25:58 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:41:41 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ void	redir_set(t_token *token, int idx)
 	redir = redir_allocate(idx);
 	redir->type = token->tok_type;
 	redir->file_name = token->next->tok_str;
-	if (redir->type == HEREDOC)
+	if (redir->type == HEREDOC || redir->type == HRDC_EXPND)
 		redir->heredoc_delim = ft_strdup(redir->file_name);
-	if (isquote(redir->file_name[0]))	
+	if (redir->type == HRDC_EXPND)	
+		redir->heredoc_expand = 1;
+	else
 		redir->heredoc_expand = 0;
 }
 

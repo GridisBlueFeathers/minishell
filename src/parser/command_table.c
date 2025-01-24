@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 15:08:41 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:34:09 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	command_table_set(int idx)
 	token = data(GET)->prompt[idx]->first;
 	while (token)
 	{
-		if (token->tok_type > 1 && token->tok_type < 6)
+		if (token->tok_type > 1 && token->tok_type < 7)
 		{
 			redir_set(token, idx);
 			token = token->next->next;
@@ -56,7 +56,7 @@ static void	command_type_get(t_token *token)
 	first_word = 1;
 	while (token)
 	{
-		if (token->tok_type > 1 && token->tok_type < 6)
+		if (token->tok_type > 1 && token->tok_type < 7)
 		{
 			token = token->next->next;
 			continue ;
@@ -83,7 +83,7 @@ static void	argv_set(t_prompt *prompt)
 	i = 0;
 	while (token)
 	{
-		if (token->tok_type > 1 && token->tok_type < 6)
+		if (token->tok_type > 1 && token->tok_type < 7)
 		{
 			token = token->next->next;
 			continue ;

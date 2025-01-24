@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:07:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/11 18:15:32 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:56:35 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	quotes_rm_init(t_token	*token)
 	quote_amount = 0;
 	while (token)
 	{
+		if (token->tok_type == HEREDOC && !isquote(token->next->tok_str[0]))
+			token->tok_type = HRDC_EXPND;
 		if (ft_strchr(token->tok_str, '"') || ft_strchr(token->tok_str, '\''))
 		{
 			quote_amount = quote_amount_get(token->tok_str);

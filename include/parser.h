@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:01:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 14:57:28 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:28:47 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSER_H
@@ -22,6 +22,7 @@ typedef enum e_tok_type
 	HEREDOC,
 	INPUT,
 	OUTPUT,
+	HRDC_EXPND,
 	CMD
 }	t_tok_type;
 
