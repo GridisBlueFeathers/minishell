@@ -6,15 +6,15 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:22:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 18:41:41 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:22:48 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_redir *redir_allocate(int idx)
+static t_redir	*redir_allocate(int idx)
 {
-	t_redir *redir;
+	t_redir	*redir;
 
 	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
 	if (!redir)
@@ -41,9 +41,8 @@ void	redir_set(t_token *token, int idx)
 	redir->file_name = token->next->tok_str;
 	if (redir->type == HEREDOC || redir->type == HRDC_EXPND)
 		redir->heredoc_delim = ft_strdup(redir->file_name);
-	if (redir->type == HRDC_EXPND)	
+	if (redir->type == HRDC_EXPND)
 		redir->heredoc_expand = 1;
 	else
 		redir->heredoc_expand = 0;
 }
-

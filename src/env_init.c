@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/14 12:11:54 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:08:15 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,9 @@ static void	env_set(char **env)
 	}
 }
 
-
-static void	no_env_set()
+static void	no_env_set(void)
 {
-	t_env_var *node;
+	t_env_var	*node;
 
 	node = env_allocate();
 	node->key = ft_strdup("PWD");

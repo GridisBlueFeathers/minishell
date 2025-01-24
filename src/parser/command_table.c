@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 18:34:09 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:21:54 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 static void	command_table_allocate(int idx)
 {
-	data(GET)->commands[idx] = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
-	if (!data(GET)->commands[idx])
+	t_cmd	*command;
+
+	command = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	if (!command)
 		minishell_exit(1, NULL);
-	data(GET)->commands[idx]->name = NULL;
-	data(GET)->commands[idx]->bin = NULL;
-	data(GET)->commands[idx]->argv = NULL;
-	data(GET)->commands[idx]->type = -1;
-	data(GET)->commands[idx]->redir_head = NULL;
-	data(GET)->commands[idx]->redir_tail = NULL;
+	data(GET)->commands[idx] = command;
+	command->type = -1;
 }
 
 static void	command_table_set(int idx)
 {
-	t_token *token;
+	t_token	*token;
 
 	command_table_allocate(idx);
 	token = data(GET)->prompt[idx]->first;
@@ -74,8 +72,10 @@ static void	argv_set(t_prompt *prompt)
 {
 	int		i;
 	t_token	*token;
+	t_data	*ms_data;
 
-	data(GET)->commands[prompt->idx]->argv
+	ms_data = data(GET);
+	ms_data->commands[prompt->idx]->argv
 		= (char **)ft_calloc(prompt->last->idx + 2, sizeof(char *));
 	if (!data(GET)->commands[prompt->idx]->argv)
 		minishell_exit(1, NULL);
@@ -84,13 +84,10 @@ static void	argv_set(t_prompt *prompt)
 	while (token)
 	{
 		if (token->tok_type > 1 && token->tok_type < 7)
-		{
-			token = token->next->next;
-			continue ;
-		}
+			token = token->next;
 		else if (token->tok_type == WORD || token->tok_type == CMD)
 		{
-			data(GET)->commands[prompt->idx]->argv[i] = ft_strdup(token->tok_str);
+			ms_data->commands[prompt->idx]->argv[i] = ft_strdup(token->tok_str);
 			if (!data(GET)->commands[prompt->idx]->argv[i])
 				minishell_exit(1, NULL);
 			i++;
