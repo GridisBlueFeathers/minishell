@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/14 17:04:48 by svereten         ###   ########.fr        #
+#    Updated: 2025/01/24 17:29:33 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -43,7 +43,9 @@ FILES = main \
 		executor/executor \
 		executor/commands \
 		executor/cmd \
-		executor/child \
+		executor/child/child \
+		executor/child/execute \
+		executor/child/kill \
 		executor/heredoc \
 		utils/exit \
 		utils/redirect \

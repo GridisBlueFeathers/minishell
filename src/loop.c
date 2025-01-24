@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/14 17:10:47 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:31:29 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	loop(void)
 		else
 			data(GET)->rl_prompt = readline(PREFIX_GOOD);
 		if (!data(GET)->rl_prompt)
+		{
+			printf("exit\n");
 			minishell_exit(0, NULL);
+		}
 		prompt_exec();
 		free(data(GET)->rl_prompt);
 	}

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 17:58:24 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:30:19 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -40,7 +40,7 @@ int	cmd_execute_single_bin(t_cmd *cmd)
 	if (cmd->pid < 0)
 		minishell_exit(1, NULL);
 	if (cmd->pid == 0)
-		child_execute_single(cmd);
+		child_single(cmd);
 	return (1);
 }
 
@@ -61,7 +61,7 @@ int	cmd_execute(t_cmd *cmd)
 		minishell_exit(1, NULL);
 	}
 	if (cmd->pid == 0)
-		child_execute(cmd, pipe_fd);
+		child(cmd, pipe_fd);
 	if (cmd->index + 1 != data(GET)->cmd_amount)
 	{
 		ft_close(pipe_fd[WR]);

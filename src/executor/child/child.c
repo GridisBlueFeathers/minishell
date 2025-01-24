@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:05:03 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 18:12:29 by svereten         ###   ########.fr       */
+/*   Created: 2025/01/24 17:18:07 by svereten          #+#    #+#             */
+/*   Updated: 2025/01/24 17:26:10 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "command.h"
 #include "minishell.h"
 #include <fcntl.h>
 
@@ -36,15 +37,14 @@ static int	child_apply_redirs(t_cmd *cmd)
 	return (1);
 }
 
-void	child_execute_single(t_cmd *cmd)
+void	child_single(t_cmd *cmd)
 {
 	if (!child_apply_redirs(cmd))
 		minishell_exit(1, NULL);
-	if (execve(cmd->bin, cmd->argv, NULL))
-		minishell_exit(0, NULL);
+	child_execute(cmd);
 }
 
-void	child_execute(t_cmd *cmd, int pipe_fd[2])
+void	child(t_cmd *cmd, int pipe_fd[2])
 {
 	if (cmd->index + 1 != data(GET)->cmd_amount)
 	{
@@ -56,6 +56,5 @@ void	child_execute(t_cmd *cmd, int pipe_fd[2])
 	stdfd_close();
 	if (!child_apply_redirs(cmd))
 		minishell_exit(1, NULL);
-	if (execve(cmd->bin, cmd->argv, NULL))
-		minishell_exit(0, NULL);
+	child_execute(cmd);
 }

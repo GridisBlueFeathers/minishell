@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 19:02:46 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:47:23 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -65,7 +65,6 @@ void	executor_execute(void)
 
 void	executor(void)
 {
-
 	dev_shim_prompt();
 	dprintf(STDERR_FILENO, "Executor\n");
 	dprintf(STDERR_FILENO, "Amount of commands: %d\n", data(GET)->cmd_amount);

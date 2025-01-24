@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 17:35:12 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:37:16 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
@@ -68,15 +68,17 @@ int		cmd_heredoc_run(t_cmd *cmd);
 
 void	heredoc_handle(t_redir *redir);
 
-void	child_execute(t_cmd *cmd, int pipe_fd[2]);
-void	child_execute_single(t_cmd *cmd);
+void	child(t_cmd *cmd, int pipe_fd[2]);
+void	child_single(t_cmd *cmd);
+void	child_execute(t_cmd *cmd);
+void	child_kill(t_cmd *cmd);
 
 /**
  * DEV function - delete on production
  *
  * mocks `cat Makefile` command
  */
-void	dev_shim_prompt();
+void	dev_shim_prompt(void);
 void	dev_mock_cat_make(void);
 void	dev_mock_echo_hi(void);
 void	dev_mock_cat_dev2(void);
