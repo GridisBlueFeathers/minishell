@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:01:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/11 15:13:47 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:28:47 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSER_H
@@ -22,6 +22,7 @@ typedef enum e_tok_type
 	HEREDOC,
 	INPUT,
 	OUTPUT,
+	HRDC_EXPND,
 	CMD
 }	t_tok_type;
 
@@ -46,6 +47,8 @@ void	prompt_init(void);
 void	token_init(t_prompt *prompt);
 void	expander_init(t_token *token);
 void	quotes_rm_init(t_token *token);
+void	command_table_init(void);
+void	redir_set(t_token *token, int idx);
 
 size_t	wordcount(char *str);
 char	*substrrplc(char *main_str, char *old_str, char *new_str);
