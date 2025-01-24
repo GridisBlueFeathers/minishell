@@ -6,22 +6,36 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/14 17:46:31 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:08:41 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	command_table_allocate(int idx)
+{
+	data(GET)->commands[idx] = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	if (!data(GET)->commands[idx])
+		minishell_exit(1, NULL);
+	data(GET)->commands[idx]->name = NULL;
+	data(GET)->commands[idx]->bin = NULL;
+	data(GET)->commands[idx]->argv = NULL;
+	data(GET)->commands[idx]->type = -1;
+	data(GET)->commands[idx]->redir_head = NULL;
+	data(GET)->commands[idx]->redir_tail = NULL;
+}
+
 static void	command_table_set(int idx)
 {
 	t_token *token;
 
+	command_table_allocate(idx);
 	token = data(GET)->prompt[idx]->first;
 	while (token)
 	{
 		if (token->tok_type > 1 && token->tok_type < 6)
 		{
-			redir_allocate(idx);
+			redir_set(token, idx);
 			token = token->next->next;
 			continue ;
 		}
@@ -31,21 +45,8 @@ static void	command_table_set(int idx)
 			data(GET)->commands[idx]->type = BUILTIN;
 		token = token->next;
 	}
-	if (data(GET)->commands[idx]->type == -1)
+	if (data(GET)->commands[idx]->type < 0)
 		data(GET)->commands[idx]->type = BIN;
-}
-
-static void	command_table_allocate(int idx)
-{
-	data(GET)->commands[idx] = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
-	if (data(GET)->commands[idx])
-		minishell_exit(1, NULL);
-	data(GET)->commands[idx]->name = NULL;
-	data(GET)->commands[idx]->bin = NULL;
-	data(GET)->commands[idx]->argv = NULL;
-	data(GET)->commands[idx]->type = -1;
-	data(GET)->commands[idx]->redir_head = NULL;
-	data(GET)->commands[idx]->redir_tail = NULL;
 }
 
 static void	command_type_get(t_token *token)
@@ -69,6 +70,35 @@ static void	command_type_get(t_token *token)
 	}
 }
 
+static void	argv_set(t_prompt *prompt)
+{
+	int		i;
+	t_token	*token;
+
+	data(GET)->commands[prompt->idx]->argv
+		= (char **)ft_calloc(prompt->last->idx + 2, sizeof(char *));
+	if (!data(GET)->commands[prompt->idx]->argv)
+		minishell_exit(1, NULL);
+	token = prompt->first;
+	i = 0;
+	while (token)
+	{
+		if (token->tok_type > 1 && token->tok_type < 6)
+		{
+			token = token->next->next;
+			continue ;
+		}
+		else if (token->tok_type == WORD || token->tok_type == CMD)
+		{
+			data(GET)->commands[prompt->idx]->argv[i] = ft_strdup(token->tok_str);
+			if (!data(GET)->commands[prompt->idx]->argv[i])
+				minishell_exit(1, NULL);
+			i++;
+		}
+		token = token->next;
+	}
+}
+
 void	command_table_init(void)
 {
 	int	i;
@@ -78,16 +108,14 @@ void	command_table_init(void)
 		i++;
 	data(GET)->cmd_amount = i + 1;
 	data(GET)->commands = (t_cmd **)ft_calloc(i + 2, sizeof(t_cmd *));
-	if (data(GET)->commands)
+	if (!data(GET)->commands)
 		minishell_exit(1, NULL);
 	i = 0;
 	while (data(GET)->prompt[i])
 	{
-		command_table_allocate(i);
+		command_type_get(data(GET)->prompt[i]->first);
 		command_table_set(i);
-		if (data(GET)->commands[i]->redir_head)
-			redir_struct_init(data(GET)->prompt[i]);
-		argv_init(data(GET)->prompt[i]);
+		argv_set(data(GET)->prompt[i]);
 		i++;
 	}
 }
