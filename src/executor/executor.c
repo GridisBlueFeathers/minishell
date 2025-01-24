@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/24 17:47:23 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:48:26 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -15,7 +15,14 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-void	executor_execute_single(void)
+static void	cmd_execute_single_builtin(t_cmd *cmd)
+{
+	dprintf(STDERR_FILENO, "Executing builtin\n");
+	if (ft_strncmp(cmd->name, "exit", ft_strlen("exit")) == 0)
+		builtin_exit(cmd->argv);
+}
+
+static void	executor_execute_single(void)
 {
 	int	s;
 
@@ -32,9 +39,11 @@ void	executor_execute_single(void)
 		if (WIFEXITED(s))
 			data(GET)->exit_code = WEXITSTATUS(s);
 	}
+	else
+		cmd_execute_single_builtin(data(GET)->commands[0]);
 }
 
-void	executor_execute_pipeline(void)
+static void	executor_execute_pipeline(void)
 {
 	int	i;
 	int	s;
@@ -54,7 +63,7 @@ void	executor_execute_pipeline(void)
 	stdfd_restore();
 }
 
-void	executor_execute(void)
+static void	executor_execute(void)
 {
 	if (data(GET)->cmd_amount == 1)
 		executor_execute_single();

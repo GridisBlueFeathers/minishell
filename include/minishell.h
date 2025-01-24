@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 18:06:43 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:44:15 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -102,6 +102,8 @@ int		lexer(void);
 
 void	signal_init(void);
 void	signal_int(int signal);
+
+void	builtin_exit(char **args);
 
 void	minishell_exit(int status, char *msg);
 

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/24 17:47:02 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:32:08 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -62,13 +62,13 @@ static void	child_get_path(t_cmd *cmd)
 void	child_execute(t_cmd *cmd)
 {
 	dprintf(STDERR_FILENO, "Command name: %s\n", cmd->name);
-	if (ft_strchr(cmd->name, '/'))
+	if (cmd->type == BIN && ft_strchr(cmd->name, '/'))
 	{
 		cmd->bin = ft_strdup(cmd->name);
 		if (!cmd->bin)
 			minishell_exit(1, NULL);
 	}
-	else if (data(GET)->path)
+	else if (cmd->type == BIN && data(GET)->path)
 		child_get_path(cmd);
 	if (!cmd->bin)
 	{

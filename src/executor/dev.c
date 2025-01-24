@@ -190,6 +190,45 @@ static void	dev_mock_absolute_asdf(void)
 	data(GET)->commands[0]->redir_valid = 1;
 }
 
+static void	dev_mock_exit(void)
+{
+	data(GET)->cmd_amount = 1;
+	data(GET)->commands = (t_cmd **)ft_calloc(2, sizeof(t_cmd *));
+	data(GET)->commands[0] = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	data(GET)->commands[0]->name = ft_strdup("exit");
+	char	*argv_0[] = {"exit", NULL};
+	data(GET)->commands[0]->argv = ft_strarrdup(argv_0);
+	data(GET)->commands[0]->type = BUILTIN;
+	data(GET)->commands[0]->index = 0;
+	data(GET)->commands[0]->redir_valid = 1;
+}
+
+static void	dev_mock_exit_42(void)
+{
+	data(GET)->cmd_amount = 1;
+	data(GET)->commands = (t_cmd **)ft_calloc(2, sizeof(t_cmd *));
+	data(GET)->commands[0] = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	data(GET)->commands[0]->name = ft_strdup("exit");
+	char	*argv_0[] = {"exit", "42", NULL};
+	data(GET)->commands[0]->argv = ft_strarrdup(argv_0);
+	data(GET)->commands[0]->type = BUILTIN;
+	data(GET)->commands[0]->index = 0;
+	data(GET)->commands[0]->redir_valid = 1;
+}
+
+static void	dev_mock_exit_42yo(void)
+{
+	data(GET)->cmd_amount = 1;
+	data(GET)->commands = (t_cmd **)ft_calloc(2, sizeof(t_cmd *));
+	data(GET)->commands[0] = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	data(GET)->commands[0]->name = ft_strdup("exit");
+	char	*argv_0[] = {"exit", "42yo", NULL};
+	data(GET)->commands[0]->argv = ft_strarrdup(argv_0);
+	data(GET)->commands[0]->type = BUILTIN;
+	data(GET)->commands[0]->index = 0;
+	data(GET)->commands[0]->redir_valid = 1;
+}
+
 void	dev_shim_prompt()
 {
 	if (!ft_strcmp(data(GET)->rl_prompt, "cat Makefile"))
@@ -216,4 +255,10 @@ void	dev_shim_prompt()
 		dev_mock_asdf();
 	if (!ft_strcmp(data(GET)->rl_prompt, "./asdf"))
 		dev_mock_absolute_asdf();
+	if (!ft_strcmp(data(GET)->rl_prompt, "exit 42yo"))
+		dev_mock_exit_42yo();
+	if (!ft_strcmp(data(GET)->rl_prompt, "exit 42"))
+		dev_mock_exit_42();
+	if (!ft_strcmp(data(GET)->rl_prompt, "exit"))
+		dev_mock_exit();
 }
