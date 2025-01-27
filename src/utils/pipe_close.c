@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   pipe_close.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:15:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 16:59:05 by svereten         ###   ########.fr       */
+/*   Created: 2025/01/06 15:50:29 by svereten          #+#    #+#             */
+/*   Updated: 2025/01/14 17:06:44 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
 
-void	minishell_exit(int status, char *msg)
+void	pipe_close(int pipe_fd[2])
 {
-	data(FREE);
-	if (status)
-		ft_panic(status, msg);
-	ft_exit(status);
+	ft_close(pipe_fd[RD]);
+	ft_close(pipe_fd[WR]);
 }

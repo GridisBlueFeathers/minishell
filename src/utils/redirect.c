@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:15:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 16:59:05 by svereten         ###   ########.fr       */
+/*   Created: 2025/01/06 11:56:50 by svereten          #+#    #+#             */
+/*   Updated: 2025/01/23 17:57:34 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
+#include <stdio.h>
 
-void	minishell_exit(int status, char *msg)
+void	redirect(int *old_fd, int new_fd)
 {
-	data(FREE);
-	if (status)
-		ft_panic(status, msg);
-	ft_exit(status);
+	if (!old_fd)
+		return ;
+	if (dup2(*old_fd, new_fd) == -1)
+		minishell_exit(1, NULL);
+	if (*old_fd >= 0 && close(*old_fd) == -1)
+		minishell_exit(1, NULL);
+	*old_fd = -1;
 }

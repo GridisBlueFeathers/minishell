@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/24 14:57:44 by jwolfram         ###   ########.fr        #
+#    Updated: 2025/01/27 11:53:55 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -40,6 +40,13 @@ FILES = main \
 		loop \
 		signal \
 		lexer \
+		executor/executor \
+		executor/commands \
+		executor/cmd \
+		executor/child/child \
+		executor/child/execute \
+		executor/child/kill \
+		executor/heredoc \
 		parser/parser \
 		parser/prompt \
 		parser/token \
@@ -47,6 +54,11 @@ FILES = main \
 		parser/quotes_rm \
 		parser/command_table \
 		parser/command_table_redir \
+		builtins/exit \
+		utils/exit \
+		utils/redirect \
+		utils/stdfd \
+		utils/pipe_close \
 		utils/words \
 		utils/ischar \
 		utils/is_builtin \
@@ -54,7 +66,6 @@ FILES = main \
 		utils/ft_getenv \
 		utils/valid_operator \
 		utils/minishell_split \
-		utils/exit \
 		dev 
 		# -> dev file, delete later #
 		
@@ -75,11 +86,14 @@ GREEN = \033[1;32m
 # 
 ###############################################################################
 
+
 INCLUDE_FILES = ${wildcard include/*.h}
 
 CFLAGS := ${CFLAGS} -g
 
-DEV_FILES =	${wildcard src/dev*.c} 
+DEV_FILES = executor/dev \
+
+OBJS := ${OBJS} ${DEV_FILES:%=${OBJ_DIR}/%.o}
 
 ###############################################################################
 #
@@ -124,7 +138,8 @@ re: fclean all
 ###############################################################################
 
 run: re
-	./minishell
+	@clear
+	@./minishell
 
 print:
 	echo ${INCLUDE_FILES} ${DEV_FILES}

@@ -6,14 +6,13 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/24 14:24:54 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:02:33 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "libft/libft.h"
-# include "parser.h"
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -32,6 +31,12 @@ typedef enum e_option
 	FREE
 }	t_option;
 
+typedef enum e_mode
+{
+	IN_PROMPT,
+	IN_HEREDOC,
+}	t_mode;
+
 typedef struct s_env_var
 {
 	char				*key;
@@ -49,13 +54,16 @@ typedef struct s_env
 
 typedef struct s_data
 {
-	int			exit_code;
-	char		*rl_prompt;
-	char		**path;
-	t_prompt	**prompt;
-	int			cmd_amount;
-	t_cmd		**commands;
 	t_env		env;
+	t_cmd		**commands;
+	char		**path;
+	char		*rl_prompt;
+	int			stdin_copy;
+	int			stdout_copy;
+	int			exit_code;
+	int			cmd_amount;
+	t_mode		mode;
+	t_prompt	**prompt;
 }	t_data;
 
 /* dev functions */
@@ -76,6 +84,14 @@ void	path_set(void);
 void	env_update(void);
 
 int		isredir(char c);
+/**
+ * Old fd MUST be passed by reference
+*/
+void	redirect(int *old_fd, int new_fd);
+void	pipe_close(int pipe_fd[2]);
+void	stdfd_copy(void);
+void	stdfd_restore(void);
+void	stdfd_close(void);
 int		isquote(char c);
 int		is_builtin(char *name);
 size_t	wordlen(char *str);
@@ -88,6 +104,8 @@ int		lexer(void);
 
 void	signal_init(void);
 void	signal_int(int signal);
+
+void	builtin_exit(char **args);
 
 void	minishell_exit(int status, char *msg);
 

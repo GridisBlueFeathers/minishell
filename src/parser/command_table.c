@@ -6,11 +6,12 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 19:21:54 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:48:08 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 static void	command_table_allocate(int idx)
 {
@@ -20,6 +21,7 @@ static void	command_table_allocate(int idx)
 	if (!command)
 		minishell_exit(1, NULL);
 	data(GET)->commands[idx] = command;
+	command->index = idx;
 	command->type = -1;
 }
 
@@ -43,7 +45,7 @@ static void	command_table_set(int idx)
 			data(GET)->commands[idx]->type = BUILTIN;
 		token = token->next;
 	}
-	if (data(GET)->commands[idx]->type < 0)
+	if (data(GET)->commands[idx]->type != BUILTIN)
 		data(GET)->commands[idx]->type = BIN;
 }
 
@@ -103,8 +105,8 @@ void	command_table_init(void)
 	i = 0;
 	while (data(GET)->prompt[i])
 		i++;
-	data(GET)->cmd_amount = i + 1;
-	data(GET)->commands = (t_cmd **)ft_calloc(i + 2, sizeof(t_cmd *));
+	data(GET)->cmd_amount = i;
+	data(GET)->commands = (t_cmd **)ft_calloc(i + 1, sizeof(t_cmd *));
 	if (!data(GET)->commands)
 		minishell_exit(1, NULL);
 	i = 0;

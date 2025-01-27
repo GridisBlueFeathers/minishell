@@ -89,8 +89,10 @@ void	command_table_print(void)
 		printf("Command %d\n", i);
 		if (data(GET)->commands[i]->type == BUILTIN)
 			printf("Command Type: BUILTIN\n");
-		else
+		else if (data(GET)->commands[i]->type == BIN)
 			printf("Command Type: BIN\n");
+		else
+			printf("Command Type is broken for some reason\n");
 		printf("Command Name: %s\n", data(GET)->commands[i]->name);
 		printf("Command Arguments: \n");
 		ft_putstrarr_fd(data(GET)->commands[i]->argv, STDOUT_FILENO);
