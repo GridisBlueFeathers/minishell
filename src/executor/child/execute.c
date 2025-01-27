@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 12:46:17 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:09:25 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -44,7 +44,9 @@ static void	child_get_path(t_cmd *cmd)
 	size_t	len;
 
 	i = 0;
-	dprintf(STDERR_FILENO, "Getting path for the command\n");
+	#if DEBUG
+		dprintf(STDERR_FILENO, "Getting path for the command\n");
+	#endif
 	while (data(GET)->path[i])
 	{
 		len = ft_strlen(data(GET)->path[i]) + ft_strlen(cmd->name) + 1;
@@ -63,8 +65,12 @@ static void	child_get_path(t_cmd *cmd)
 
 void	child_execute(t_cmd *cmd)
 {
-	dprintf(STDERR_FILENO, "Command name: %s\n", cmd->name);
-	dprintf(STDERR_FILENO, "Command type: %d\n", cmd->type);
+	if (cmd->type == BUILTIN)
+		minishell_exit(1, NULL);
+	#if DEBUG
+		dprintf(STDERR_FILENO, "Command name: %s\n", cmd->name);
+		dprintf(STDERR_FILENO, "Command type: %d\n", cmd->type);
+	#endif
 	if (ft_strchr(cmd->name, '/'))
 	{
 		dprintf(STDERR_FILENO, "Are we here?\n");
@@ -80,7 +86,9 @@ void	child_execute(t_cmd *cmd)
 		if (!cmd->bin)
 			minishell_exit(1, NULL);
 	}
-	dprintf(STDERR_FILENO, "Command bin: %s\n", cmd->bin);
+	#if DEBUG
+		dprintf(STDERR_FILENO, "Command bin: %s\n", cmd->bin);
+	#endif
 	execve(cmd->bin, cmd->argv, NULL);
 	if (errno == EACCES || errno == ENOENT)
 		child_kill(cmd);

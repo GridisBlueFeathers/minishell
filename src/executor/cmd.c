@@ -6,16 +6,27 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 12:26:48 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:10:40 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
+
+void	cmd_execute_single_builtin(t_cmd *cmd)
+{
+	#if DEBUG
+		dprintf(STDERR_FILENO, "Executing builtin\n");
+	#endif
+	if (ft_strncmp(cmd->name, "exit", ft_strlen("exit")) == 0)
+		builtin_exit(cmd->argv);
+}
 
 int	cmd_heredoc_run(t_cmd *cmd)
 {
 	t_redir	*cur;
 
+	#if DEBUG
 	dprintf(STDERR_FILENO, "Running heredocs for %s[%d]\n", cmd->name, cmd->index);
+	#endif
 	cur = cmd->redir_head;
 	while (cur)
 	{
@@ -24,7 +35,9 @@ int	cmd_heredoc_run(t_cmd *cmd)
 			cur = cur->next;
 			continue ;
 		}
-		dprintf(STDERR_FILENO, "Heredoc delim: %s\n", cur->heredoc_delim);
+		#if DEBUG
+			dprintf(STDERR_FILENO, "Heredoc delim: %s\n", cur->heredoc_delim);
+		#endif
 		heredoc_handle(cur);
 		cur = cur->next;
 	}
@@ -33,7 +46,9 @@ int	cmd_heredoc_run(t_cmd *cmd)
 
 int	cmd_execute_single_bin(t_cmd *cmd)
 {
-	dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->index);
+	#if DEBUG
+		dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->index);
+	#endif
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		minishell_exit(1, NULL);
@@ -46,7 +61,9 @@ int	cmd_execute(t_cmd *cmd)
 {
 	int		pipe_fd[2];
 
-	dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->index);
+	#if DEBUG
+		dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->index);
+	#endif
 	if (cmd->index + 1 != data(GET)->cmd_amount && pipe(pipe_fd) == -1)
 		minishell_exit(1, NULL);
 	cmd->pid = fork();
