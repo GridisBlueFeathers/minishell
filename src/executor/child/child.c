@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:18:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 12:30:25 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:53:24 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -50,7 +50,7 @@ void	child_single(t_cmd *cmd)
 
 void	child(t_cmd *cmd, int pipe_fd[2])
 {
-	if (cmd->index + 1 != data(GET)->cmd_amount)
+	if (cmd->idx + 1 != data(GET)->cmd_amount)
 	{
 		ft_close(pipe_fd[RD]);
 		redirect(&pipe_fd[WR], STDOUT_FILENO);

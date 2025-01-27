@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 12:48:08 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:54:40 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	command_table_allocate(int idx)
 	if (!command)
 		minishell_exit(1, NULL);
 	data(GET)->commands[idx] = command;
-	command->index = idx;
+	command->idx = idx;
 	command->type = -1;
 }
 
@@ -70,34 +70,6 @@ static void	command_type_get(t_token *token)
 	}
 }
 
-static void	argv_set(t_prompt *prompt)
-{
-	int		i;
-	t_token	*token;
-	t_data	*ms_data;
-
-	ms_data = data(GET);
-	ms_data->commands[prompt->idx]->argv
-		= (char **)ft_calloc(prompt->last->idx + 2, sizeof(char *));
-	if (!data(GET)->commands[prompt->idx]->argv)
-		minishell_exit(1, NULL);
-	token = prompt->first;
-	i = 0;
-	while (token)
-	{
-		if (token->tok_type > 1 && token->tok_type < 7)
-			token = token->next;
-		else if (token->tok_type == WORD || token->tok_type == CMD)
-		{
-			ms_data->commands[prompt->idx]->argv[i] = ft_strdup(token->tok_str);
-			if (!data(GET)->commands[prompt->idx]->argv[i])
-				minishell_exit(1, NULL);
-			i++;
-		}
-		token = token->next;
-	}
-}
-
 void	command_table_init(void)
 {
 	int	i;
@@ -114,7 +86,8 @@ void	command_table_init(void)
 	{
 		command_type_get(data(GET)->prompt[i]->first);
 		command_table_set(i);
-		argv_set(data(GET)->prompt[i]);
+		ct_argv_set(data(GET)->prompt[i]);
+		ct_env_set();
 		i++;
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 11:51:25 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 15:01:28 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:47:28 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parser_init(void)
+void	parser(void)
 {
 	size_t		i;
 

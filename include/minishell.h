@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 12:02:33 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:40:50 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -41,6 +41,7 @@ typedef struct s_env_var
 {
 	char				*key;
 	char				*value;
+	int					idx;
 	struct s_env_var	*next;
 	struct s_env_var	*prev;
 }	t_env_var;
@@ -58,6 +59,7 @@ typedef struct s_data
 	t_cmd		**commands;
 	char		**path;
 	char		*rl_prompt;
+	char		**env_arr;
 	int			stdin_copy;
 	int			stdout_copy;
 	int			exit_code;
