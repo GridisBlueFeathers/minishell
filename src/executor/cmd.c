@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/24 17:30:19 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:26:48 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -19,7 +19,7 @@ int	cmd_heredoc_run(t_cmd *cmd)
 	cur = cmd->redir_head;
 	while (cur)
 	{
-		if (cur->type != HEREDOC)
+		if (cur->type != HEREDOC && cur->type != HRDC_EXPND)
 		{
 			cur = cur->next;
 			continue ;
@@ -34,8 +34,6 @@ int	cmd_heredoc_run(t_cmd *cmd)
 int	cmd_execute_single_bin(t_cmd *cmd)
 {
 	dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->index);
-	if (!cmd->redir_valid)
-		return (0);
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		minishell_exit(1, NULL);
@@ -49,8 +47,6 @@ int	cmd_execute(t_cmd *cmd)
 	int		pipe_fd[2];
 
 	dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->index);
-	if (!cmd->redir_valid)
-		return (0);
 	if (cmd->index + 1 != data(GET)->cmd_amount && pipe(pipe_fd) == -1)
 		minishell_exit(1, NULL);
 	cmd->pid = fork();

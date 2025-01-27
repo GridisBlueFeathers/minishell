@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:07:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/11 18:15:32 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:15:24 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	quote_is_valid(char *str, size_t loc)
 		return (1);
 	while (str[i] && i < loc)
 	{
-		if (!quote && isquote(str[i]))	
+		if (!quote && isquote(str[i]))
 			quote = str[i];
 		else if (quote && str[i] == quote)
 			quote = 0;
@@ -34,15 +34,11 @@ static int	quote_is_valid(char *str, size_t loc)
 	return (1);
 }
 
-static char	*quotes_rm(char *str, size_t quote_amount)
+static void	quotes_iterate(char *str, char *res)
 {
-	char	*res;
 	size_t	i;
 	size_t	j;
 
-	res = (char *)ft_calloc((ft_strlen(str) - quote_amount + 1), sizeof(char));
-	if (!res)
-		minishell_exit(1, NULL);
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -62,6 +58,16 @@ static char	*quotes_rm(char *str, size_t quote_amount)
 		i++;
 		j++;
 	}
+}
+
+static char	*quotes_rm(char *str, size_t quote_amount)
+{
+	char	*res;
+
+	res = (char *)ft_calloc((ft_strlen(str) - quote_amount + 1), sizeof(char));
+	if (!res)
+		minishell_exit(1, NULL);
+	quotes_iterate(str, res);
 	return (res);
 }
 
@@ -90,6 +96,8 @@ void	quotes_rm_init(t_token	*token)
 	quote_amount = 0;
 	while (token)
 	{
+		if (token->tok_type == HEREDOC && !isquote(token->next->tok_str[0]))
+			token->tok_type = HRDC_EXPND;
 		if (ft_strchr(token->tok_str, '"') || ft_strchr(token->tok_str, '\''))
 		{
 			quote_amount = quote_amount_get(token->tok_str);

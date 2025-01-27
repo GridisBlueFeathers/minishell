@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/24 18:44:15 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:02:33 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -49,6 +49,7 @@ typedef struct s_env
 {
 	t_env_var	*first;
 	t_env_var	*last;
+	char		**arr;
 }	t_env;
 
 typedef struct s_data
@@ -92,6 +93,7 @@ void	stdfd_copy(void);
 void	stdfd_restore(void);
 void	stdfd_close(void);
 int		isquote(char c);
+int		is_builtin(char *name);
 size_t	wordlen(char *str);
 char	*ft_getenv(char *key);
 int		valid_operator(char *str, size_t loc, char type);

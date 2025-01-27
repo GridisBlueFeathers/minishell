@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/24 17:37:16 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:54:48 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
@@ -16,6 +16,7 @@
 
 typedef struct s_redir
 {
+	struct s_redir	*first;
 	t_tok_type		type;
 	/* name of the redirect file, if type is HEREDOC - name of tmp file */
 	char			*file_name;

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/24 18:48:26 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:23:56 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -27,7 +27,7 @@ static void	executor_execute_single(void)
 	int	s;
 
 	dprintf(STDERR_FILENO, "Executing single command\n");
-	if (!data(GET)->commands[0]->type)
+	if (data(GET)->commands[0]->type == BIN)
 	{
 		if (!cmd_execute_single_bin(data(GET)->commands[0]))
 		{
@@ -74,7 +74,6 @@ static void	executor_execute(void)
 
 void	executor(void)
 {
-	dev_shim_prompt();
 	dprintf(STDERR_FILENO, "Executor\n");
 	dprintf(STDERR_FILENO, "Amount of commands: %d\n", data(GET)->cmd_amount);
 	data(GET)->mode = IN_HEREDOC;

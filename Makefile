@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/24 18:41:49 by svereten         ###   ########.fr        #
+#    Updated: 2025/01/27 11:53:55 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -47,18 +47,21 @@ FILES = main \
 		executor/child/execute \
 		executor/child/kill \
 		executor/heredoc \
-		utils/exit \
-		utils/redirect \
-		utils/stdfd \
-		utils/pipe_close \
 		parser/parser \
 		parser/prompt \
 		parser/token \
 		parser/expander \
 		parser/quotes_rm \
+		parser/command_table \
+		parser/command_table_redir \
 		builtins/exit \
+		utils/exit \
+		utils/redirect \
+		utils/stdfd \
+		utils/pipe_close \
 		utils/words \
 		utils/ischar \
+		utils/is_builtin \
 		utils/substrrplc \
 		utils/ft_getenv \
 		utils/valid_operator \

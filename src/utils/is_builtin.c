@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 11:51:25 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 15:01:28 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/01/24 14:23:58 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/01/24 15:15:22 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parser_init(void)
+int	is_builtin(char *name)
 {
-	size_t		i;
-
-	i = 0;
-	prompt_init();
-	while (data(GET)->prompt[i])
-	{
-		data(GET)->prompt[i]->idx = i;
-		token_init(data(GET)->prompt[i]);
-		expander_init(data(GET)->prompt[i]->first);
-		quotes_rm_init(data(GET)->prompt[i]->first);
-		i++;
-	}
-	command_table_init();
+	if (!ft_strncmp(name, "echo", ft_strlen(name))
+		|| !ft_strncmp(name, "cd", ft_strlen(name))
+		|| !ft_strncmp(name, "pwd", ft_strlen(name))
+		|| !ft_strncmp(name, "exit", ft_strlen(name))
+		|| !ft_strncmp(name, "env", ft_strlen(name))
+		|| !ft_strncmp(name, "export", ft_strlen(name))
+		|| !ft_strncmp(name, "unset", ft_strlen(name)))
+		return (1);
+	return (0);
 }
