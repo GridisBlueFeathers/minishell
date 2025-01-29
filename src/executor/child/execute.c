@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 15:09:25 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:17:06 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -63,10 +63,16 @@ static void	child_get_path(t_cmd *cmd)
 	}
 }
 
+static void	child_execute_builtin(t_cmd *cmd)
+{
+	cmd_execute_single_builtin(cmd);
+	minishell_exit(data(GET)->exit_code, NULL);
+}
+
 void	child_execute(t_cmd *cmd)
 {
 	if (cmd->type == BUILTIN)
-		minishell_exit(1, NULL);
+		child_execute_builtin(cmd);
 	#if DEBUG
 		dprintf(STDERR_FILENO, "Command name: %s\n", cmd->name);
 		dprintf(STDERR_FILENO, "Command type: %d\n", cmd->type);

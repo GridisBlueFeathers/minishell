@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 15:10:40 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:16:30 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -17,7 +17,7 @@ void	cmd_execute_single_builtin(t_cmd *cmd)
 		dprintf(STDERR_FILENO, "Executing builtin\n");
 	#endif
 	if (ft_strncmp(cmd->name, "exit", ft_strlen("exit")) == 0)
-		builtin_exit(cmd->argv);
+		builtin_exit(cmd);
 }
 
 int	cmd_heredoc_run(t_cmd *cmd)

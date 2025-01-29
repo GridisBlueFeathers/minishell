@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 15:12:03 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:01:43 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	prompt_exec(void)
 		debug_print();
 	#endif
 	executor();
-	data(GET)->exit_code = 0;
 }
 
 void	loop(void)
