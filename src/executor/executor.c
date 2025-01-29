@@ -6,27 +6,22 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 12:23:56 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:07:58 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
 #include "minishell.h"
 #include <stdio.h>
-#include <unistd.h>
 #include <sys/wait.h>
 
-static void	cmd_execute_single_builtin(t_cmd *cmd)
-{
-	dprintf(STDERR_FILENO, "Executing builtin\n");
-	if (ft_strncmp(cmd->name, "exit", ft_strlen("exit")) == 0)
-		builtin_exit(cmd->argv);
-}
 
-static void	executor_execute_single(void)
+static void	execute_single(void)
 {
 	int	s;
 
-	dprintf(STDERR_FILENO, "Executing single command\n");
+	#if DEBUG
+		dprintf(STDERR_FILENO, "Executing single command\n");
+	#endif
 	if (data(GET)->commands[0]->type == BIN)
 	{
 		if (!cmd_execute_single_bin(data(GET)->commands[0]))
@@ -43,7 +38,7 @@ static void	executor_execute_single(void)
 		cmd_execute_single_builtin(data(GET)->commands[0]);
 }
 
-static void	executor_execute_pipeline(void)
+static void	execute_pipeline(void)
 {
 	int	i;
 	int	s;
@@ -63,21 +58,23 @@ static void	executor_execute_pipeline(void)
 	stdfd_restore();
 }
 
-static void	executor_execute(void)
+static void	execute(void)
 {
 	if (data(GET)->cmd_amount == 1)
-		executor_execute_single();
+		execute_single();
 	else
-		executor_execute_pipeline();
+		execute_pipeline();
 	commands_reset();
 }
 
 void	executor(void)
 {
-	dprintf(STDERR_FILENO, "Executor\n");
-	dprintf(STDERR_FILENO, "Amount of commands: %d\n", data(GET)->cmd_amount);
+	#if DEBUG
+		dprintf(STDERR_FILENO, "Executor\n");
+		dprintf(STDERR_FILENO, "Amount of commands: %d\n", data(GET)->cmd_amount);
+	#endif
 	data(GET)->mode = IN_HEREDOC;
 	if (!commands_heredocs_run())
 		return ;
-	executor_execute();
+	execute();
 }

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:18:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 12:30:25 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:08:11 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -18,7 +18,9 @@ static int	child_apply_redirs(t_cmd *cmd)
 {
 	t_redir	*cur;
 
-	dprintf(STDERR_FILENO, "Applying redirections\n");
+	#if DEBUG
+		dprintf(STDERR_FILENO, "Applying redirections\n");
+	#endif
 	cur = cmd->redir_head;
 	while (cur)
 	{

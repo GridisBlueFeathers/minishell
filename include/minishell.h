@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 12:02:33 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:10:47 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -24,6 +24,10 @@
 # define ERR_QUOTES "minishell: syntax error near unexpected quotation marks\n"
 # define ERR_PIPES "minishell: syntax error near unexpected pipe\n"
 # define ERR_REDIRS "minishell: syntax error near unexpected redirection\n"
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 typedef enum e_option
 {
@@ -105,7 +109,7 @@ int		lexer(void);
 void	signal_init(void);
 void	signal_int(int signal);
 
-void	builtin_exit(char **args);
+void	builtin_exit(t_cmd *cmd);
 
 void	minishell_exit(int status, char *msg);
 
