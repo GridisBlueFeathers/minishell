@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 19:08:15 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:25:45 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static t_env_var	*env_allocate(void)
 	node = (t_env_var *)ft_calloc(1, sizeof(t_env_var));
 	if (!node)
 		minishell_exit(1, NULL);
+	node->was_unset = 0;
 	if (!data(GET)->env.first)
 	{
 		data(GET)->env.first = node;
