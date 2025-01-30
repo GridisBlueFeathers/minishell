@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/30 13:25:22 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/30 21:48:02 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -83,6 +83,7 @@ void	tokenizer_print(void);
 t_data		*data(t_option option);
 void		loop(void);
 
+t_env_var	*env_allocate(void);
 void		env_init(char **env);
 void		env_free(t_env_var *node);
 void		path_set(void);
@@ -102,6 +103,7 @@ int			is_builtin(char *name);
 size_t		wordlen(char *str);
 char		*ft_getenv(char *key);
 t_env_var	*ft_getenv_node(char *key);
+t_env_var	*ft_get_alloc_env_node(char *key);
 int			valid_operator(char *str, size_t loc, char type);
 
 char		**minishell_split(char *str);
@@ -111,6 +113,7 @@ int			lexer(void);
 void		signal_init(void);
 void		signal_int(int signal);
 
+int			builtin_cd(t_cmd *cmd);
 void		builtin_exit(t_cmd *cmd);
 	
 void		minishell_exit(int status, char *msg);

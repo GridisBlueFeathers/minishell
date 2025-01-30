@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/29 17:17:06 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/30 20:23:42 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -79,7 +79,6 @@ void	child_execute(t_cmd *cmd)
 	#endif
 	if (ft_strchr(cmd->name, '/'))
 	{
-		dprintf(STDERR_FILENO, "Are we here?\n");
 		cmd->bin = ft_strdup(cmd->name);
 		if (!cmd->bin)
 			minishell_exit(1, NULL);

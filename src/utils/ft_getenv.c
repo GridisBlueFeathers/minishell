@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:01:29 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/30 12:58:55 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/30 21:35:42 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,21 @@ t_env_var	*ft_getenv_node(char *key)
 		if (!ft_strncmp(key, res->key, ft_strlen(key)))
 			return (res);
 		res = res->next;
+	}
+	return (res);
+}
+
+t_env_var	*ft_get_alloc_env_node(char *key)
+{
+	t_env_var	*res;
+
+	res = ft_getenv_node(key);
+	if (!res)
+	{
+		res = env_allocate();
+		res->key = ft_strdup(key);
+		if (!res->key)
+			minishell_exit(1, NULL);
 	}
 	return (res);
 }

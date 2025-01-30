@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/30 13:25:45 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:56:22 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	env_free(t_env_var	*node)
 	}
 }
 
-static t_env_var	*env_allocate(void)
+t_env_var	*env_allocate(void)
 {
 	t_env_var	*node;
 
