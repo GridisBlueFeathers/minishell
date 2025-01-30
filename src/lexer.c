@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:26:48 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/11 14:48:29 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:04:05 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	lexer_double_redir_check(char *prompt)
 		return (1);
 	if (isredir(prompt[2]))
 		return (0);
-	return (2);
+	return (1);
 }
 
 static int	lexer_redir_check(void)

@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 14:54:40 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:58:56 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,14 @@ static void	command_type_get(t_token *token)
 	while (token)
 	{
 		if (token->tok_type > 1 && token->tok_type < 7)
-		{
-			token = token->next->next;
-			continue ;
-		}
+			token = token->next;
 		else if (token->tok_type == WORD && first_word)
 		{
 			token->tok_type = CMD;
 			first_word = 0;
 		}
+		if (!token->next)
+			break ;
 		token = token->next;
 	}
 }
