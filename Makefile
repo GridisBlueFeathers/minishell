@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/31 16:06:35 by jwolfram         ###   ########.fr        #
+#    Updated: 2025/01/31 16:34:38 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -58,6 +58,12 @@ FILES = main \
 		parser/command_table_redir \
 		parser/command_table_arr \
 		builtins/exit \
+		builtins/cd \
+		builtins/env \
+		builtins/unset \
+		builtins/pwd \
+		builtins/export/export \
+		builtins/export/no_args \
 		builtins/echo \
 		utils/exit \
 		utils/redirect \
@@ -141,6 +147,11 @@ re: fclean all
 
 test: re
 	bash /home/svereten/42_minishell_tester/tester.sh m
+
+noenv: CFLAGS += -D DEBUG=1
+noenv: re
+	@clear
+	@env -i ./minishell
 
 run: CFLAGS += -D DEBUG=1
 run: re

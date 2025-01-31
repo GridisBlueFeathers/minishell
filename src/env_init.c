@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 15:03:44 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:35:05 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ void	env_free(t_env_var	*node)
 	}
 }
 
-static t_env_var	*env_allocate(void)
+t_env_var	*env_allocate(void)
 {
 	t_env_var	*node;
 
 	node = (t_env_var *)ft_calloc(1, sizeof(t_env_var));
 	if (!node)
 		minishell_exit(1, NULL);
+	node->was_unset = 0;
 	if (!data(GET)->env.first)
 	{
 		data(GET)->env.first = node;
@@ -75,6 +76,10 @@ static void	no_env_set(void)
 {
 	t_env_var	*node;
 
+	node = env_allocate();
+	node->key = ft_strdup("OLDPWD");
+	if (!node->key)
+		minishell_exit(1, NULL);
 	node = env_allocate();
 	node->key = ft_strdup("PWD");
 	if (!node->key)
