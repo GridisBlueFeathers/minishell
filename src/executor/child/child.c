@@ -52,7 +52,7 @@ void	child_single(t_cmd *cmd)
 
 void	child(t_cmd *cmd, int pipe_fd[2])
 {
-	if (cmd->index + 1 != data(GET)->cmd_amount)
+	if (cmd->idx + 1 != data(GET)->cmd_amount)
 	{
 		ft_close(pipe_fd[RD]);
 		redirect(&pipe_fd[WR], STDOUT_FILENO);

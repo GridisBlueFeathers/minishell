@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   quotes_esc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 11:51:25 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 17:02:16 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/01/31 14:43:03 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/01/31 14:44:17 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parser(void)
+int	quotes_esc(char *str, char *res, size_t *i, size_t *j)
 {
-	size_t		i;
+	int	idx;
 
-	i = 0;
-	prompt_init();
-	while (data(GET)->prompt[i])
+	idx = *i;
+	if (str[idx] == '"')
 	{
-		data(GET)->prompt[i]->idx = i;
-		token_init(data(GET)->prompt[i]);
-		expander_init(data(GET)->prompt[i]->first);
-		quotes_rm_init(data(GET)->prompt[i]->first);
-		i++;
+		res[0] = '"';
+		return (1);
 	}
-	command_table_init();
+	else if (str[idx] == '\'' && valid_operator(str, idx, 0))
+	{
+		res[0] = '\'';
+		return (1);
+	}
+	res[0] = '\\';
+	res[1] = '\'';
+	*i += 1;
+	*j += 1;
+	return (0);
 }

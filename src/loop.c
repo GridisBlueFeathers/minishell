@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/29 17:01:43 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:11:20 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	prompt_exec(void)
 	#endif
 	if (!lexer())
 		return ;
-	parser_init();
+	parser();
 	#if DEBUG
 		debug_print();
 	#endif

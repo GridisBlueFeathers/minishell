@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 11:51:25 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 17:02:16 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/01/31 15:39:13 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/01/31 16:10:16 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parser(void)
+int	builtin_echo(t_cmd *cmd)
 {
-	size_t		i;
+	int	i;
+	int	check;
 
-	i = 0;
-	prompt_init();
-	while (data(GET)->prompt[i])
+	i = 1;
+	if (cmd->argv[1][0] == '-' && cmd->argv[1][1] == 'n')
+		i = 2;
+	while (cmd->argv[i + 1])
 	{
-		data(GET)->prompt[i]->idx = i;
-		token_init(data(GET)->prompt[i]);
-		expander_init(data(GET)->prompt[i]->first);
-		quotes_rm_init(data(GET)->prompt[i]->first);
+		check = printf("%s ", cmd->argv[i]);
+		if (check < 0)
+			return (1);
 		i++;
 	}
-	command_table_init();
+	if (cmd->argv[1][0] == '-' && cmd->argv[1][1] == 'n')
+		check = printf("%s", cmd->argv[i]);
+	else
+		check = printf("%s\n", cmd->argv[i]);
+	if (check < 0)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 14:32:21 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:41:25 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
@@ -44,7 +44,7 @@ typedef struct s_cmd
 	/* array of command arguments */
 	char			**argv;
 	/* for check if last command */
-	int				index;
+	int				idx;
 	pid_t			pid;
 	/* to prevent execution of everything but heredocs */
 	int				redir_valid;
