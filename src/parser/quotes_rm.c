@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:07:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 16:24:54 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:43:25 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,6 @@ static int	quote_is_valid(char *str, size_t loc)
 	return (1);
 }
 
-int	quotes_escaped(char *str, char *res, size_t *i, size_t *j)
-{
-	int idx;
-
-	idx = *i;
-	if (str[idx] == '"')
-	{
-		res[0] = '"';
-		return (1);
-	}
-	else if (str[idx] == '\'' && valid_operator(str, idx, 0))
-	{
-		res[0] = '\'';
-		return (1);
-	}
-	res[0] = '\\';
-	res[1] = '\'';
-	*i += 1;
-	*j += 1;
-	return (0);
-}
-
 static void	quotes_iterate(char *str, char *res)
 {
 	size_t	i;
@@ -68,7 +46,7 @@ static void	quotes_iterate(char *str, char *res)
 		if (str[i] == '\\' && str[i + 1] && isquote(str[i + 1]))
 		{
 			i++;
-			if (!quotes_escaped(str, res + j, &i, &j))
+			if (!quotes_esc(str, res + j, &i, &j))
 				continue ;
 		}
 		else if (isquote(str[i]) && quote_is_valid(str, i))
