@@ -138,7 +138,15 @@ re: fclean all
 # 
 ###############################################################################
 
+test: re
+	bash /home/svereten/42_minishell_tester/tester.sh m
+
+run: CFLAGS += -D DEBUG=1
 run: re
+	@clear
+	@./minishell
+
+release: re
 	@clear
 	@./minishell
 

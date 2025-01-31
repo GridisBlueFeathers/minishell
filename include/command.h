@@ -65,6 +65,7 @@ int		commands_heredocs_run(void);
 
 int		cmd_execute(t_cmd *cmd);
 int		cmd_execute_single_bin(t_cmd *cmd);
+void	cmd_execute_single_builtin(t_cmd *cmd);
 int		cmd_heredoc_run(t_cmd *cmd);
 
 void	heredoc_handle(t_redir *redir);

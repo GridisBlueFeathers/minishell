@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 16:58:56 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:08:56 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	command_table_allocate(int idx)
 	if (!command)
 		minishell_exit(1, NULL);
 	data(GET)->commands[idx] = command;
-	command->idx = idx;
+	command->pid = 1;
+	command->index = idx;
 	command->type = -1;
 }
 

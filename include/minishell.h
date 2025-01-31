@@ -21,6 +21,10 @@
 # define PREFIX_GOOD "\ueab2 minishell \uf061  "
 # define PREFIX_BAD "\uea76 minishell \uf061  "
 
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+
 typedef enum e_option
 {
 	GET,
@@ -105,7 +109,7 @@ void	lexer_error(char error, char redir);
 void	signal_init(void);
 void	signal_int(int signal);
 
-void	builtin_exit(char **args);
+void	builtin_exit(t_cmd *cmd);
 
 void	minishell_exit(int status, char *msg);
 

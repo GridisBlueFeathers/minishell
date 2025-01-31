@@ -2,3 +2,4 @@ minishell
 obj
 dev
 .vgignore
+mstest*
