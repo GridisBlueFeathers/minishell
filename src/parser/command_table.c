@@ -58,43 +58,14 @@ static void	command_type_get(t_token *token)
 	while (token)
 	{
 		if (token->tok_type > 1 && token->tok_type < 7)
-		{
-			token = token->next->next;
-			continue ;
-		}
+			token = token->next;
 		else if (token->tok_type == WORD && first_word)
 		{
 			token->tok_type = CMD;
 			first_word = 0;
 		}
-		token = token->next;
-	}
-}
-
-static void	argv_set(t_prompt *prompt)
-{
-	int		i;
-	t_token	*token;
-	t_data	*ms_data;
-
-	ms_data = data(GET);
-	ms_data->commands[prompt->idx]->argv
-		= (char **)ft_calloc(prompt->last->idx + 2, sizeof(char *));
-	if (!data(GET)->commands[prompt->idx]->argv)
-		minishell_exit(1, NULL);
-	token = prompt->first;
-	i = 0;
-	while (token)
-	{
-		if (token->tok_type > 1 && token->tok_type < 7)
-			token = token->next;
-		else if (token->tok_type == WORD || token->tok_type == CMD)
-		{
-			ms_data->commands[prompt->idx]->argv[i] = ft_strdup(token->tok_str);
-			if (!data(GET)->commands[prompt->idx]->argv[i])
-				minishell_exit(1, NULL);
-			i++;
-		}
+		if (!token->next)
+			break ;
 		token = token->next;
 	}
 }
@@ -115,7 +86,8 @@ void	command_table_init(void)
 	{
 		command_type_get(data(GET)->prompt[i]->first);
 		command_table_set(i);
-		argv_set(data(GET)->prompt[i]);
+		ct_argv_set(data(GET)->prompt[i]);
+		ct_env_set();
 		i++;
 	}
 }

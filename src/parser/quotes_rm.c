@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:07:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 19:15:24 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:43:25 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ static void	quotes_iterate(char *str, char *res)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == '\\' && str[i + 1] && str[i + 1] == '"')
+		if (str[i] == '\\' && str[i + 1] && isquote(str[i + 1]))
 		{
-			res[j] = '"';
 			i++;
+			if (!quotes_esc(str, res + j, &i, &j))
+				continue ;
 		}
 		else if (isquote(str[i]) && quote_is_valid(str, i))
 		{

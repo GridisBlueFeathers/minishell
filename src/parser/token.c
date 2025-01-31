@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:55:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/14 17:16:43 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:39:32 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ static t_tok_type	token_type_set(char *prompt, size_t loc)
 		else if (prompt[loc + 1] == '<')
 			return (HEREDOC);
 	}
-	else if (isredir(prompt[loc]) && prompt[loc + 1]
-		&& !isredir(prompt[loc + 1]) && valid_operator(prompt, loc, 0))
+	else if (isredir(prompt[loc]) && !isredir(prompt[loc + 1])
+		&& valid_operator(prompt, loc, 0))
 	{
 		if (prompt[loc] == '>')
 			return (OUTPUT);

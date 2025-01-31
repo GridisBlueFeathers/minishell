@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/29 17:10:47 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:30:48 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -20,10 +20,6 @@
 
 # define PREFIX_GOOD "\ueab2 minishell \uf061  "
 # define PREFIX_BAD "\uea76 minishell \uf061  "
-
-# define ERR_QUOTES "minishell: syntax error near unexpected quotation marks\n"
-# define ERR_PIPES "minishell: syntax error near unexpected pipe\n"
-# define ERR_REDIRS "minishell: syntax error near unexpected redirection\n"
 
 # ifndef DEBUG
 #  define DEBUG 0
@@ -45,6 +41,7 @@ typedef struct s_env_var
 {
 	char				*key;
 	char				*value;
+	int					idx;
 	struct s_env_var	*next;
 	struct s_env_var	*prev;
 }	t_env_var;
@@ -62,6 +59,7 @@ typedef struct s_data
 	t_cmd		**commands;
 	char		**path;
 	char		*rl_prompt;
+	char		**env_arr;
 	int			stdin_copy;
 	int			stdout_copy;
 	int			exit_code;
@@ -105,6 +103,8 @@ int		valid_operator(char *str, size_t loc, char type);
 char	**minishell_split(char *str);
 
 int		lexer(void);
+int		lexer_redir_check(void);
+void	lexer_error(char error, char redir);
 
 void	signal_init(void);
 void	signal_int(int signal);

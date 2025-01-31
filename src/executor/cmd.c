@@ -25,7 +25,7 @@ int	cmd_heredoc_run(t_cmd *cmd)
 	t_redir	*cur;
 
 	#if DEBUG
-	dprintf(STDERR_FILENO, "Running heredocs for %s[%d]\n", cmd->name, cmd->index);
+	dprintf(STDERR_FILENO, "Running heredocs for %s[%d]\n", cmd->name, cmd->idx);
 	#endif
 	cur = cmd->redir_head;
 	while (cur)
@@ -47,7 +47,7 @@ int	cmd_heredoc_run(t_cmd *cmd)
 int	cmd_execute_single_bin(t_cmd *cmd)
 {
 	#if DEBUG
-		dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->index);
+		dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->idx);
 	#endif
 	cmd->pid = fork();
 	if (cmd->pid < 0)
@@ -62,20 +62,20 @@ int	cmd_execute(t_cmd *cmd)
 	int		pipe_fd[2];
 
 	#if DEBUG
-		dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->index);
+		dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->idx);
 	#endif
-	if (cmd->index + 1 != data(GET)->cmd_amount && pipe(pipe_fd) == -1)
+	if (cmd->index + 1 != data(GET)->cmd_amount && pipe(pipe_fd) == -1;
 		minishell_exit(1, NULL);
 	cmd->pid = fork();
 	if (cmd->pid == -1)
 	{
-		if (cmd->index + 1 != data(GET)->cmd_amount)
+		if (cmd->idx + 1 != data(GET)->cmd_amount)
 			pipe_close(pipe_fd);
 		minishell_exit(1, NULL);
 	}
 	if (cmd->pid == 0)
 		child(cmd, pipe_fd);
-	if (cmd->index + 1 != data(GET)->cmd_amount)
+	if (cmd->idx + 1 != data(GET)->cmd_amount)
 	{
 		ft_close(pipe_fd[WR]);
 		redirect(&pipe_fd[RD], STDIN_FILENO);

@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/27 15:32:08 by svereten         ###   ########.fr        #
+#    Updated: 2025/01/31 14:42:39 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -40,6 +40,7 @@ FILES = main \
 		loop \
 		signal \
 		lexer \
+		lexer_redir \
 		executor/executor \
 		executor/commands \
 		executor/cmd \
@@ -52,8 +53,10 @@ FILES = main \
 		parser/token \
 		parser/expander \
 		parser/quotes_rm \
+		parser/quotes_esc \
 		parser/command_table \
 		parser/command_table_redir \
+		parser/command_table_arr \
 		builtins/exit \
 		utils/exit \
 		utils/redirect \
@@ -90,8 +93,6 @@ GREEN = \033[1;32m
 INCLUDE_FILES = ${wildcard include/*.h}
 
 CFLAGS := ${CFLAGS} -g
-
-DEV_FILES = executor/dev \
 
 OBJS := ${OBJS} ${DEV_FILES:%=${OBJ_DIR}/%.o}
 

@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 19:08:15 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:03:44 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	env_set(char **env)
 		node->value = ft_substr(env[i], len + 1, ft_strlen(env[i]));
 		if (!node->value)
 			minishell_exit(1, NULL);
+		node->idx = i;
 		if (!env[i + 1])
 			break ;
 		i++;
@@ -81,6 +82,7 @@ static void	no_env_set(void)
 	node->value = getcwd(NULL, 0);
 	if (!node->value)
 		minishell_exit(1, NULL);
+	node->idx = 0;
 	node = env_allocate();
 	node->key = ft_strdup("SHLVL");
 	if (!node->key)
@@ -88,6 +90,7 @@ static void	no_env_set(void)
 	node->value = ft_strdup("1");
 	if (!node->value)
 		minishell_exit(1, NULL);
+	node->idx = 1;
 }
 
 void	env_init(char **env)
