@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/31 14:42:39 by jwolfram         ###   ########.fr        #
+#    Updated: 2025/01/31 16:06:35 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -58,6 +58,7 @@ FILES = main \
 		parser/command_table_redir \
 		parser/command_table_arr \
 		builtins/exit \
+		builtins/echo \
 		utils/exit \
 		utils/redirect \
 		utils/stdfd \

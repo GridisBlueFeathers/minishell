@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/29 17:16:30 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:12:26 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -18,6 +18,8 @@ void	cmd_execute_single_builtin(t_cmd *cmd)
 	#endif
 	if (ft_strncmp(cmd->name, "exit", ft_strlen("exit")) == 0)
 		builtin_exit(cmd);
+	if (ft_strncmp(cmd->name, "echo", ft_strlen("echo")) == 0)
+		data(GET)->exit_code = builtin_echo(cmd);
 }
 
 int	cmd_heredoc_run(t_cmd *cmd)
@@ -64,7 +66,7 @@ int	cmd_execute(t_cmd *cmd)
 	#if DEBUG
 		dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->idx);
 	#endif
-	if (cmd->index + 1 != data(GET)->cmd_amount && pipe(pipe_fd) == -1;
+	if (cmd->idx + 1 != data(GET)->cmd_amount && pipe(pipe_fd) == -1)
 		minishell_exit(1, NULL);
 	cmd->pid = fork();
 	if (cmd->pid == -1)
