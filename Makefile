@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/31 15:47:23 by svereten         ###   ########.fr        #
+#    Updated: 2025/01/31 16:23:49 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -58,6 +58,7 @@ FILES = main \
 		builtins/cd \
 		builtins/env \
 		builtins/unset \
+		builtins/pwd \
 		builtins/export/export \
 		builtins/export/no_args \
 		utils/exit \

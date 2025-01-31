@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/31 15:47:13 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:24:48 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -118,6 +118,7 @@ int			builtin_env(t_cmd *cmd);
 int			builtin_export(t_cmd *cmd);
 int			builtin_export_no_args(void);
 int			builtin_unset(t_cmd *cmd);
+int			builtin_pwd(void);
 void		builtin_exit(t_cmd *cmd);
 	
 void		minishell_exit(int status, char *msg);

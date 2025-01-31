@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/31 15:49:12 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:25:04 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -26,6 +26,8 @@ void	cmd_execute_single_builtin(t_cmd *cmd)
 		data(GET)->exit_code = builtin_export(cmd);
 	if (ft_strncmp(cmd->name, "unset", ft_strlen("unset")) == 0)
 		data(GET)->exit_code = builtin_unset(cmd);
+	if (ft_strncmp(cmd->name, "pwd", ft_strlen("pwd")) == 0)
+		data(GET)->exit_code = builtin_pwd();
 }
 
 int	cmd_heredoc_run(t_cmd *cmd)

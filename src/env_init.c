@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/30 19:56:22 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:26:34 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ static void	no_env_set(void)
 {
 	t_env_var	*node;
 
+	node = env_allocate();
+	node->key = ft_strdup("OLDPWD");
+	if (!node->key)
+		minishell_exit(1, NULL);
 	node = env_allocate();
 	node->key = ft_strdup("PWD");
 	if (!node->key)
