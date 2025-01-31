@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/31 14:25:44 by svereten         ###   ########.fr        #
+#    Updated: 2025/01/31 14:32:58 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -57,7 +57,8 @@ FILES = main \
 		builtins/exit \
 		builtins/cd \
 		builtins/env \
-		builtins/export \
+		builtins/export/export \
+		builtins/export/no_args \
 		utils/exit \
 		utils/redirect \
 		utils/stdfd \
