@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:14:40 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/31 13:41:47 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:22:04 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/string.h"
@@ -25,14 +25,12 @@ static size_t	env_get_len(void)
 	cur = data(GET)->env.first;
 	while (cur)
 	{
-		if (cur->was_unset)
+		if (cur->was_unset || !cur->value)
 		{
 			cur = cur->next;
 			continue ;
 		}
-		len += ft_strlen(cur->key) + 2;
-		if (cur->value)
-			len += ft_strlen(cur->value);
+		len += ft_strlen(cur->key) + ft_strlen(cur->value) + 2;
 		cur = cur->next;
 	}
 	return (len);
@@ -51,7 +49,7 @@ static char	*env_get_output(void)
 	cur = data(GET)->env.first;
 	while (cur)
 	{
-		if (cur->was_unset)
+		if (cur->was_unset || !cur->value)
 		{
 			cur = cur->next;
 			continue ;

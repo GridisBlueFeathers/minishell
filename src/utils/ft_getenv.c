@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:01:29 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/31 13:19:58 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:59:48 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ t_env_var	*ft_get_alloc_env_node(char *key)
 		res = env_allocate();
 		res->key = ft_strdup(key);
 		if (!res->key)
-			minishell_exit(1, NULL);
-		res->value = (char *)ft_calloc(1, sizeof(char));
-		if (!res->value)
 			minishell_exit(1, NULL);
 	}
 	return (res);

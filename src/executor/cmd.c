@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/31 13:29:23 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:26:34 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -22,6 +22,8 @@ void	cmd_execute_single_builtin(t_cmd *cmd)
 		data(GET)->exit_code = builtin_cd(cmd);
 	if (ft_strncmp(cmd->name, "env", ft_strlen("env")) == 0)
 		data(GET)->exit_code = builtin_env(cmd);
+	if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
+		data(GET)->exit_code = builtin_export(cmd);
 }
 
 int	cmd_heredoc_run(t_cmd *cmd)
