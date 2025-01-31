@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/29 17:08:56 by svereten         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:12:54 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	command_table_allocate(int idx)
 		minishell_exit(1, NULL);
 	data(GET)->commands[idx] = command;
 	command->pid = 1;
-	command->index = idx;
+	command->idx = idx;
 	command->type = -1;
 }
 

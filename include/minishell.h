@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/31 14:30:48 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:10:37 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -110,6 +110,7 @@ void	signal_init(void);
 void	signal_int(int signal);
 
 void	builtin_exit(t_cmd *cmd);
+int		builtin_echo(t_cmd *cmd);
 
 void	minishell_exit(int status, char *msg);
 
