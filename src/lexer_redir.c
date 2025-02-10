@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:25:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/31 14:38:35 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:44:36 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	lexer_double_redir_check(char *prompt)
 
 	redir = prompt[0];
 	if (!prompt[1])
-		return (lexer_error(prompt[0], 0), 0);
+		return (lexer_error('\n', 0), 0);
 	if (prompt[1] != redir)
 	{
 		if (isredir(prompt[1]) || prompt[1] == '|')
@@ -33,16 +33,22 @@ static int	lexer_double_redir_check(char *prompt)
 
 static int	lexer_redir_check_last(char *prompt)
 {
-	char	last;
 	size_t	i;
+	char	last;
 
-	i = 0;
-	last = prompt[i];
+	i = 1;
+	last = prompt[0];
+	if (isredir(prompt[1]))
+		i = 2;
 	while (isspace(prompt[i]))
 		i++;
-	if (!prompt[i] || isredir(prompt[i]))
-		return (lexer_error(last, 0), 0);
-	if (prompt[i] == '|')
+	if (!prompt[i])
+		return (lexer_error('\n', 0), 0);
+	else if (isredir(prompt[i]) && prompt[i + 1] == prompt[i])
+		return (lexer_error(prompt[i], prompt[i + 1]), 0);
+	else if (isredir(prompt[i]))
+		return (lexer_error(prompt[i], 0), 0);
+	else if (prompt[i] == '|')
 		return (lexer_error(prompt[i], 0), 0);
 	return (1);
 }
@@ -62,9 +68,9 @@ int	lexer_redir_check(void)
 		{
 			if (!lexer_double_redir_check(data(GET)->rl_prompt + i))
 				return (0);
-			i += 2;
 			if (!lexer_redir_check_last(data(GET)->rl_prompt + i))
 				return (0);
+			i++;
 		}
 		i++;
 	}

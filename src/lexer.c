@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:22:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/31 14:38:03 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:15:08 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,36 +68,38 @@ static int	lexer_pipe_check(void)
 void	lexer_error(char error, char redir)
 {
 	if (error == '|')
-		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
+	else if (error == '\n')
+		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
 	else if (error == '\'')
-		ft_putstr_fd("minishell: syntax error near unexpected token '\''\n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token `\''\n", 2);
 	else if (error == '"')
-		ft_putstr_fd("minishell: syntax error near unexpected token '\"'\n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token `\"'\n", 2);
 	else if (error == '<' && !redir)
-		ft_putstr_fd("minishell: syntax error near unexpected token '<'\n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token `<'\n", 2);
 	else if (error == '>' && !redir)
-		ft_putstr_fd("minishell: syntax error near unexpected token '>'\n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token `>'\n", 2);
 	else if (error == '<' && error == redir)
-		ft_putstr_fd("minishell: syntax error near unexpected token '<<'\n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token `<<'\n", 2);
 	else if (error == '>' && error == redir)
-		ft_putstr_fd("minishell: syntax error near unexpected token '>>'\n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token `>>'\n", 2);
 }
 
 int	lexer(void)
 {
 	if (!lexer_quote_check())
 	{
-		data(GET)->exit_code = 1;
+		data(GET)->exit_code = 2;
 		return (0);
 	}
 	if (!lexer_pipe_check())
 	{
-		data(GET)->exit_code = 1;
+		data(GET)->exit_code = 2;
 		return (0);
 	}
 	if (!lexer_redir_check())
 	{
-		data(GET)->exit_code = 1;
+		data(GET)->exit_code = 2;
 		return (0);
 	}
 	return (1);

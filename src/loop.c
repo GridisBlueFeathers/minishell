@@ -6,11 +6,14 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/31 16:11:20 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:11:38 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <errno.h>
 
 static void	prompt_exec(void)
 {
@@ -40,8 +43,8 @@ void	loop(void)
 			data(GET)->rl_prompt = readline(PREFIX_GOOD);
 		if (!data(GET)->rl_prompt)
 		{
-			printf("exit\n");
-			minishell_exit(0, NULL);
+			ft_putstr_fd("exit\n", STDERR_FILENO);
+			minishell_exit(data(GET)->exit_code, NULL);
 		}
 		prompt_exec();
 		free(data(GET)->rl_prompt);

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/07 13:09:40 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:58:37 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	command_table_set(int idx)
 		}
 		if (token->tok_type == CMD)
 			data(GET)->commands[idx]->name = token->tok_str;
-		if (is_builtin(token->tok_str))
+		if (token->tok_type == CMD && is_builtin(token->tok_str))
 			data(GET)->commands[idx]->type = BUILTIN;
 		token = token->next;
 	}

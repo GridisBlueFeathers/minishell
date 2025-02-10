@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/14 13:23:22 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:37:19 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	expander_init(t_token *token)
 			old_str = exp_old_str_init(token->tok_str);
 			if (!old_str)
 				break ;
-			new_str = exp_new_str_init(old_str);
+			new_str = exp_new_str_init(old_str);	
 			token->tok_str = substrrplc(token->tok_str, old_str, new_str);
 		}
 		token = token->next;
