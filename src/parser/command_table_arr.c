@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 10:32:33 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:35:18 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ void	ct_argv_set(t_prompt *prompt)
 static void	ct_env_set_var(t_env_var *var, int i)
 {
 	size_t	len;
+	t_data	*ms_data;
 
-	len = ft_strlen(var->key) +  ft_strlen(var->value) + 1;
-	data(GET)->env_arr[i] = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!data(GET)->env_arr[i])
+	len = ft_strlen(var->key) + ft_strlen(var->value) + 1;
+	ms_data = data(GET);
+	ms_data->env_arr[i] = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!ms_data->env_arr[i])
 		minishell_exit(1, NULL);
-	ft_strlcat(data(GET)->env_arr[i], var->key, len + 1);
-	ft_strlcat(data(GET)->env_arr[i], "=", len + 1);
-	ft_strlcat(data(GET)->env_arr[i], var->value, len + 1);
+	ft_strlcat(ms_data->env_arr[i], var->key, len + 1);
+	ft_strlcat(ms_data->env_arr[i], "=", len + 1);
+	ft_strlcat(ms_data->env_arr[i], var->value, len + 1);
 }
 
 void	ct_env_set(void)

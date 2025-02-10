@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/31 16:33:53 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:12:22 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -72,9 +72,9 @@ typedef struct s_data
 /* dev functions */
 /* ------------- */
 
-void	debug_print(void);
-void	env_print(void);
-void	tokenizer_print(void);
+void		debug_print(void);
+void		env_print(void);
+void		tokenizer_print(void);
 
 /* ------------- */
 
@@ -121,7 +121,7 @@ int			builtin_unset(t_cmd *cmd);
 int			builtin_echo(t_cmd *cmd);
 int			builtin_pwd(void);
 void		builtin_exit(t_cmd *cmd);
-	
+
 void		minishell_exit(int status, char *msg);
 
 #endif
