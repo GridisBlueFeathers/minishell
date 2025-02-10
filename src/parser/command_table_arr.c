@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 10:35:18 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:48:07 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	ct_env_set(void)
 	env = ms_data->env.first;
 	i = ms_data->env.last->idx;
 	if (ms_data->env_arr)
-		ft_free(STR_ARR, &ms_data->env_arr);
-	ms_data->env_arr = (char **)ft_calloc(i + 1, sizeof(char *));
+		ft_free(STR_ARR, &(data(GET)->env_arr));
+	ms_data->env_arr = (char **)ft_calloc(i + 2, sizeof(char *));
 	if (!ms_data->env_arr)
 		minishell_exit(1, NULL);
 	i = 0;
