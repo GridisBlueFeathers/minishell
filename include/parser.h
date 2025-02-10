@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:01:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 12:05:26 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:17:54 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSER_H
@@ -44,8 +44,8 @@ typedef struct s_prompt
 
 void	parser(void);
 void	prompt_init(void);
+void	expander_init(t_prompt *prompt);
 void	token_init(t_prompt *prompt);
-void	expander_init(t_token *token);
 char	*expander_str(char *str);
 
 void	quotes_rm_init(t_token *token);

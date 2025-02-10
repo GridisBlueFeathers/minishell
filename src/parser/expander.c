@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 12:04:31 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:17:26 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,20 @@ char	*expander_str(char *str)
 	return (str);
 }
 
-void	expander_init(t_token *token)
+void	expander_init(t_prompt *prompt)
 {
+	size_t	i;
 	char	*old_str;
 	char	*new_str;
 
-	while (token)
+	i = 0;
+	while (ft_strchr(prompt->name, '$'))
 	{
-		while (token->tok_type == WORD && ft_strchr(token->tok_str, '$'))
-		{
-			old_str = exp_old_str_init(token->tok_str);
-			if (!old_str)
-				break ;
-			new_str = exp_new_str_init(old_str);
-			token->tok_str = substrrplc(token->tok_str, old_str, new_str);
-		}
-		token = token->next;
+		old_str = exp_old_str_init(prompt->name);
+		if (!old_str)
+			break ;
+		new_str = exp_new_str_init(old_str);	
+		prompt->name = substrrplc(prompt->name, old_str, new_str);
+		i++;
 	}
 }

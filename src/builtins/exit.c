@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:33:24 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/29 17:14:55 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:25:38 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/ctype.h"
@@ -25,7 +25,7 @@ void	builtin_exit(t_cmd *cmd)
 	if (cmd->pid)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (ft_strarrlen(cmd->argv) == 1)
-		minishell_exit(0, NULL);
+		minishell_exit(data(GET)->exit_code, NULL);
 	if (ft_isnumber(cmd->argv[1]))
 		minishell_exit(ft_atoi(cmd->argv[1]), NULL);
 	len = 17 + ft_strlen(cmd->argv[1]) + 28;
