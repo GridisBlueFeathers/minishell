@@ -6,13 +6,13 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:01:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/31 14:43:47 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:12:33 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "libft/libft.h"
+# include "libft/libft.h"
 
 typedef enum e_tok_type
 {

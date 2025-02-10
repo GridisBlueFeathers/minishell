@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/31 16:35:05 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:26:36 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_env_var	*env_allocate(void)
 		data(GET)->env.last->next = node;
 		node->prev = data(GET)->env.last;
 		data(GET)->env.last = node;
+		node->idx = node->prev->idx + 1;
 	}
 	return (node);
 }

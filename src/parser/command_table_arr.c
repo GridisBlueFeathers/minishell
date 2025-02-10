@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   command_table_arr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 15:12:39 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:35:18 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 void	ct_argv_set(t_prompt *prompt)
 {
@@ -40,6 +41,21 @@ void	ct_argv_set(t_prompt *prompt)
 	}
 }
 
+static void	ct_env_set_var(t_env_var *var, int i)
+{
+	size_t	len;
+	t_data	*ms_data;
+
+	len = ft_strlen(var->key) + ft_strlen(var->value) + 1;
+	ms_data = data(GET);
+	ms_data->env_arr[i] = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!ms_data->env_arr[i])
+		minishell_exit(1, NULL);
+	ft_strlcat(ms_data->env_arr[i], var->key, len + 1);
+	ft_strlcat(ms_data->env_arr[i], "=", len + 1);
+	ft_strlcat(ms_data->env_arr[i], var->value, len + 1);
+}
+
 void	ct_env_set(void)
 {
 	int			i;
@@ -49,21 +65,20 @@ void	ct_env_set(void)
 	ms_data = data(GET);
 	env = ms_data->env.first;
 	i = ms_data->env.last->idx;
-	ms_data->env_arr = (char **)ft_calloc(i + 2, sizeof(char *));
+	if (ms_data->env_arr)
+		ft_free(STR_ARR, &ms_data->env_arr);
+	ms_data->env_arr = (char **)ft_calloc(i + 1, sizeof(char *));
 	if (!ms_data->env_arr)
 		minishell_exit(1, NULL);
 	i = 0;
 	while (env)
 	{
-		ms_data->env_arr[i] = ft_strdup(env->key);
-		if (!ms_data->env_arr[i])
-			minishell_exit(1, NULL);
-		ms_data->env_arr[i] = ft_strjoin(ms_data->env_arr[i], "=");
-		if (!ms_data->env_arr[i])
-			minishell_exit(1, NULL);
-		ms_data->env_arr[i] = ft_strjoin(ms_data->env_arr[i], env->value);
-		if (!ms_data->env_arr[i])
-			minishell_exit(1, NULL);
+		if (!env->value || env->was_unset)
+		{
+			env = env->next;
+			continue ;
+		}
+		ct_env_set_var(env, i);
 		i++;
 		env = env->next;
 	}

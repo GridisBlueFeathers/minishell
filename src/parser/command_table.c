@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:00:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/31 16:12:54 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:09:40 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ void	command_table_init(void)
 	if (!data(GET)->commands)
 		minishell_exit(1, NULL);
 	i = 0;
+	ct_env_set();
 	while (data(GET)->prompt[i])
 	{
 		command_type_get(data(GET)->prompt[i]->first);
 		command_table_set(i);
 		ct_argv_set(data(GET)->prompt[i]);
-		ct_env_set();
 		i++;
 	}
 }
