@@ -6,10 +6,11 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 15:54:47 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:17:26 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/string.h"
 #include "minishell.h"
 
 static char	*exp_new_str_init(char	*old)
@@ -67,6 +68,22 @@ static char	*exp_old_str_init(char *str)
 		i++;
 	}
 	return (res);
+}
+
+char	*expander_str(char *str)
+{
+	char	*old_str;
+	char	*new_str;
+
+	while (ft_strchr(str, '$'))
+	{
+		old_str = exp_old_str_init(str);
+		if (!old_str)
+			break ;
+		new_str = exp_new_str_init(old_str);
+		str = substrrplc(str, old_str, new_str);
+	}
+	return (str);
 }
 
 void	expander_init(t_prompt *prompt)
