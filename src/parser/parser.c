@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 11:51:25 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 15:17:57 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:55:10 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void	parser(void)
 	while (data(GET)->prompt[i])
 	{
 		data(GET)->prompt[i]->idx = i;
+		expander_init(data(GET)->prompt[i]);
 		token_init(data(GET)->prompt[i]);
-		expander_init(data(GET)->prompt[i]->first);
-		tokenizer_print();
 		quotes_rm_init(data(GET)->prompt[i]->first);
 		i++;
 	}
