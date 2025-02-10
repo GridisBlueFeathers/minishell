@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:55:15 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 15:11:17 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:14:52 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -51,6 +51,8 @@ static void	heredoc_feed(t_redir *redir)
 			ft_putstr_fd("warning: heredoc delimited by EOF\n", STDERR_FILENO);
 		if (!heredoc_line || !ft_strcmp(heredoc_line, redir->heredoc_delim))
 			break ;
+		if (redir->heredoc_expand)
+			heredoc_line = expander_str(heredoc_line);
 		if (ft_putendl_fd(heredoc_line, redir->fd) < 0)
 		{
 			(ft_free(STR, &heredoc_line), ft_close(redir->fd));
