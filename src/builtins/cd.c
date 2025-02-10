@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:00:51 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/30 21:48:13 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:43:55 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -36,11 +36,8 @@ static void	cd_handle_oldpwd(void)
 
 static int	cd_directory_check(char *target)
 {
-	DIR	*dir;
-
-	dir = opendir(target);
-	if (dir)
-		return (closedir(dir), 1);
+	if (is_directory(target))
+		return (1);
 	else if (errno == ENOENT)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);

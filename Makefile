@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/31 16:34:38 by svereten         ###   ########.fr        #
+#    Updated: 2025/02/10 15:40:25 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -72,6 +72,7 @@ FILES = main \
 		utils/words \
 		utils/ischar \
 		utils/is_builtin \
+		utils/is_directory \
 		utils/substrrplc \
 		utils/ft_getenv \
 		utils/valid_operator \
