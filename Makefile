@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/01/31 16:34:38 by svereten         ###   ########.fr        #
+#    Updated: 2025/02/10 10:54:56 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -146,7 +146,7 @@ re: fclean all
 ###############################################################################
 
 test: re
-	bash /home/svereten/42_minishell_tester/tester.sh m
+	bash ${HOME}/42_minishell_tester/tester.sh m
 
 noenv: CFLAGS += -D DEBUG=1
 noenv: re
