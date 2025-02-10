@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 16:17:26 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:23:58 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static char	*exp_new_str_init(char	*old)
 		new = ft_getenv(old + 1);
 		if (new)
 			new = ft_strdup(new);
+		if (!new || !ft_strlen(new))
+			new = ft_strdup("\"\"");
 	}
 	return (new);
 }
@@ -98,7 +100,7 @@ void	expander_init(t_prompt *prompt)
 		old_str = exp_old_str_init(prompt->name);
 		if (!old_str)
 			break ;
-		new_str = exp_new_str_init(old_str);	
+		new_str = exp_new_str_init(old_str);
 		prompt->name = substrrplc(prompt->name, old_str, new_str);
 		i++;
 	}
