@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:25:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/11 13:44:00 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:29:39 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ static int	lexer_double_redir_check(char *prompt)
 			return (1);
 	}
 	if (prompt[2] && isredir(prompt[2]))
-		return (lexer_error(prompt[2], 0), 0);
+	{
+		if (prompt[3] && prompt[3] == prompt[2])
+			return (lexer_error(prompt[2], prompt[3]), 0);
+		else
+			return (lexer_error(prompt[2], 0), 0);
+	}
 	return (1);
 }
 
