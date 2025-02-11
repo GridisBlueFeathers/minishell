@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/30 20:23:42 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:50:59 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -94,7 +94,7 @@ void	child_execute(t_cmd *cmd)
 	#if DEBUG
 		dprintf(STDERR_FILENO, "Command bin: %s\n", cmd->bin);
 	#endif
-	execve(cmd->bin, cmd->argv, NULL);
+	execve(cmd->bin, cmd->argv, data(GET)->env_arr);
 	if (errno == EACCES || errno == ENOENT)
 		child_kill(cmd);
 	minishell_exit(1, NULL);
