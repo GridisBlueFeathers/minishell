@@ -6,11 +6,12 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:07:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/31 14:43:25 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:33:54 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 static int	quote_is_valid(char *str, size_t loc)
 {
@@ -83,7 +84,7 @@ static size_t	quote_amount_get(char *str)
 	{
 		if (str[i] == '\\' && str[i + 1] && str[i + 1] == '"')
 			i++;
-		else if (isquote(str[i]))
+		else if (isquote(str[i]) && quote_is_valid(str, i))
 			amount++;
 		i++;
 	}
