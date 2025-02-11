@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:45:30 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/14 17:08:47 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:16:53 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -60,5 +60,6 @@ int	commands_heredocs_run(void)
 		}
 		i++;
 	}
+	data(GET)->mode = IN_EXECUTION;
 	return (1);
 }

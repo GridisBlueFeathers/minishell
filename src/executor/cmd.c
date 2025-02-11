@@ -6,30 +6,38 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/10 10:37:19 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:33:04 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
+#include <stdio.h>
 
 void	cmd_execute_single_builtin(t_cmd *cmd)
 {
 	#if DEBUG
 		dprintf(STDERR_FILENO, "Executing builtin\n");
 	#endif
-	if (ft_strncmp(cmd->name, "exit", ft_strlen("exit")) == 0)
+	if (data(GET)->cmd_amount == 1)
+	{
+		stdfd_copy();
+		child_apply_redirs(cmd);
+	}
+	if (ft_strcmp(cmd->name, "exit") == 0)
 		builtin_exit(cmd);
-	if (ft_strncmp(cmd->name, "cd", ft_strlen("cd")) == 0)
+	if (ft_strcmp(cmd->name, "cd") == 0)
 		data(GET)->exit_code = builtin_cd(cmd);
-	if (ft_strncmp(cmd->name, "env", ft_strlen("env")) == 0)
+	if (ft_strcmp(cmd->name, "env") == 0)
 		data(GET)->exit_code = builtin_env(cmd);
-	if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
+	if (ft_strcmp(cmd->name, "export") == 0)
 		data(GET)->exit_code = builtin_export(cmd);
-	if (ft_strncmp(cmd->name, "unset", ft_strlen("unset")) == 0)
+	if (ft_strcmp(cmd->name, "unset") == 0)
 		data(GET)->exit_code = builtin_unset(cmd);
-	if (ft_strncmp(cmd->name, "pwd", ft_strlen("pwd")) == 0)
+	if (ft_strcmp(cmd->name, "pwd") == 0)
 		data(GET)->exit_code = builtin_pwd();
-	if (ft_strncmp(cmd->name, "echo", ft_strlen("echo")) == 0)
+	if (ft_strcmp(cmd->name, "echo") == 0)
 		data(GET)->exit_code = builtin_echo(cmd);
+	if (data(GET)->cmd_amount == 1)
+		stdfd_restore();
 }
 
 int	cmd_heredoc_run(t_cmd *cmd)
@@ -50,6 +58,7 @@ int	cmd_heredoc_run(t_cmd *cmd)
 		#if DEBUG
 			dprintf(STDERR_FILENO, "Heredoc delim: %s\n", cur->heredoc_delim);
 		#endif
+		data(GET)->mode = IN_HEREDOC;
 		heredoc_handle(cur);
 		cur = cur->next;
 	}
