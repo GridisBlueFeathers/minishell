@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:39:13 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/11 11:53:20 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:19:37 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	builtin_echo(t_cmd *cmd)
 	{
 		if (!cmd->argv[i + 1])
 			check = printf("%s", cmd->argv[i]);
-		else
+		else if (ft_strcmp("-n", cmd->argv[i]))
 			check = printf("%s ", cmd->argv[i]);
 		if (check < 0)
 			return (1);

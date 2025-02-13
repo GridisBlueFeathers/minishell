@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:01:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 16:17:54 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:57:46 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSER_H
@@ -49,7 +49,7 @@ void	token_init(t_prompt *prompt);
 char	*expander_str(char *str);
 
 void	quotes_rm_init(t_token *token);
-int		quotes_esc(char *str, char *res, size_t *i, size_t *j);
+int		quote_is_valid(char *str, size_t loc, char type);
 
 void	command_table_init(void);
 void	redir_set(t_token *token, int idx);
