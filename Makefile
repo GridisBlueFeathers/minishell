@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/02/10 16:16:00 by svereten         ###   ########.fr        #
+#    Updated: 2025/02/13 16:18:12 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -77,6 +77,7 @@ FILES = main \
 		utils/ft_getenv \
 		utils/valid_operator \
 		utils/minishell_split \
+		utils/str_has_quotes \
 		dev 
 		# -> dev file, delete later #
 		
