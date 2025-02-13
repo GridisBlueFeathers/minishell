@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 14:41:25 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:16:29 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
@@ -71,6 +71,7 @@ int		cmd_heredoc_run(t_cmd *cmd);
 void	heredoc_handle(t_redir *redir);
 
 void	child(t_cmd *cmd, int pipe_fd[2]);
+int		child_apply_redirs(t_cmd *cmd);
 void	child_single(t_cmd *cmd);
 void	child_execute(t_cmd *cmd);
 void	child_kill(t_cmd *cmd);
