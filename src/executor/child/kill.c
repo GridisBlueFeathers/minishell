@@ -6,9 +6,10 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:27:54 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/11 14:30:42 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:20:17 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft/string.h"
 #include "minishell.h"
 
 /**
@@ -27,6 +28,7 @@ static char	*child_kill_directory(t_cmd *cmd)
 	ft_strlcat(msg, "minishell: ", len + 1);
 	ft_strlcat(msg, cmd->name, len + 1);
 	ft_strlcat(msg, ": Is a directory\n", len + 1);
+	data(GET)->exit_code = 126;
 	return (msg);
 }
 
@@ -46,6 +48,7 @@ static char	*child_kill_permission(t_cmd *cmd)
 	ft_strlcat(msg, "minishell: ", len + 1);
 	ft_strlcat(msg, cmd->name, len + 1);
 	ft_strlcat(msg, ": Permission denied\n", len + 1);
+	data(GET)->exit_code = 126;
 	return (msg);
 }
 
@@ -66,6 +69,7 @@ static char	*child_kill_file(t_cmd *cmd)
 	ft_strlcat(msg, "minishell: ", len + 1);
 	ft_strlcat(msg, cmd->name, len + 1);
 	ft_strlcat(msg, ": No such file or directory\n", len + 1);
+	data(GET)->exit_code = 127;
 	return (msg);
 }
 
@@ -83,33 +87,23 @@ static char	*child_kill_command(t_cmd *cmd)
 		minishell_exit(1, NULL);
 	ft_strlcat(msg, cmd->name, len + 1);
 	ft_strlcat(msg, ": command not found\n", len + 1);
+	data(GET)->exit_code = 127;
 	return (msg);
 }
 
 void	child_kill(t_cmd *cmd)
 {
-	int		code;
 	char	*err_msg;
 
-	if (access(cmd->bin, F_OK) == 0)
-	{
+	if (cmd->from_path)
 		err_msg = child_kill_permission(cmd);
-		code = 126;
-	}
-	else if (is_directory(cmd->name))
-	{
+	else if (ft_strchr(cmd->name, '/') && access(cmd->name, F_OK) == 0)
+		err_msg = child_kill_permission(cmd);
+	else if (ft_strchr(cmd->name, '/') && is_directory(cmd->name))
 		err_msg = child_kill_directory(cmd);
-		code = 126;
-	}
 	else if (ft_strchr(cmd->name, '/'))
-	{
 		err_msg = child_kill_file(cmd);
-		code = 127;
-	}
 	else
-	{
 		err_msg = child_kill_command(cmd);
-		code = 127;
-	}
-	minishell_exit(code, err_msg);
+	minishell_exit(data(GET)->exit_code, err_msg);
 }
