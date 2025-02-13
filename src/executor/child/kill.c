@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:27:54 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/10 15:47:02 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:30:42 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -91,14 +91,14 @@ void	child_kill(t_cmd *cmd)
 	int		code;
 	char	*err_msg;
 
-	if (is_directory(cmd->name))
-	{
-		err_msg = child_kill_directory(cmd);
-		code = 126;
-	}
-	else if (access(cmd->bin, F_OK) == 0)
+	if (access(cmd->bin, F_OK) == 0)
 	{
 		err_msg = child_kill_permission(cmd);
+		code = 126;
+	}
+	else if (is_directory(cmd->name))
+	{
+		err_msg = child_kill_directory(cmd);
 		code = 126;
 	}
 	else if (ft_strchr(cmd->name, '/'))

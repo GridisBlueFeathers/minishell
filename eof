@@ -1,5 +1,0 @@
-[?2004h minishell   export pipe_var=1 | echo $pipe_var
-[?2004l[?2004h minishell   echo $pipe_varexport pipe_var=1 | echo $pipe_var
-[?2004l[?2004h minishell   echo $pipe_varexport pipe_var=1 | echo $pipe_var
-[?2004l[?2004h minishell   echo $pipe_varexport pipe_var=1 | echo $pipe_var[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kexi[K[K[K[?2004l
-[?2004l
