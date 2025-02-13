@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/10 15:40:09 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:48:19 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -34,6 +34,7 @@ typedef enum e_option
 typedef enum e_mode
 {
 	IN_PROMPT,
+	IN_EXECUTION,
 	IN_HEREDOC,
 }	t_mode;
 

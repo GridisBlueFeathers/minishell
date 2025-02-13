@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 17:04:35 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:12:19 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 static void	prompt_exec(void)
 {
+	data(GET)->mode = IN_EXECUTION;
 	if (!data(GET)->rl_prompt[0])
 		return ;
 	add_history(data(GET)->rl_prompt);
@@ -37,6 +38,7 @@ void	loop(void)
 	signal_init();
 	while (1)
 	{
+		data(GET)->mode = IN_PROMPT;
 		if (data(GET)->exit_code)
 			data(GET)->rl_prompt = readline(PREFIX_BAD);
 		else
