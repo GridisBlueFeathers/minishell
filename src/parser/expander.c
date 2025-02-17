@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/13 16:06:49 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:49:32 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/string.h"
 #include "minishell.h"
+#include <stdio.h>
 
 static char	*exp_new_str_init(char *old, int in_heredoc)
 {
@@ -53,13 +53,19 @@ static char	*exp_find_str(char *str)
 static char	*exp_old_str_init(char *str)
 {
 	size_t	i;
+	char	quote;
 	char	*res;
 
 	i = 0;
+	quote = 0;
 	res = NULL;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] && valid_operator(str, i, '\''))
+		if (!quote && isquote(str[i]))
+			quote = str[i];
+		else if (quote && str[i] == quote)
+			quote = 0;
+		if (str[i] == '$' && str[i + 1] && quote != '\'')
 		{
 			if (str[i + 1] == '?')
 				res = ft_strdup("$?");
