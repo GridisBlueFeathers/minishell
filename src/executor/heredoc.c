@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:55:15 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/13 15:59:08 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:31:57 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -47,13 +47,13 @@ static char	*heredoc_get_name(void)
  * "warning: here-document at line 2 delimited by end-of-file (wanted `"
  * strlen is 67
  */
-static void	heredoc_eof_message(t_redir *redir, size_t line_num)
+static void	heredoc_eof_message(t_redir *redir)
 {
 	size_t	len;
 	char	*res;
 	char	*line_num_str;
 
-	line_num_str = ft_itoa(line_num);
+	line_num_str = ft_itoa(data(GET)->line_num);
 	if (!line_num_str)
 		minishell_exit(1, NULL);
 	len = 66 + ft_strlen(redir->heredoc_delim) + ft_strlen(line_num_str) + 3;
@@ -73,14 +73,12 @@ static void	heredoc_eof_message(t_redir *redir, size_t line_num)
 static void	heredoc_feed(t_redir *redir)
 {
 	char	*heredoc_line;
-	size_t	line_num;
 
-	line_num = 2;
 	while (data(GET)->mode == IN_HEREDOC)
 	{
 		heredoc_line = readline("> ");
 		if (!heredoc_line)
-			heredoc_eof_message(redir, line_num);
+			heredoc_eof_message(redir);
 		if (!heredoc_line || !ft_strcmp(heredoc_line, redir->heredoc_delim))
 			break ;
 		if (redir->heredoc_expand)
@@ -91,7 +89,7 @@ static void	heredoc_feed(t_redir *redir)
 			minishell_exit(1, NULL);
 		}
 		ft_free(STR, &heredoc_line);
-		line_num++;
+		data(GET)->line_num++;
 	}
 	ft_free(STR, &heredoc_line);
 }

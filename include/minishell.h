@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/17 16:35:49 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:30:45 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -66,6 +66,7 @@ typedef struct s_data
 	int			stdout_copy;
 	int			exit_code;
 	int			cmd_amount;
+	int			line_num;
 	t_mode		mode;
 	t_prompt	**prompt;
 }	t_data;

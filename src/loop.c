@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/11 16:12:19 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:31:06 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	loop(void)
 			ft_putstr_fd("exit\n", STDERR_FILENO);
 			minishell_exit(data(GET)->exit_code, NULL);
 		}
+		data(GET)->line_num = 2;
 		prompt_exec();
 		free(data(GET)->rl_prompt);
 	}
