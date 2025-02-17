@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:33:24 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/10 11:25:38 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:37:38 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/ctype.h"
@@ -17,7 +17,7 @@
  * "minishell: exit: " strlen is 17
  * ": numeric argument required\n" strlen is 28
  */
-void	builtin_exit(t_cmd *cmd)
+int	builtin_exit(t_cmd *cmd)
 {
 	char	*err_msg;
 	size_t	len;
@@ -26,14 +26,22 @@ void	builtin_exit(t_cmd *cmd)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (ft_strarrlen(cmd->argv) == 1)
 		minishell_exit(data(GET)->exit_code, NULL);
-	if (ft_isnumber(cmd->argv[1]))
-		minishell_exit(ft_atoi(cmd->argv[1]), NULL);
-	len = 17 + ft_strlen(cmd->argv[1]) + 28;
-	err_msg = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!err_msg)
-		minishell_exit(1, NULL);
-	ft_strlcat(err_msg, "minishell: exit: ", len + 1);
-	ft_strlcat(err_msg, cmd->argv[1], len + 1);
-	ft_strlcat(err_msg, ": numeric argument required\n", len + 1);
-	minishell_exit(2, err_msg);
+	if (!ft_isnumber(cmd->argv[1]))
+	{
+		len = 17 + ft_strlen(cmd->argv[1]) + 28;
+		err_msg = (char *)ft_calloc(len + 1, sizeof(char));
+		if (!err_msg)
+			minishell_exit(1, NULL);
+		ft_strlcat(err_msg, "minishell: exit: ", len + 1);
+		ft_strlcat(err_msg, cmd->argv[1], len + 1);
+		ft_strlcat(err_msg, ": numeric argument required\n", len + 1);
+		minishell_exit(2, err_msg);
+	}
+	if (ft_strarrlen(cmd->argv) > 2)
+	{
+		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+		return (1);
+	}
+	minishell_exit(ft_atoi(cmd->argv[1]), NULL);
+	return (0);
 }

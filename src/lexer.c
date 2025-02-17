@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:22:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 13:15:08 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:09:59 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,25 @@ static int	lexer_quote_check(void)
 static int	lexer_pipe_check(void)
 {
 	size_t	i;
+	t_data	*ms_data;
 
 	i = 0;
-	if (!ft_strchr(data(GET)->rl_prompt, '|'))
+	ms_data = data(GET);
+	if (!ft_strchr(ms_data->rl_prompt, '|'))
 		return (1);
-	while (ft_isspace(data(GET)->rl_prompt[i]))
+	while (ft_isspace(ms_data->rl_prompt[i]))
 		i++;
-	if (data(GET)->rl_prompt[i] == '|')
+	if (ms_data->rl_prompt[i] == '|' && valid_operator(ms_data->rl_prompt, i, 0))
 		return (lexer_error('|', 0), 0);
-	while (data(GET)->rl_prompt[i])
+	while (ms_data->rl_prompt[i])
 	{
-		if (data(GET)->rl_prompt[i] == '|')
+		if (ms_data->rl_prompt[i] == '|')
 		{
 			i++;
-			while (ft_isspace(data(GET)->rl_prompt[i]))
+			while (ft_isspace(ms_data->rl_prompt[i]))
 				i++;
-			if (!data(GET)->rl_prompt[i] || data(GET)->rl_prompt[i] == '|')
+			if (!ms_data->rl_prompt[i] || (ms_data->rl_prompt[i] == '|' 
+				&& valid_operator(ms_data->rl_prompt, i, 0)))
 				return (lexer_error('|', 0), 0);
 		}
 		i++;
