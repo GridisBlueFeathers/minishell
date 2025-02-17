@@ -6,10 +6,12 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:30:17 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/13 15:02:15 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:32:52 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft/stdlib.h"
 #include "minishell.h"
+#include <stdio.h>
 
 static void	export_new_var(char *arg, int eq_index)
 {
@@ -26,11 +28,59 @@ static void	export_new_var(char *arg, int eq_index)
 	ft_free(STR, &key);
 }
 
-void	export_error_id(char *arg)
+static int	export_error_id(char *arg)
 {
 	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
 	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+	return (1);
+}
+
+/**
+ * check: if alphabetic or underscore character was found yet
+ */
+static int	export_check_key(char *str)
+{
+	int	i;
+	int	check;
+	
+	i = 0;
+	check = 0;
+	while (str[i])
+	{
+		if (!check && (ft_isalpha(str[i]) || str[i] == '_'))
+			check = 1;
+		if (!check && ft_isdigit(str[i]))
+			return (1);
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (1);
+		i++;
+	}
+	if (ft_isnumber(str))
+		return (1);
+	return (0);
+}
+
+static int	export_check_arg(char *str, char *eq)
+{
+	int		idx;
+	int		err;
+	char	*key;
+
+	if (!eq)
+		err = export_check_key(str);
+	else
+	{
+		if (eq == str)
+			return (1);
+		idx = eq - str - 1;
+		key = ft_substri(str, 0, idx);
+		if (!key)
+			minishell_exit(1, NULL);
+		err = export_check_key(key);
+		ft_free(STR, &key);
+	}
+	return (err);
 }
 
 int	builtin_export(t_cmd *cmd)
@@ -46,12 +96,14 @@ int	builtin_export(t_cmd *cmd)
 	while (cmd->argv[i])
 	{
 		eq_sign_loc = ft_strchr(cmd->argv[i], '=');
-		if (eq_sign_loc == cmd->argv[i])
+		error = export_check_arg(cmd->argv[i], eq_sign_loc);
+		if (error)
 		{
 			export_error_id(cmd->argv[i]);
-			error = 1;
+			i++;
+			continue ;
 		}
-		else if (!eq_sign_loc)
+		if (!eq_sign_loc)
 			ft_get_alloc_env_node(cmd->argv[i]);
 		else
 			export_new_var(cmd->argv[i], eq_sign_loc - cmd->argv[i]);

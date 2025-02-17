@@ -5,7 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Updated: 2025/02/13 16:49:32 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/17 16:36:30 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +43,7 @@ static char	*exp_find_str(char *str)
 	size_t	len;
 
 	len = 1;
-	while (str[len] && (str[len] == '_' || ft_isalpha(str[len])))
+	while (str[len] && (str[len] == '_' || ft_isalnum(str[len])))
 		len++;
 	res = ft_substr(str, 0, len);
 	if (!res)

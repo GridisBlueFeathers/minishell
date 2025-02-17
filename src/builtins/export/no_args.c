@@ -6,13 +6,13 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:31:44 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/31 14:34:21 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:30:08 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
 
 /**
- * "declare -x " strlen is 11 + '\n' makes 12
+ * "export " strlen is 7 + '\n' makes 8
  * 3 additional characters for =""
  */
 static size_t	export_get_len(void)
@@ -29,7 +29,7 @@ static size_t	export_get_len(void)
 			cur = cur->next;
 			continue ;
 		}
-		len += ft_strlen(cur->key) + 12;
+		len += ft_strlen(cur->key) + 8;
 		if (cur->value)
 			len += ft_strlen(cur->value) + 3;
 		cur = cur->next;
@@ -39,7 +39,7 @@ static size_t	export_get_len(void)
 
 static void	export_concat_output(t_env_var *cur, char *output, size_t len)
 {
-	ft_strlcat(output, "declare -x ", len + 1);
+	ft_strlcat(output, "export ", len + 1);
 	ft_strlcat(output, cur->key, len + 1);
 	if (cur->value)
 	{
