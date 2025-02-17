@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/11 13:50:59 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:04:20 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -16,7 +16,7 @@
 
 static int	child_check_access(t_cmd *cmd, char *bin_path)
 {
-	if (access(bin_path, X_OK) == 0)
+	if (!is_directory(bin_path) && access(bin_path, X_OK) == 0)
 	{
 		if (cmd->bin)
 			ft_free(STR, &cmd->bin);
@@ -24,15 +24,17 @@ static int	child_check_access(t_cmd *cmd, char *bin_path)
 		if (!cmd->bin)
 			minishell_exit(1, NULL);
 		ft_free(STR, &bin_path);
+		cmd->from_path = 1;
 		return (1);
 	}
-	if (access(bin_path, F_OK) == 0)
+	if (!is_directory(bin_path) && access(bin_path, F_OK) == 0)
 	{
 		if (cmd->bin)
 			ft_free(STR, &cmd->bin);
 		cmd->bin = ft_strdup(bin_path);
 		if (!cmd->bin)
 			minishell_exit(1, NULL);
+		cmd->from_path = 1;
 	}
 	return (0);
 }
