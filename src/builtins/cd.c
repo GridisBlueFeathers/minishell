@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:00:51 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/10 15:43:55 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:09:17 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -61,6 +61,20 @@ static char	*cd_get_home(void)
 	return (home->value);
 }
 
+static char	*cd_get_oldpwd(void)
+{
+	t_env_var	*oldpwd;
+
+	oldpwd = ft_getenv_node("OLDPWD");
+	if (!oldpwd || !oldpwd->value)
+	{
+		ft_putstr_fd("minishell: cd: OLDPWD not set\n", STDERR_FILENO);
+		return (NULL);
+	}
+	ft_putendl_fd(oldpwd->value, STDOUT_FILENO);
+	return (oldpwd->value);
+}
+
 int	builtin_cd(t_cmd *cmd)
 {
 	char		*target;
@@ -68,17 +82,17 @@ int	builtin_cd(t_cmd *cmd)
 
 	if (ft_strarrlen(cmd->argv) > 2)
 	{
-		ft_putstr_fd("minishell: cd: too many agruments\n", STDERR_FILENO);
+		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
 		return (1);
 	}
 	if (!cmd->argv[1])
-	{
 		target = cd_get_home();
-		if (!target)
-			return (1);
-	}
+	else if (cmd->argv[1] && ft_strcmp(cmd->argv[1], "-") == 0)
+		target = cd_get_oldpwd();
 	else
 		target = cmd->argv[1];
+	if (!target)
+		return (1);
 	if (!cd_directory_check(target))
 		return (1);
 	err = chdir(target);
