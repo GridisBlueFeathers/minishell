@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:02:11 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/11 15:05:01 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:48:21 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*substrrplc(char *main, char *old, char *new)
 {
 	size_t	i;
+	char	quote;
 	char	*res;
 
 	if (!old)
@@ -23,8 +24,12 @@ char	*substrrplc(char *main, char *old, char *new)
 	res = NULL;
 	while (main[i])
 	{
+		if (!quote && isquote(main[i]))
+			quote = main[i];
+		else if (quote && main[i] == quote)
+			quote = 0;
 		if (!ft_strncmp(main + i, old, ft_strlen(old) - 1)
-			&& valid_operator(main, i, '\''))
+			&& quote != '\'')
 			break ;
 		i++;
 	}

@@ -6,33 +6,33 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:07:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/11 12:33:54 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:57:11 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <stdio.h>
 
-static int	quote_is_valid(char *str, size_t loc)
+static int	quotes_esc(char *str, char *res, size_t *i, size_t *j)
 {
-	size_t	i;
-	char	quote;
+	int	idx;
 
-	i = 0;
-	quote = 0;
-	if (!loc)
-		return (1);
-	while (str[i] && i < loc)
+	idx = *i;
+	if (str[idx] == '"')
 	{
-		if (!quote && isquote(str[i]))
-			quote = str[i];
-		else if (quote && str[i] == quote)
-			quote = 0;
-		i++;
+		res[0] = '"';
+		return (1);
 	}
-	if (quote && str[loc] != quote)
-		return (0);
-	return (1);
+	else if (str[idx] == '\'' && valid_operator(str, idx, 0))
+	{
+		res[0] = '\'';
+		return (1);
+	}
+	res[0] = '\\';
+	res[1] = '\'';
+	*i += 1;
+	*j += 1;
+	return (0);
 }
 
 static void	quotes_iterate(char *str, char *res)
@@ -50,7 +50,7 @@ static void	quotes_iterate(char *str, char *res)
 			if (!quotes_esc(str, res + j, &i, &j))
 				continue ;
 		}
-		else if (isquote(str[i]) && quote_is_valid(str, i))
+		else if (isquote(str[i]) && quote_is_valid(str, i, 0))
 		{
 			i++;
 			continue ;
@@ -84,7 +84,7 @@ static size_t	quote_amount_get(char *str)
 	{
 		if (str[i] == '\\' && str[i + 1] && str[i + 1] == '"')
 			i++;
-		else if (isquote(str[i]) && quote_is_valid(str, i))
+		else if (isquote(str[i]) && quote_is_valid(str, i, 0))
 			amount++;
 		i++;
 	}
