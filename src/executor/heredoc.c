@@ -6,10 +6,13 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:55:15 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/10 12:14:52 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:59:08 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
+#include <unistd.h>
+#include "libft/stdlib.h"
+#include "libft/string.h"
 #include "minishell.h"
 
 static char	*heredoc_get_name(void)
@@ -40,15 +43,44 @@ static char	*heredoc_get_name(void)
 	return (ft_close(urandom_fd), res);
 }
 
+/**
+ * "warning: here-document at line 2 delimited by end-of-file (wanted `"
+ * strlen is 67
+ */
+static void	heredoc_eof_message(t_redir *redir, size_t line_num)
+{
+	size_t	len;
+	char	*res;
+	char	*line_num_str;
+
+	line_num_str = ft_itoa(line_num);
+	if (!line_num_str)
+		minishell_exit(1, NULL);
+	len = 66 + ft_strlen(redir->heredoc_delim) + ft_strlen(line_num_str) + 3;
+	res = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!res)
+		(ft_free(STR, &line_num_str), minishell_exit(1, NULL));
+	ft_strlcat(res, "warning: here-document at line ", len + 1);
+	ft_strlcat(res, line_num_str, len + 1);
+	ft_strlcat(res, " delimited by end-of-file (wanted `", len + 1);
+	ft_strlcat(res, redir->heredoc_delim, len + 1);
+	ft_strlcat(res, "')\n", len + 1);
+	ft_putstr_fd(res, STDERR_FILENO);
+	ft_free(STR, &line_num_str);
+	ft_free(STR, &res);
+}
+
 static void	heredoc_feed(t_redir *redir)
 {
 	char	*heredoc_line;
+	size_t	line_num;
 
+	line_num = 2;
 	while (data(GET)->mode == IN_HEREDOC)
 	{
 		heredoc_line = readline("> ");
 		if (!heredoc_line)
-			ft_putstr_fd("warning: heredoc delimited by EOF\n", STDERR_FILENO);
+			heredoc_eof_message(redir, line_num);
 		if (!heredoc_line || !ft_strcmp(heredoc_line, redir->heredoc_delim))
 			break ;
 		if (redir->heredoc_expand)
@@ -59,6 +91,7 @@ static void	heredoc_feed(t_redir *redir)
 			minishell_exit(1, NULL);
 		}
 		ft_free(STR, &heredoc_line);
+		line_num++;
 	}
 	ft_free(STR, &heredoc_line);
 }
