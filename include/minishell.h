@@ -104,6 +104,7 @@ size_t		wordlen(char *str);
 char		*ft_getenv(char *key);
 t_env_var	*ft_getenv_node(char *key);
 t_env_var	*ft_get_alloc_env_node(char *key);
+int			str_has_quotes(char *str);
 int			valid_operator(char *str, size_t loc, char type);
 
 char		**minishell_split(char *str);
