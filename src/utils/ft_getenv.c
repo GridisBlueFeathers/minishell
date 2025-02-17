@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:01:29 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/10 16:59:01 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/17 11:58:08 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_getenv(char *key)
 	var = data(GET)->env.first;
 	while (var)
 	{
-		if (!ft_strncmp(key, var->key, ft_strlen(key)))
+		if (!ft_strcmp(key, var->key))
 			return (var->value);
 		var = var->next;
 	}
@@ -33,7 +33,7 @@ t_env_var	*ft_getenv_node(char *key)
 	res = data(GET)->env.first;
 	while (res)
 	{
-		if (!ft_strncmp(key, res->key, ft_strlen(key)))
+		if (!ft_strcmp(key, res->key))
 			return (res);
 		res = res->next;
 	}

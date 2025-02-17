@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/17 16:34:28 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:35:49 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -104,6 +104,7 @@ size_t		wordlen(char *str);
 char		*ft_getenv(char *key);
 t_env_var	*ft_getenv_node(char *key);
 t_env_var	*ft_get_alloc_env_node(char *key);
+int			str_has_quotes(char *str);
 int			valid_operator(char *str, size_t loc, char type);
 
 char		**minishell_split(char *str);
@@ -122,7 +123,7 @@ int			builtin_export_no_args(void);
 int			builtin_unset(t_cmd *cmd);
 int			builtin_echo(t_cmd *cmd);
 int			builtin_pwd(void);
-void		builtin_exit(t_cmd *cmd);
+int			builtin_exit(t_cmd *cmd);
 
 void		minishell_exit(int status, char *msg);
 

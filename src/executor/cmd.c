@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/11 17:33:04 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:18:04 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -23,7 +23,7 @@ void	cmd_execute_single_builtin(t_cmd *cmd)
 		child_apply_redirs(cmd);
 	}
 	if (ft_strcmp(cmd->name, "exit") == 0)
-		builtin_exit(cmd);
+		data(GET)->exit_code = builtin_exit(cmd);
 	if (ft_strcmp(cmd->name, "cd") == 0)
 		data(GET)->exit_code = builtin_cd(cmd);
 	if (ft_strcmp(cmd->name, "env") == 0)

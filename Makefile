@@ -76,6 +76,7 @@ FILES = main \
 		utils/ft_getenv \
 		utils/valid_operator \
 		utils/minishell_split \
+		utils/str_has_quotes \
 		dev 
 		# -> dev file, delete later #
 		
