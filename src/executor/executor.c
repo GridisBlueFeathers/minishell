@@ -6,14 +6,14 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/27 15:07:58 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:42:35 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
 #include "minishell.h"
+#include <errno.h>
 #include <stdio.h>
 #include <sys/wait.h>
-
 
 static void	execute_single(void)
 {
@@ -40,8 +40,8 @@ static void	execute_single(void)
 
 static void	execute_pipeline(void)
 {
-	int	i;
-	int	s;
+	int		i;
+	int		status;
 
 	i = 0;
 	stdfd_copy();
@@ -51,11 +51,16 @@ static void	execute_pipeline(void)
 			break ;
 		i++;
 	}
-	if (waitpid(data(GET)->commands[data(GET)->cmd_amount - 1]->pid, &s, 0) < 0)
-		minishell_exit(1, NULL);
-	if (WIFEXITED(s))
-		data(GET)->exit_code = WEXITSTATUS(s);
 	stdfd_restore();
+	if (waitpid(data(GET)->commands[data(GET)->cmd_amount - 1]->pid, &status, 0) < 0)
+		minishell_exit(1, NULL);
+	if (WIFEXITED(status))
+		data(GET)->exit_code = WEXITSTATUS(status);
+	while (wait(NULL) > 0)
+		;
+	if (errno != ECHILD)
+		minishell_exit(1, NULL);
+	errno = 0;
 }
 
 static void	execute(void)
