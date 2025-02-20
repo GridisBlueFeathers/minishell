@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:18:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/13 15:30:36 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:43:43 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -58,8 +58,6 @@ void	child(t_cmd *cmd, int pipe_fd[2])
 		ft_close(pipe_fd[RD]);
 		redirect(&pipe_fd[WR], STDOUT_FILENO);
 	}
-	else
-		redirect(&data(GET)->stdout_copy, STDOUT_FILENO);
 	stdfd_close();
 	if (!child_apply_redirs(cmd))
 		minishell_exit(1, NULL);

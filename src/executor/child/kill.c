@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:27:54 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/13 15:20:17 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:47:03 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/string.h"
@@ -97,10 +97,10 @@ void	child_kill(t_cmd *cmd)
 
 	if (cmd->from_path)
 		err_msg = child_kill_permission(cmd);
-	else if (ft_strchr(cmd->name, '/') && access(cmd->name, F_OK) == 0)
-		err_msg = child_kill_permission(cmd);
 	else if (ft_strchr(cmd->name, '/') && is_directory(cmd->name))
 		err_msg = child_kill_directory(cmd);
+	else if (ft_strchr(cmd->name, '/') && access(cmd->name, F_OK) == 0)
+		err_msg = child_kill_permission(cmd);
 	else if (ft_strchr(cmd->name, '/'))
 		err_msg = child_kill_file(cmd);
 	else
