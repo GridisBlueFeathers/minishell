@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/17 12:18:04 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:22:21 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -20,7 +20,11 @@ void	cmd_execute_single_builtin(t_cmd *cmd)
 	if (data(GET)->cmd_amount == 1)
 	{
 		stdfd_copy();
-		child_apply_redirs(cmd);
+		if (!child_apply_redirs(cmd))
+		{
+			(data(GET)->exit_code = 1, stdfd_restore());
+			return ;
+		}
 	}
 	if (ft_strcmp(cmd->name, "exit") == 0)
 		data(GET)->exit_code = builtin_exit(cmd);

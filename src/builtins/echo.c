@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:39:13 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/17 17:24:10 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:42:12 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	is_minus_n(char *str)
 	int	i;
 
 	i = 1;
+	if (ft_strcmp(str, "-") == 0)
+		return (0);
 	if (str[0] != '-')
 		return (0);
 	while (str[i])
