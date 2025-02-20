@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:22:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/17 12:09:59 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:38:35 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	lexer_error(char error, char redir)
 
 int	lexer(void)
 {
+	if (str_isspace(data(GET)->rl_prompt))
+		return (0);
 	if (!lexer_quote_check())
 	{
 		data(GET)->exit_code = 2;
