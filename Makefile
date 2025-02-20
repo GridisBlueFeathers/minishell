@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/02/17 16:34:10 by svereten         ###   ########.fr        #
+#    Updated: 2025/02/20 14:38:03 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -77,6 +77,7 @@ FILES = main \
 		utils/valid_operator \
 		utils/minishell_split \
 		utils/str_has_quotes \
+		utils/str_isspace \
 		dev 
 		# -> dev file, delete later #
 		
