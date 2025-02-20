@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:00:51 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/17 13:26:31 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:05:36 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -38,7 +38,7 @@ static int	cd_directory_check(char *target)
 {
 	if (is_directory(target))
 		return (1);
-	else if (errno == ENOENT)
+	else if (errno == ENOENT || errno == EACCES)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		return (perror(target), 0);
