@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   is_first_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 11:51:25 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/21 14:54:57 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/21 14:42:27 by svereten          #+#    #+#             */
+/*   Updated: 2025/02/21 15:03:43 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
-void	parser(void)
+int	is_first_word(char *big, char *small)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
-	prompt_init();
-	while (data(GET)->prompt[i])
-	{
-		data(GET)->prompt[i]->idx = i;
-		expander_init(data(GET)->prompt[i]);
-		token_init(data(GET)->prompt[i]);
-		quotes_rm_init(data(GET)->prompt[i]->first);
+	while (isspace(big[i]))
 		i++;
-	}
-	command_table_init();
+	if (!ft_strncmp(small, big + i, ft_strlen(small)))	
+		return (1);
+	return (0);
 }

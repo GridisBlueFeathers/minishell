@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/20 15:49:58 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:54:22 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,20 @@ static void	prompt_exec(void)
 	#endif
 	if (!lexer())
 		return ;
+	#if DEBUG
+		dprintf(STDERR_FILENO, "lexer done\n");
+	#endif
 	parser();
+	#if DEBUG
+		dprintf(STDERR_FILENO, "parser done\n");
+	#endif
 	#if DEBUG
 		debug_print();
 	#endif
 	executor();
+	#if DEBUG
+		dprintf(STDERR_FILENO, "executor done\n");
+	#endif
 }
 
 void	loop(void)

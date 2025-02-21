@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/21 13:24:46 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:50:15 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -101,6 +101,7 @@ void		stdfd_close(void);
 int			isquote(char c);
 int			is_builtin(char *name);
 int			is_directory(char *path);
+int			is_first_word(char *big, char *small);
 size_t		wordlen(char *str);
 char		*ft_getenv(char *key);
 t_env_var	*ft_getenv_node(char *key);

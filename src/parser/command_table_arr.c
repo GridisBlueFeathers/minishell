@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/13 14:15:11 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:58:17 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ct_argv_set(t_prompt *prompt)
 	t_token	*token;
 	t_data	*ms_data;
 
+	if (!prompt->last)
+		return ;
 	ms_data = data(GET);
 	ms_data->commands[prompt->idx]->argv
 		= (char **)ft_calloc(prompt->last->idx + 2, sizeof(char *));

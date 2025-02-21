@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/21 13:41:13 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:04:00 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,10 @@ void	expander_init(t_prompt *prompt)
 			old_str = exp_old_str_init(prompt->name, i);
 			if (!old_str)
 				break ;
-			new_str = exp_new_str_init(old_str, 0);
+			if (is_first_word(prompt->name, old_str))
+				new_str = exp_new_str_init(old_str, 1);
+			else
+				new_str = exp_new_str_init(old_str, 0);
 			prompt->name = substrrplc(prompt->name, old_str, new_str);
 		}
 		i++;
