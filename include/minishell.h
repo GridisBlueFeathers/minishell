@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/20 15:49:15 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:24:46 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -108,6 +108,7 @@ t_env_var	*ft_get_alloc_env_node(char *key);
 int			str_has_quotes(char *str);
 int			str_isspace(char *str);
 int			valid_operator(char *str, size_t loc, char type);
+int			heredoc_var(char *str, size_t loc);
 
 char		**minishell_split(char *str);
 

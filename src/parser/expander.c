@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/17 16:36:30 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:41:13 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*exp_find_str(char *str)
 	return (res);
 }
 
-static char	*exp_old_str_init(char *str)
+static char	*exp_old_str_init(char *str, size_t loc)
 {
 	size_t	i;
 	char	quote;
@@ -66,7 +66,7 @@ static char	*exp_old_str_init(char *str)
 			quote = str[i];
 		else if (quote && str[i] == quote)
 			quote = 0;
-		if (str[i] == '$' && str[i + 1] && quote != '\'')
+		if (str[loc] == str[i] && quote != '\'' && !heredoc_var(str, loc))
 		{
 			if (str[i + 1] == '?')
 				res = ft_strdup("$?");
@@ -81,16 +81,22 @@ static char	*exp_old_str_init(char *str)
 
 char	*expander_str(char *str)
 {
+	size_t	i;
 	char	*old_str;
 	char	*new_str;
 
-	while (ft_strchr(str, '$'))
+	i = 0;
+	while (str[i])
 	{
-		old_str = exp_old_str_init(str);
-		if (!old_str)
-			break ;
-		new_str = exp_new_str_init(old_str, 1);
-		str = substrrplc(str, old_str, new_str);
+		if (str[i] == '$' && str[i + 1])
+		{
+			old_str = exp_old_str_init(str, i);
+			if (!old_str)
+				break ;
+			new_str = exp_new_str_init(old_str, 1);
+			str = substrrplc(str, old_str, new_str);
+		}
+		i++;
 	}
 	return (str);
 }
@@ -102,13 +108,16 @@ void	expander_init(t_prompt *prompt)
 	char	*new_str;
 
 	i = 0;
-	while (ft_strchr(prompt->name, '$'))
+	while (prompt->name[i])
 	{
-		old_str = exp_old_str_init(prompt->name);
-		if (!old_str)
-			break ;
-		new_str = exp_new_str_init(old_str, 0);
-		prompt->name = substrrplc(prompt->name, old_str, new_str);
+		if (prompt->name[i] == '$' && prompt->name[i + 1])
+		{
+			old_str = exp_old_str_init(prompt->name, i);
+			if (!old_str)
+				break ;
+			new_str = exp_new_str_init(old_str, 0);
+			prompt->name = substrrplc(prompt->name, old_str, new_str);
+		}
 		i++;
 	}
 }

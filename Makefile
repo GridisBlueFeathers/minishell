@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/02/20 14:38:03 by svereten         ###   ########.fr        #
+#    Updated: 2025/02/21 13:24:03 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -75,6 +75,7 @@ FILES = main \
 		utils/substrrplc \
 		utils/ft_getenv \
 		utils/valid_operator \
+		utils/heredoc_var \
 		utils/minishell_split \
 		utils/str_has_quotes \
 		utils/str_isspace \
