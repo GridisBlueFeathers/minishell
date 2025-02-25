@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/18 16:42:35 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:01:22 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -22,6 +22,7 @@ static void	execute_single(void)
 	#if DEBUG
 		dprintf(STDERR_FILENO, "Executing single command\n");
 	#endif
+	env_to_arr(data(GET)->commands[0]);
 	if (data(GET)->commands[0]->type == BIN)
 	{
 		if (!cmd_execute_single_bin(data(GET)->commands[0]))

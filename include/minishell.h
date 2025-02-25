@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/21 14:50:15 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:40:08 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -86,8 +86,8 @@ void		loop(void);
 t_env_var	*env_allocate(void);
 void		env_init(char **env);
 void		env_free(t_env_var *node);
+void		env_to_arr(t_cmd *cmd);
 void		path_set(void);
-void		env_update(void);
 
 int			isredir(char c);
 /**

@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:18:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/18 16:43:43 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:01:53 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
@@ -53,6 +53,7 @@ void	child_single(t_cmd *cmd)
 
 void	child(t_cmd *cmd, int pipe_fd[2])
 {
+	env_to_arr(cmd);
 	if (cmd->idx + 1 != data(GET)->cmd_amount)
 	{
 		ft_close(pipe_fd[RD]);
