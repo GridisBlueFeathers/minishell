@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/02/25 13:37:38 by svereten         ###   ########.fr        #
+#    Updated: 2025/02/25 14:14:50 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -34,13 +34,14 @@ OBJ_DIR = obj
 
 FILES = main \
 		data \
-		env_init \
-		env_to_arr \
 		path \
 		loop \
 		signal \
 		lexer \
 		lexer_redir \
+		env/env_init \
+		env/env_to_arr \
+		env/env_utils \
 		executor/executor \
 		executor/commands \
 		executor/cmd \
