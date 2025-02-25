@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:55:15 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/20 15:49:50 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:37:56 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -101,9 +101,6 @@ void	heredoc_handle(t_redir *redir)
 	redir->file_name = heredoc_get_name();
 	if (!redir->file_name)
 		minishell_exit(1, NULL);
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Heredoc file name is %s\n", redir->file_name);
-	#endif
 	redir->fd = open(redir->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (redir->fd == -1)
 		minishell_exit(1, NULL);

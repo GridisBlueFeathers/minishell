@@ -6,9 +6,10 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:28:06 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 18:09:54 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:39:10 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 void	stdfd_copy(void)

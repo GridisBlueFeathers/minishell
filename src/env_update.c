@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 11:58:05 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 19:09:35 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:34:51 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	env_update(void)
 		cur = ft_getenv(env->key);
 		if (ft_strncmp(env->value, cur, ft_strlen(env->value)))
 		{
-			// debug print, remove later
-			printf("Env diff at %s: %s\nNow: %s\n\n", env->key, env->value, cur);
 			ft_free(STR, &env->value);
 			if (cur)
 			{

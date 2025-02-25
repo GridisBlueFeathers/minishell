@@ -6,11 +6,10 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:34:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 15:13:33 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:41:20 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/stdio.h"
 #include "minishell.h"
 
 void	prompt_init(void)

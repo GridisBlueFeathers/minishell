@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:09:47 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/13 15:55:27 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:45:53 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	quote_is_valid(char *str, size_t loc, char type)
 	if (type)
 	{
 		i = quote_type_valid(str, loc, type);
-		if (i)	
+		if (i)
 			return (1);
 		return (0);
 	}

@@ -6,12 +6,11 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:30:17 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/17 16:32:52 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:47:21 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/stdlib.h"
+
 #include "minishell.h"
-#include <stdio.h>
 
 static void	export_new_var(char *arg, int eq_index)
 {
@@ -43,7 +42,7 @@ static int	export_check_key(char *str)
 {
 	int	i;
 	int	check;
-	
+
 	i = 0;
 	check = 0;
 	while (str[i])

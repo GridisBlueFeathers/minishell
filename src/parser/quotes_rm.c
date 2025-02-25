@@ -6,12 +6,11 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:07:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/13 15:57:11 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:41:38 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
 static int	quotes_esc(char *str, char *res, size_t *i, size_t *j)
 {

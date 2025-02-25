@@ -6,26 +6,14 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/20 15:22:21 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:18:14 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
 #include <stdio.h>
 
-void	cmd_execute_single_builtin(t_cmd *cmd)
+static void	cmd_execute_multiple_builtin(t_cmd *cmd)
 {
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Executing builtin\n");
-	#endif
-	if (data(GET)->cmd_amount == 1)
-	{
-		stdfd_copy();
-		if (!child_apply_redirs(cmd))
-		{
-			(data(GET)->exit_code = 1, stdfd_restore());
-			return ;
-		}
-	}
 	if (ft_strcmp(cmd->name, "exit") == 0)
 		data(GET)->exit_code = builtin_exit(cmd);
 	if (ft_strcmp(cmd->name, "cd") == 0)
@@ -44,13 +32,25 @@ void	cmd_execute_single_builtin(t_cmd *cmd)
 		stdfd_restore();
 }
 
+void	cmd_execute_single_builtin(t_cmd *cmd)
+{
+	if (data(GET)->cmd_amount == 1)
+	{
+		stdfd_copy();
+		if (!child_apply_redirs(cmd))
+		{
+			data(GET)->exit_code = 1;
+			stdfd_restore();
+			return ;
+		}
+	}
+	cmd_execute_multiple_builtin(cmd);
+}
+
 int	cmd_heredoc_run(t_cmd *cmd)
 {
 	t_redir	*cur;
 
-	#if DEBUG
-	dprintf(STDERR_FILENO, "Running heredocs for %s[%d]\n", cmd->name, cmd->idx);
-	#endif
 	cur = cmd->redir_head;
 	while (cur)
 	{
@@ -59,9 +59,6 @@ int	cmd_heredoc_run(t_cmd *cmd)
 			cur = cur->next;
 			continue ;
 		}
-		#if DEBUG
-			dprintf(STDERR_FILENO, "Heredoc delim: %s\n", cur->heredoc_delim);
-		#endif
 		data(GET)->mode = IN_HEREDOC;
 		heredoc_handle(cur);
 		cur = cur->next;
@@ -71,9 +68,6 @@ int	cmd_heredoc_run(t_cmd *cmd)
 
 int	cmd_execute_single_bin(t_cmd *cmd)
 {
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->idx);
-	#endif
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		minishell_exit(1, NULL);
@@ -86,9 +80,6 @@ int	cmd_execute(t_cmd *cmd)
 {
 	int		pipe_fd[2];
 
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Executing: %s[%d]\n", cmd->name, cmd->idx);
-	#endif
 	if (cmd->idx + 1 != data(GET)->cmd_amount && pipe(pipe_fd) == -1)
 		minishell_exit(1, NULL);
 	cmd->pid = fork();

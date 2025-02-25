@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/13 14:04:20 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:40:04 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -46,9 +46,6 @@ static void	child_get_path(t_cmd *cmd)
 	size_t	len;
 
 	i = 0;
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Getting path for the command\n");
-	#endif
 	while (data(GET)->path[i])
 	{
 		len = ft_strlen(data(GET)->path[i]) + ft_strlen(cmd->name) + 1;
@@ -75,10 +72,6 @@ void	child_execute(t_cmd *cmd)
 {
 	if (cmd->type == BUILTIN)
 		child_execute_builtin(cmd);
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Command name: %s\n", cmd->name);
-		dprintf(STDERR_FILENO, "Command type: %d\n", cmd->type);
-	#endif
 	if (ft_strchr(cmd->name, '/'))
 	{
 		cmd->bin = ft_strdup(cmd->name);
@@ -93,9 +86,6 @@ void	child_execute(t_cmd *cmd)
 		if (!cmd->bin)
 			minishell_exit(1, NULL);
 	}
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Command bin: %s\n", cmd->bin);
-	#endif
 	execve(cmd->bin, cmd->argv, data(GET)->env_arr);
 	if (errno == EACCES || errno == ENOENT)
 		child_kill(cmd);

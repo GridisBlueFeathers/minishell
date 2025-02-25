@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/02/21 14:49:40 by svereten         ###   ########.fr        #
+#    Updated: 2025/02/25 14:32:34 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -80,8 +80,6 @@ FILES = main \
 		utils/minishell_split \
 		utils/str_has_quotes \
 		utils/str_isspace \
-		dev 
-		# -> dev file, delete later #
 		
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
@@ -148,26 +146,6 @@ re: fclean all
 # Dev targets
 # 
 ###############################################################################
-
-test: re
-	bash ${HOME}/42_minishell_tester/tester.sh m
-
-noenv: CFLAGS += -D DEBUG=1
-noenv: re
-	@clear
-	@env -i ./minishell
-
-run: CFLAGS += -D DEBUG=1
-run: re
-	@clear
-	@./minishell
-
-release: re
-	@clear
-	@./minishell
-
-print:
-	echo ${INCLUDE_FILES} ${DEV_FILES}
 
 norm:
 	norminette ${SRCS} ${INCLUDE_FILES}

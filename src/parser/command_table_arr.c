@@ -6,26 +6,31 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/21 14:58:17 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:58:12 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
+
+static void	ct_argv_allocate(t_prompt *prompt)
+{
+	t_cmd	**cmd;
+
+	cmd = data(GET)->commands;
+	cmd[prompt->idx]->argv
+		= (char **)ft_calloc(prompt->last->idx + 2, sizeof(char *));
+	if (!cmd[prompt->idx]->argv)
+		minishell_exit(1, NULL);
+}
 
 void	ct_argv_set(t_prompt *prompt)
 {
 	int		i;
 	t_token	*token;
-	t_data	*ms_data;
 
 	if (!prompt->last)
 		return ;
-	ms_data = data(GET);
-	ms_data->commands[prompt->idx]->argv
-		= (char **)ft_calloc(prompt->last->idx + 2, sizeof(char *));
-	if (!data(GET)->commands[prompt->idx]->argv)
-		minishell_exit(1, NULL);
+	ct_argv_allocate(prompt);
 	token = prompt->first;
 	i = 0;
 	while (token)
@@ -34,7 +39,8 @@ void	ct_argv_set(t_prompt *prompt)
 			token = token->next;
 		else if (token->tok_type == WORD || token->tok_type == CMD)
 		{
-			ms_data->commands[prompt->idx]->argv[i] = ft_strdup(token->tok_str);
+			data(GET)->commands[prompt->idx]->argv[i]
+			= ft_strdup(token->tok_str);
 			if (!data(GET)->commands[prompt->idx]->argv[i])
 				minishell_exit(1, NULL);
 			i++;

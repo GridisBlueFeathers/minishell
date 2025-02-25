@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/21 14:50:15 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:10:20 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -21,9 +21,7 @@
 # define PREFIX_GOOD "\ueab2 minishell \uf061  "
 # define PREFIX_BAD "\uea76 minishell \uf061  "
 
-# ifndef DEBUG
-#  define DEBUG 0
-# endif
+# define NL_ERROR "minishell: syntax error near unexpected token `newline'\n"
 
 typedef enum e_option
 {
@@ -70,15 +68,6 @@ typedef struct s_data
 	t_mode		mode;
 	t_prompt	**prompt;
 }	t_data;
-
-/* dev functions */
-/* ------------- */
-
-void		debug_print(void);
-void		env_print(void);
-void		tokenizer_print(void);
-
-/* ------------- */
 
 t_data		*data(t_option option);
 void		loop(void);

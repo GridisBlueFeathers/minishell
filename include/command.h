@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/13 13:38:30 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:30:43 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef COMMAND_H
@@ -76,18 +76,5 @@ int		child_apply_redirs(t_cmd *cmd);
 void	child_single(t_cmd *cmd);
 void	child_execute(t_cmd *cmd);
 void	child_kill(t_cmd *cmd);
-
-/**
- * DEV function - delete on production
- *
- * mocks `cat Makefile` command
- */
-void	dev_shim_prompt(void);
-void	dev_mock_cat_make(void);
-void	dev_mock_echo_hi(void);
-void	dev_mock_cat_dev2(void);
-void	dev_mock_cat_pipe_grep(void);
-void	dev_mock_cat_pipe_grep_pipe_wc(void);
-void	dev_mock_cat_heredoc(void);
 
 #endif
