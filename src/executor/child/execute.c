@@ -6,13 +6,13 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 14:40:04 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:43:10 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft/string.h"
 #include "minishell.h"
 #include "command.h"
 #include <errno.h>
-#include <stdio.h>
 
 static int	child_check_access(t_cmd *cmd, char *bin_path)
 {
@@ -68,6 +68,21 @@ static void	child_execute_builtin(t_cmd *cmd)
 	minishell_exit(data(GET)->exit_code, NULL);
 }
 
+/**
+ * "./" strlen is 2
+ */
+static void child_handle_no_path(t_cmd *cmd)
+{
+	size_t	len;
+
+	len = ft_strlen(cmd->name) + 2;
+	cmd->bin = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!cmd->bin)
+		minishell_exit(1, NULL);
+	ft_strlcat(cmd->bin, "./", len + 1);
+	ft_strlcat(cmd->bin, cmd->name, len + 1);
+}
+
 void	child_execute(t_cmd *cmd)
 {
 	if (cmd->type == BUILTIN)
@@ -78,8 +93,10 @@ void	child_execute(t_cmd *cmd)
 		if (!cmd->bin)
 			minishell_exit(1, NULL);
 	}
-	else if (cmd->type == BIN && data(GET)->path)
+	else if (cmd->type == BIN && data(GET)->path && data(GET)->path[0])
 		child_get_path(cmd);
+	else if (cmd->type == BIN && (!data(GET)->path || !data(GET)->path[0]))
+		child_handle_no_path(cmd);
 	if (!cmd->bin)
 	{
 		cmd->bin = ft_strdup(cmd->name);

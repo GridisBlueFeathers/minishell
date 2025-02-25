@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:27:54 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 14:40:26 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:43:39 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/string.h"
@@ -81,7 +81,7 @@ static char	*child_kill_command(t_cmd *cmd)
 	char	*msg;
 	size_t	len;
 
-	len = ft_strlen(cmd->bin) + 20;
+	len = ft_strlen(cmd->name) + 20;
 	msg = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!msg)
 		minishell_exit(1, NULL);
@@ -97,11 +97,11 @@ void	child_kill(t_cmd *cmd)
 
 	if (cmd->from_path)
 		err_msg = child_kill_permission(cmd);
-	else if (ft_strchr(cmd->name, '/') && is_directory(cmd->name))
+	else if (ft_strchr(cmd->bin, '/') && is_directory(cmd->bin))
 		err_msg = child_kill_directory(cmd);
-	else if (ft_strchr(cmd->name, '/') && access(cmd->name, F_OK) == 0)
+	else if (ft_strchr(cmd->bin, '/') && access(cmd->bin, F_OK) == 0)
 		err_msg = child_kill_permission(cmd);
-	else if (ft_strchr(cmd->name, '/'))
+	else if (ft_strchr(cmd->bin, '/'))
 		err_msg = child_kill_file(cmd);
 	else
 		err_msg = child_kill_command(cmd);

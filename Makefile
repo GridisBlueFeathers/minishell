@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/02/25 16:27:05 by jwolfram         ###   ########.fr        #
+#    Updated: 2025/02/25 16:40:46 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ###############################################################################
@@ -26,7 +26,7 @@ LDLIBS = -lft -lreadline
 LDFLAGS = -L./libft
 
 LIBFT = libft/libft.a
-LIBFT_DEFINES = GNL_SIZE="-D BUFFER_SIZE=42" PANIC_MSG=minishell DEBUG=1
+LIBFT_DEFINES = GNL_SIZE="-D BUFFER_SIZE=42" PANIC_MSG=minishell
 
 LIBFT_DIR = libft
 SRC_DIR = src
@@ -34,13 +34,14 @@ OBJ_DIR = obj
 
 FILES = main \
 		data \
-		env_init \
-		env_update \
 		path \
 		loop \
 		signal \
 		lexer \
 		lexer_redir \
+		env/env_init \
+		env/env_to_arr \
+		env/env_utils \
 		executor/executor \
 		executor/commands \
 		executor/cmd \
@@ -91,19 +92,6 @@ DEFAULT = \033[0m
 BLUE = \033[1;34m
 
 GREEN = \033[1;32m
-
-###############################################################################
-#
-# Dev vars
-# 
-###############################################################################
-
-
-INCLUDE_FILES = ${wildcard include/*.h}
-
-CFLAGS := ${CFLAGS} -g
-
-OBJS := ${OBJS} ${DEV_FILES:%=${OBJ_DIR}/%.o}
 
 ###############################################################################
 #

@@ -6,13 +6,12 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:18:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 14:39:45 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:42:40 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
 #include "minishell.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include <errno.h>
 
 int	child_apply_redirs(t_cmd *cmd)
@@ -50,6 +49,7 @@ void	child_single(t_cmd *cmd)
 
 void	child(t_cmd *cmd, int pipe_fd[2])
 {
+	env_to_arr(cmd);
 	if (cmd->idx + 1 != data(GET)->cmd_amount)
 	{
 		ft_close(pipe_fd[RD]);

@@ -6,47 +6,24 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/07 13:26:36 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:27:16 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/stdlib.h"
+#include "libft/string.h"
 #include "minishell.h"
 
-void	env_free(t_env_var	*node)
+static char *handle_shlvl(char *var)
 {
-	t_env_var	*tmp;
+	char	*res;
+	int		eq_loc;
 
-	while (node)
-	{
-		ft_free(STR, &node->key);
-		ft_free(STR, &node->value);
-		tmp = node->next;
-		ft_free(STRUCT, &node);
-		node = tmp;
-	}
-}
-
-t_env_var	*env_allocate(void)
-{
-	t_env_var	*node;
-
-	node = (t_env_var *)ft_calloc(1, sizeof(t_env_var));
-	if (!node)
-		minishell_exit(1, NULL);
-	node->was_unset = 0;
-	if (!data(GET)->env.first)
-	{
-		data(GET)->env.first = node;
-		data(GET)->env.last = node;
-	}
-	else
-	{
-		data(GET)->env.last->next = node;
-		node->prev = data(GET)->env.last;
-		data(GET)->env.last = node;
-		node->idx = node->prev->idx + 1;
-	}
-	return (node);
+	eq_loc = ft_strchr(var, '=') - var;
+	if (!ft_isnumber(&var[eq_loc + 1]))
+		return (ft_strdup("1"));
+	res = ft_itoa(ft_atoi(&var[eq_loc + 1]) + 1);
+	return (res);
 }
 
 static void	env_set(char **env)
@@ -63,7 +40,10 @@ static void	env_set(char **env)
 		node->key = ft_substr(env[i], 0, len);
 		if (!node->key)
 			minishell_exit(1, NULL);
-		node->value = ft_substr(env[i], len + 1, ft_strlen(env[i]));
+		if (ft_strcmp(node->key, "SHLVL") == 0)
+			node->value = handle_shlvl(env[i]);
+		else
+			node->value = ft_substr(env[i], len + 1, ft_strlen(env[i]));
 		if (!node->value)
 			minishell_exit(1, NULL);
 		node->idx = i;

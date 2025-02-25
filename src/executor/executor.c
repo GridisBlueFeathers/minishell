@@ -6,19 +6,19 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 16:05:10 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:44:26 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
 #include "minishell.h"
 #include <errno.h>
-#include <stdio.h>
 #include <sys/wait.h>
 
 static void	execute_single(void)
 {
 	int	s;
 
+	env_to_arr(data(GET)->commands[0]);
 	if (data(GET)->commands[0]->type == BIN)
 	{
 		if (!cmd_execute_single_bin(data(GET)->commands[0]))
