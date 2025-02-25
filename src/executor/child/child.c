@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 17:18:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 16:42:40 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/02/25 16:54:10 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:54:11 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "command.h"
 #include "minishell.h"
 #include <fcntl.h>

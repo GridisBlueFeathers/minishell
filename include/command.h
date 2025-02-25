@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 17:09:01 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 14:30:43 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/02/25 16:50:45 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:50:48 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef COMMAND_H
 # define COMMAND_H
 

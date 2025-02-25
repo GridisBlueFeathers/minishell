@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 15:45:30 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/11 16:16:53 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:54:47 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:54:49 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	cmd_free(t_cmd *cmd)

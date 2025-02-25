@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 16:44:26 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/02/25 16:54:55 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:54:57 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "command.h"
 #include "minishell.h"
 #include <errno.h>

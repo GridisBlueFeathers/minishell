@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 16:43:10 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/02/25 16:54:19 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:54:21 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft/string.h"
 #include "minishell.h"
 #include "command.h"

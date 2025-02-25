@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 16:18:14 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/02/25 16:54:35 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:54:40 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
-#include <stdio.h>
 
 static void	cmd_execute_multiple_builtin(t_cmd *cmd)
 {

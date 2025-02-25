@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 11:56:50 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 17:57:34 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:58:09 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:58:14 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
-#include <stdio.h>
 
 void	redirect(int *old_fd, int new_fd)
 {

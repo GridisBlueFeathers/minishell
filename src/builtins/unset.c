@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 15:39:35 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/10 16:44:43 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/02/25 16:53:31 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:53:33 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft/stdlib.h"
 #include "minishell.h"
 

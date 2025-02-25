@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   no_args.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 14:31:44 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/17 13:30:08 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:52:13 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:52:15 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 /**

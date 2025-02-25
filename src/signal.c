@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:25:48 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/11 16:29:21 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 17:01:06 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 17:01:11 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
-#include <stdio.h>
 #include <sys/ioctl.h>
-#include <unistd.h>
 
 void	signal_int(int signal)
 {

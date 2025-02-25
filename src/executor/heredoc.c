@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 16:55:15 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 14:37:56 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/02/25 16:55:07 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:55:09 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <fcntl.h>
 #include <unistd.h>
 #include "libft/stdlib.h"

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   is_directory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 15:37:11 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/10 15:39:57 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:57:19 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:57:21 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <dirent.h>
 
 int	is_directory(char *path)

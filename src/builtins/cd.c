@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 13:00:51 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/20 16:05:36 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:52:25 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:52:32 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "command.h"
 #include "libft/string.h"
 #include "minishell.h"
-#include <stdio.h>
 #include <dirent.h>
 #include <errno.h>
 
