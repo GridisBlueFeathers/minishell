@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 13:40:08 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:36:29 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -119,6 +119,7 @@ void		lexer_error(char error, char redir);
 
 void		signal_init(void);
 void		signal_int(int signal);
+void		signal_pipe(int signal);
 
 int			builtin_cd(t_cmd *cmd);
 int			builtin_env(t_cmd *cmd);

@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:02:11 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/13 16:48:21 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:42:32 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*substrrplc(char *main, char *old, char *new)
 		return (main);
 	i = 0;
 	res = NULL;
+	quote = 0;
 	while (main[i])
 	{
 		if (!quote && isquote(main[i]))
