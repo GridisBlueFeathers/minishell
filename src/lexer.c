@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 14:22:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/20 14:38:35 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:59:59 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 17:00:00 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,25 @@ static int	lexer_quote_check(void)
 static int	lexer_pipe_check(void)
 {
 	size_t	i;
-	t_data	*ms_data;
+	t_data	*dt;
 
 	i = 0;
-	ms_data = data(GET);
-	if (!ft_strchr(ms_data->rl_prompt, '|'))
+	dt = data(GET);
+	if (!ft_strchr(dt->rl_prompt, '|'))
 		return (1);
-	while (ft_isspace(ms_data->rl_prompt[i]))
+	while (ft_isspace(dt->rl_prompt[i]))
 		i++;
-	if (ms_data->rl_prompt[i] == '|' && valid_operator(ms_data->rl_prompt, i, 0))
+	if (dt->rl_prompt[i] == '|' && valid_operator(dt->rl_prompt, i, 0))
 		return (lexer_error('|', 0), 0);
-	while (ms_data->rl_prompt[i])
+	while (dt->rl_prompt[i])
 	{
-		if (ms_data->rl_prompt[i] == '|')
+		if (dt->rl_prompt[i] == '|')
 		{
 			i++;
-			while (ft_isspace(ms_data->rl_prompt[i]))
+			while (ft_isspace(dt->rl_prompt[i]))
 				i++;
-			if (!ms_data->rl_prompt[i] || (ms_data->rl_prompt[i] == '|' 
-				&& valid_operator(ms_data->rl_prompt, i, 0)))
+			if (!dt->rl_prompt[i] || (dt->rl_prompt[i] == '|'
+					&& valid_operator(dt->rl_prompt, i, 0)))
 				return (lexer_error('|', 0), 0);
 		}
 		i++;
@@ -73,7 +73,7 @@ void	lexer_error(char error, char redir)
 	if (error == '|')
 		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 	else if (error == '\n')
-		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
+		ft_putstr_fd(NL_ERROR, 2);
 	else if (error == '\'')
 		ft_putstr_fd("minishell: syntax error near unexpected token `\''\n", 2);
 	else if (error == '"')

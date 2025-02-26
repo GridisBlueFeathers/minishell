@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/21 14:54:22 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 17:00:18 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 17:00:36 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <errno.h>
 
 static void	prompt_exec(void)
 {
@@ -21,25 +18,10 @@ static void	prompt_exec(void)
 	if (!data(GET)->rl_prompt[0])
 		return ;
 	add_history(data(GET)->rl_prompt);
-	#if DEBUG
-		printf("Prompt: %s\n", data(GET)->rl_prompt);
-	#endif
 	if (!lexer())
 		return ;
-	#if DEBUG
-		dprintf(STDERR_FILENO, "lexer done\n");
-	#endif
 	parser();
-	#if DEBUG
-		dprintf(STDERR_FILENO, "parser done\n");
-	#endif
-	#if DEBUG
-		debug_print();
-	#endif
 	executor();
-	#if DEBUG
-		dprintf(STDERR_FILENO, "executor done\n");
-	#endif
 }
 
 void	loop(void)

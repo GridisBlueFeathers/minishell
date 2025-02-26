@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 16:34:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/27 15:13:33 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:56:06 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:56:08 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/stdio.h"
 #include "minishell.h"
 
 void	prompt_init(void)

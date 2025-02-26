@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 19:01:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 13:37:44 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:51:12 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:51:14 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 

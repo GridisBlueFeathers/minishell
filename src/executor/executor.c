@@ -3,25 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:08:58 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 14:01:22 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:54:55 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:54:57 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "command.h"
 #include "minishell.h"
 #include <errno.h>
-#include <stdio.h>
 #include <sys/wait.h>
 
 static void	execute_single(void)
 {
 	int	s;
 
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Executing single command\n");
-	#endif
 	env_to_arr(data(GET)->commands[0]);
 	if (data(GET)->commands[0]->type == BIN)
 	{
@@ -53,7 +50,8 @@ static void	execute_pipeline(void)
 		i++;
 	}
 	stdfd_restore();
-	if (waitpid(data(GET)->commands[data(GET)->cmd_amount - 1]->pid, &status, 0) < 0)
+	if (waitpid(data(GET)->commands[data(GET)->cmd_amount - 1]->pid, &status, 0)
+		< 0)
 		minishell_exit(1, NULL);
 	if (WIFEXITED(status))
 		data(GET)->exit_code = WEXITSTATUS(status);
@@ -75,10 +73,6 @@ static void	execute(void)
 
 void	executor(void)
 {
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Executor\n");
-		dprintf(STDERR_FILENO, "Amount of commands: %d\n", data(GET)->cmd_amount);
-	#endif
 	data(GET)->mode = IN_HEREDOC;
 	if (!commands_heredocs_run())
 		return ;

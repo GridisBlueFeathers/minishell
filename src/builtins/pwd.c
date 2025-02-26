@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 16:14:10 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/17 16:36:14 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:53:22 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:53:24 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 int	builtin_pwd(void)

@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/05 16:02:29 by svereten          #+#    #+#              #
-#    Updated: 2025/02/25 14:14:50 by svereten         ###   ########.fr        #
+#    Created: 2025/02/25 17:01:18 by jwolfram          #+#    #+#              #
+#    Updated: 2025/02/25 17:01:22 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 ###############################################################################
 #
 # Project vars
@@ -26,7 +27,7 @@ LDLIBS = -lft -lreadline
 LDFLAGS = -L./libft
 
 LIBFT = libft/libft.a
-LIBFT_DEFINES = GNL_SIZE="-D BUFFER_SIZE=42" PANIC_MSG=minishell DEBUG=1
+LIBFT_DEFINES = GNL_SIZE="-D BUFFER_SIZE=42" PANIC_MSG=minishell
 
 LIBFT_DIR = libft
 SRC_DIR = src
@@ -81,8 +82,6 @@ FILES = main \
 		utils/minishell_split \
 		utils/str_has_quotes \
 		utils/str_isspace \
-		dev 
-		# -> dev file, delete later #
 		
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
@@ -94,19 +93,6 @@ DEFAULT = \033[0m
 BLUE = \033[1;34m
 
 GREEN = \033[1;32m
-
-###############################################################################
-#
-# Dev vars
-# 
-###############################################################################
-
-
-INCLUDE_FILES = ${wildcard include/*.h}
-
-CFLAGS := ${CFLAGS} -g
-
-OBJS := ${OBJS} ${DEV_FILES:%=${OBJ_DIR}/%.o}
 
 ###############################################################################
 #
@@ -144,33 +130,4 @@ fclean: clean
 
 re: fclean all
 
-###############################################################################
-#
-# Dev targets
-# 
-###############################################################################
-
-test: re
-	bash ${HOME}/42_minishell_tester/tester.sh m
-
-noenv: CFLAGS += -D DEBUG=1
-noenv: re
-	@clear
-	@env -i ./minishell
-
-run: CFLAGS += -D DEBUG=1
-run: re
-	@clear
-	@./minishell
-
-release: re
-	@clear
-	@./minishell
-
-print:
-	echo ${INCLUDE_FILES} ${DEV_FILES}
-
-norm:
-	norminette ${SRCS} ${INCLUDE_FILES}
-
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re

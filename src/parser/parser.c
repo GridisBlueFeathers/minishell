@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 11:51:25 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/21 14:54:57 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:55:58 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:55:59 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
 void	parser(void)
 {

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 18:33:24 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/18 17:00:53 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:53:04 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:53:09 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft/ctype.h"
 #include "minishell.h"
-#include <stdio.h>
 
 /**
  * "minishell: exit: " strlen is 17

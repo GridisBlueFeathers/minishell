@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_first_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 14:42:27 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/21 15:03:43 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:57:27 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:57:29 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_first_word(char *big, char *small)
 	i = 0;
 	while (isspace(big[i]))
 		i++;
-	if (!ft_strncmp(small, big + i, ft_strlen(small)))	
+	if (!ft_strncmp(small, big + i, ft_strlen(small)))
 		return (1);
 	return (0);
 }

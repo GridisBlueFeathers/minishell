@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:59:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/21 15:04:00 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:55:47 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:55:51 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/string.h"
 #include "minishell.h"
-#include <stdio.h>
 
 static char	*exp_new_str_init(char *old, int in_heredoc)
 {

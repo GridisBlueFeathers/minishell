@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 14:30:17 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/17 16:32:52 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:51:58 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:52:03 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/stdlib.h"
+
 #include "minishell.h"
-#include <stdio.h>
 
 static void	export_new_var(char *arg, int eq_index)
 {
@@ -43,7 +42,7 @@ static int	export_check_key(char *str)
 {
 	int	i;
 	int	check;
-	
+
 	i = 0;
 	check = 0;
 	while (str[i])

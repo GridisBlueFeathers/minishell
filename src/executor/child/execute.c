@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 15:50:29 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:54:19 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:54:21 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft/string.h"
 #include "minishell.h"
 #include "command.h"
 #include <errno.h>
-#include <stdio.h>
 
 static int	child_check_access(t_cmd *cmd, char *bin_path)
 {
@@ -47,9 +47,6 @@ static void	child_get_path(t_cmd *cmd)
 	size_t	len;
 
 	i = 0;
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Getting path for the command\n");
-	#endif
 	while (data(GET)->path[i])
 	{
 		len = ft_strlen(data(GET)->path[i]) + ft_strlen(cmd->name) + 1;
@@ -91,13 +88,6 @@ void	child_execute(t_cmd *cmd)
 {
 	if (cmd->type == BUILTIN)
 		child_execute_builtin(cmd);
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Command name: %s\n", cmd->name);
-		dprintf(STDERR_FILENO, "Command type: %d\n", cmd->type);
-		dprintf(STDERR_FILENO, "PATH: %p\n", data(GET)->path);
-		if (data(GET)->path)
-			dprintf(STDERR_FILENO, "PATH[0]: %s\n", data(GET)->path[0]);
-	#endif
 	if (ft_strchr(cmd->name, '/'))
 	{
 		cmd->bin = ft_strdup(cmd->name);
@@ -114,9 +104,6 @@ void	child_execute(t_cmd *cmd)
 		if (!cmd->bin)
 			minishell_exit(1, NULL);
 	}
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Command bin: %s\n", cmd->bin);
-	#endif
 	execve(cmd->bin, cmd->argv, data(GET)->env_arr);
 	if (errno == EACCES || errno == ENOENT)
 		child_kill(cmd);

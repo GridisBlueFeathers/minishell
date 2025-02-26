@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_rm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 15:07:56 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/13 15:57:11 by jwolfram         ###   ########.fr       */
+/*   Created: 2025/02/25 16:56:18 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:56:20 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
 static int	quotes_esc(char *str, char *res, size_t *i, size_t *j)
 {

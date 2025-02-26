@@ -3,25 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 17:18:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 14:01:53 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:54:10 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 16:54:11 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "command.h"
 #include "minishell.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include <errno.h>
 
 int	child_apply_redirs(t_cmd *cmd)
 {
 	t_redir	*cur;
 
-	#if DEBUG
-		dprintf(STDERR_FILENO, "Applying redirections\n");
-	#endif
 	cur = cmd->redir_head;
 	while (cur)
 	{

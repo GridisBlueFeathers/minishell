@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 16:24:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 13:40:08 by svereten         ###   ########.fr       */
+/*   Created: 2025/02/25 16:51:04 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/25 17:01:49 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "libft/libft.h"
 # include <signal.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "command.h"
@@ -21,9 +23,7 @@
 # define PREFIX_GOOD "\ueab2 minishell \uf061  "
 # define PREFIX_BAD "\uea76 minishell \uf061  "
 
-# ifndef DEBUG
-#  define DEBUG 0
-# endif
+# define NL_ERROR "minishell: syntax error near unexpected token `newline'\n"
 
 typedef enum e_option
 {
@@ -70,15 +70,6 @@ typedef struct s_data
 	t_mode		mode;
 	t_prompt	**prompt;
 }	t_data;
-
-/* dev functions */
-/* ------------- */
-
-void		debug_print(void);
-void		env_print(void);
-void		tokenizer_print(void);
-
-/* ------------- */
 
 t_data		*data(t_option option);
 void		loop(void);
