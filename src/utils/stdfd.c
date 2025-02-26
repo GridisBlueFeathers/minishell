@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:58:28 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:58:29 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:04:17 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void	stdfd_copy(void)
 
 void	stdfd_restore(void)
 {
-	redirect(&data(GET)->stdout_copy, STDOUT_FILENO);
-	redirect(&data(GET)->stdin_copy, STDIN_FILENO);
+	if (data(GET)->stdout_copy >= 0)
+		redirect(&data(GET)->stdout_copy, STDOUT_FILENO);
+	if (data(GET)->stdin_copy >= 0)
+		redirect(&data(GET)->stdin_copy, STDIN_FILENO);
 }
 
 void	stdfd_close(void)

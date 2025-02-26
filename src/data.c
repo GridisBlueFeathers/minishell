@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 16:59:51 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:59:53 by jwolfram         ###   ########.fr       */
+/*   Created: 2024/11/15 15:55:08 by jwolfram          #+#    #+#             */
+/*   Updated: 2025/02/26 17:00:31 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static t_data	*data_init(void)
 
 static void	data_free(t_data *ptr)
 {
+	if (!ptr)
+		return ;
+	if (ptr->rl_prompt)
+		ft_free(STR, &ptr->rl_prompt);
 	if (ptr->env.first)
 		env_free(ptr->env.first);
 	if (ptr->path)

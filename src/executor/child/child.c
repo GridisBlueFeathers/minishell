@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:54:10 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:54:11 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:00:50 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,23 @@ void	child_single(t_cmd *cmd)
 {
 	if (!child_apply_redirs(cmd))
 		minishell_exit(1, NULL);
-	child_execute(cmd);
+	if (cmd->name)
+		child_execute(cmd);
+	minishell_exit(0, NULL);
 }
 
 void	child(t_cmd *cmd, int pipe_fd[2])
 {
+	stdfd_close();
 	env_to_arr(cmd);
 	if (cmd->idx + 1 != data(GET)->cmd_amount)
 	{
 		ft_close(pipe_fd[RD]);
 		redirect(&pipe_fd[WR], STDOUT_FILENO);
 	}
-	stdfd_close();
 	if (!child_apply_redirs(cmd))
 		minishell_exit(1, NULL);
-	child_execute(cmd);
+	if (cmd->name)
+		child_execute(cmd);
+	minishell_exit(0, NULL);
 }

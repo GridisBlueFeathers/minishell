@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:55:47 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:55:51 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:03:54 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ static char	*exp_new_str_init(char *old, int in_heredoc)
 		new = ft_getenv(old + 1);
 		if (new)
 			new = ft_strdup(new);
-		if (!in_heredoc && (!new || !ft_strlen(new)))
+		if (in_heredoc && (!new || !ft_strlen(new)))
+			new = ft_strdup("");
+		else if ((!new || !ft_strlen(new)))
 			new = ft_strdup("\"\"");
+		if (!new)
+			minishell_exit(1, NULL);
 	}
 	return (new);
 }
@@ -94,6 +98,8 @@ char	*expander_str(char *str)
 				break ;
 			new_str = exp_new_str_init(old_str, 1);
 			str = substrrplc(str, old_str, new_str);
+			if (!str[i])
+				break ;
 		}
 		i++;
 	}
@@ -119,6 +125,8 @@ void	expander_init(t_prompt *prompt)
 			else
 				new_str = exp_new_str_init(old_str, 0);
 			prompt->name = substrrplc(prompt->name, old_str, new_str);
+			if (!prompt->name[i])
+				break ;
 		}
 		i++;
 	}

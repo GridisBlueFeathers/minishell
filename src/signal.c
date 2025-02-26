@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 17:01:11 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:04:02 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	signal_int(int signal)
 		rl_replace_line("", 0);
 	}
 	else
-		printf("\n");
+		ft_putchar_fd('\n', STDOUT_FILENO);
 	data(GET)->mode = IN_PROMPT;
 	return ;
 }

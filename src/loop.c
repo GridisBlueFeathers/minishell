@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:00:18 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 17:00:36 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:03:38 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	loop(void)
 	while (1)
 	{
 		data(GET)->mode = IN_PROMPT;
+		if (data(GET)->rl_prompt)
+			ft_free(STR, &data(GET)->rl_prompt);
 		if (data(GET)->exit_code)
 			data(GET)->rl_prompt = readline(PREFIX_BAD);
 		else
@@ -41,6 +43,5 @@ void	loop(void)
 		}
 		data(GET)->line_num = 2;
 		prompt_exec();
-		free(data(GET)->rl_prompt);
 	}
 }

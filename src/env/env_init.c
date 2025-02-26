@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:53:41 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:53:44 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:05:24 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft/string.h"
 #include "minishell.h"
 
-static char *handle_shlvl(char *var)
+static char	*handle_shlvl(char *var)
 {
 	char	*res;
 	int		eq_loc;
