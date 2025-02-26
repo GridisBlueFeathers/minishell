@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 15:50:29 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:35:02 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/string.h"
@@ -68,6 +68,7 @@ static void	child_get_path(t_cmd *cmd)
 
 static void	child_execute_builtin(t_cmd *cmd)
 {
+	signal(SIGPIPE, SIG_IGN);
 	cmd_execute_single_builtin(cmd);
 	minishell_exit(data(GET)->exit_code, NULL);
 }

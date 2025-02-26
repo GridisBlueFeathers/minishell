@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:25:48 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/11 16:29:21 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:48:22 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -25,7 +25,7 @@ void	signal_int(int signal)
 		rl_replace_line("", 0);
 	}
 	else
-		printf("\n");
+		ft_putchar_fd('\n', STDOUT_FILENO);
 	data(GET)->mode = IN_PROMPT;
 	return ;
 }

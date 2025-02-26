@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:28:06 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/23 18:09:54 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:47:28 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -23,8 +23,10 @@ void	stdfd_copy(void)
 
 void	stdfd_restore(void)
 {
-	redirect(&data(GET)->stdout_copy, STDOUT_FILENO);
-	redirect(&data(GET)->stdin_copy, STDIN_FILENO);
+	if (data(GET)->stdout_copy >= 0)
+		redirect(&data(GET)->stdout_copy, STDOUT_FILENO);
+	if (data(GET)->stdin_copy >= 0)
+		redirect(&data(GET)->stdin_copy, STDIN_FILENO);
 }
 
 void	stdfd_close(void)

@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:55:08 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/01/24 16:30:57 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:00:26 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static t_data	*data_init(void)
 
 static void	data_free(t_data *ptr)
 {
+	if (!ptr)
+		return ;
+	if (ptr->rl_prompt)
+		ft_free(STR, &ptr->rl_prompt);
 	if (ptr->env.first)
 		env_free(ptr->env.first);
 	if (ptr->path)
