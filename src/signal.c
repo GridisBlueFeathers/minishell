@@ -6,12 +6,14 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/26 17:04:02 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:55:54 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/ioctl.h>
+#include <unistd.h>
+#include <errno.h>
 
 void	signal_int(int signal)
 {
@@ -27,6 +29,14 @@ void	signal_int(int signal)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	data(GET)->mode = IN_PROMPT;
 	return ;
+}
+
+void	signal_pipe(int	signal)
+{
+	(void)signal;
+	if (errno == EPIPE)
+		errno = 0;
+	minishell_exit(1, NULL);
 }
 
 void	signal_init(void)

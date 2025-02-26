@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:54:19 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/26 17:04:56 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:55:31 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	child_get_path(t_cmd *cmd)
 
 static void	child_execute_builtin(t_cmd *cmd)
 {
-	signal(SIGPIPE, SIG_IGN);
+	signal(SIGPIPE, signal_pipe);
 	cmd_execute_single_builtin(cmd);
 	minishell_exit(data(GET)->exit_code, NULL);
 }

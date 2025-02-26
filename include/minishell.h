@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:51:04 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 17:01:49 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:55:15 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void		lexer_error(char error, char redir);
 
 void		signal_init(void);
 void		signal_int(int signal);
+void		signal_pipe(int signal);
 
 int			builtin_cd(t_cmd *cmd);
 int			builtin_env(t_cmd *cmd);
