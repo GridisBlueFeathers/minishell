@@ -6,11 +6,10 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:54:26 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:54:28 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:07:24 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/string.h"
 #include "minishell.h"
 
 /**

@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:52:13 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:52:15 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:06:15 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ int	builtin_export_no_args(void)
 
 	output = export_get_output();
 	if (ft_putstr_fd(output, STDOUT_FILENO) < 0)
+	{
+		ft_free(STR, &output);
 		minishell_exit(1, NULL);
+	}
+	ft_free(STR, &output);
 	return (0);
 }

@@ -6,11 +6,10 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:53:31 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:53:33 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:06:36 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/stdlib.h"
 #include "minishell.h"
 
 int	builtin_unset(t_cmd *cmd)
