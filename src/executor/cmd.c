@@ -6,11 +6,10 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:07:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/20 15:22:21 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:54:25 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
-#include <stdio.h>
 
 void	cmd_execute_single_builtin(t_cmd *cmd)
 {

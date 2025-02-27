@@ -6,13 +6,12 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:18:07 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/26 13:38:14 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:51:26 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
 #include "minishell.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include <errno.h>
 
 int	child_apply_redirs(t_cmd *cmd)

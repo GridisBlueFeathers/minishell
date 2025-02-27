@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:31:44 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/17 13:30:08 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:43:09 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -84,6 +84,10 @@ int	builtin_export_no_args(void)
 
 	output = export_get_output();
 	if (ft_putstr_fd(output, STDOUT_FILENO) < 0)
+	{
+		ft_free(STR, &output);
 		minishell_exit(1, NULL);
+	}
+	ft_free(STR, &output);
 	return (0);
 }

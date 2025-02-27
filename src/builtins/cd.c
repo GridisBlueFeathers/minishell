@@ -6,14 +6,11 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:00:51 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/20 16:05:36 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:39:56 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "command.h"
-#include "libft/string.h"
 #include "minishell.h"
-#include <stdio.h>
-#include <dirent.h>
 #include <errno.h>
 
 /**

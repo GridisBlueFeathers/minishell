@@ -6,10 +6,9 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:27:54 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/25 15:56:57 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:53:52 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/string.h"
 #include "minishell.h"
 
 /**

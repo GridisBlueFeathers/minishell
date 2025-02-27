@@ -6,12 +6,10 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 14:27:16 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:48:30 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/stdlib.h"
-#include "libft/string.h"
 #include "minishell.h"
 
 static char *handle_shlvl(char *var)

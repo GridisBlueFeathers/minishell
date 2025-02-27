@@ -6,12 +6,10 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:33:24 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/26 14:47:34 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:42:06 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/ctype.h"
 #include "minishell.h"
-#include <stdio.h>
 
 static char	*numeric_arg_msg(t_cmd *cmd)
 {

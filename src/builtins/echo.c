@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:39:13 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/26 14:28:22 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:45:49 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ int	builtin_echo(t_cmd *cmd)
 	
 	res = create_output(cmd);
 	if (ft_putstr_fd(res, STDOUT_FILENO) < 0)
-		return (ft_free(STR, &res), 1);
+	{
+		ft_free(STR, &res);
+		minishell_exit(1, NULL);
+	}
 	return (ft_free(STR, &res), 0);
 }

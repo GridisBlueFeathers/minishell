@@ -6,10 +6,9 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:39:35 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/10 16:44:43 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:48:07 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/stdlib.h"
 #include "minishell.h"
 
 int	builtin_unset(t_cmd *cmd)

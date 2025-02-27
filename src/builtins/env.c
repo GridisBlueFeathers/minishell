@@ -6,10 +6,9 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:14:40 by svereten          #+#    #+#             */
-/*   Updated: 2025/01/31 14:22:04 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:46:46 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/string.h"
 #include "minishell.h"
 #include "command.h"
 
@@ -79,6 +78,10 @@ int	builtin_env(t_cmd *cmd)
 	}
 	output = env_get_output();
 	if (ft_putstr_fd(output, STDOUT_FILENO) < 0)
+	{
+		ft_free(STR, &output);
 		minishell_exit(1, NULL);
+	}
+	ft_free(STR, &output);
 	return (0);
 }

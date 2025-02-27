@@ -6,14 +6,12 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:26:33 by svereten          #+#    #+#             */
-/*   Updated: 2025/02/26 17:39:16 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:53:28 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/string.h"
 #include "minishell.h"
 #include "command.h"
 #include <errno.h>
-#include <stdio.h>
 
 static int	child_check_access(t_cmd *cmd, char *bin_path)
 {

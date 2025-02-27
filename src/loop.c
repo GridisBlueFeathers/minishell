@@ -6,7 +6,7 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:15:02 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/26 15:00:00 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:01:32 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ static void	prompt_exec(void)
 	parser();
 	#if DEBUG
 		dprintf(STDERR_FILENO, "parser done\n");
-	#endif
-	#if DEBUG
-		debug_print();
 	#endif
 	executor();
 	#if DEBUG
