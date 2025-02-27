@@ -6,11 +6,10 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:52:49 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:52:51 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:09:21 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/string.h"
 #include "minishell.h"
 #include "command.h"
 
@@ -80,6 +79,10 @@ int	builtin_env(t_cmd *cmd)
 	}
 	output = env_get_output();
 	if (ft_putstr_fd(output, STDOUT_FILENO) < 0)
+	{
+		ft_free(STR, &output);
 		minishell_exit(1, NULL);
+	}
+	ft_free(STR, &output);
 	return (0);
 }

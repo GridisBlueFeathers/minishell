@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:55:17 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:55:22 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:08:09 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ static void	command_table_set(int idx)
 			continue ;
 		}
 		if (token->tok_type == CMD)
-			data(GET)->commands[idx]->name = token->tok_str;
+			data(GET)->commands[idx]->name = ft_strdup(token->tok_str);
+		if (!data(GET)->commands[idx]->name)
+			minishell_exit(1, NULL);
 		if (token->tok_type == CMD && is_builtin(token->tok_str))
 			data(GET)->commands[idx]->type = BUILTIN;
 		token = token->next;

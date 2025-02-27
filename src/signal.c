@@ -6,7 +6,7 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:06 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/26 17:55:54 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:10:44 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	signal_int(int signal)
 	return ;
 }
 
-void	signal_pipe(int	signal)
+void	signal_pipe(int signal)
 {
 	(void)signal;
 	if (errno == EPIPE)

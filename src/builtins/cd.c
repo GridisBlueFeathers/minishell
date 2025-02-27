@@ -6,14 +6,12 @@
 /*   By: jwolfram <jwolfram@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:52:25 by jwolfram          #+#    #+#             */
-/*   Updated: 2025/02/25 16:52:32 by jwolfram         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:05:23 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
-#include "libft/string.h"
 #include "minishell.h"
-#include <dirent.h>
 #include <errno.h>
 
 /**
